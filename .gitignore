@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Build / cache
+node_modules/
+.vercel
+.next/
+.turbo/
+
+# Preview artifacts
+_preview-*.png
+
+# Local env
+.env
+.env.local

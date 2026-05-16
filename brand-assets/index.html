@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Yテック工房 — ブランドアセット</title>
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --surface: #fff;
+    --border: #D6CFC2;
+    --fg: #1A1A1A;
+    --muted: #6B7280;
+    --primary: #2D5A2D;
+    --dark-bg: #0F1A0F;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 56px 32px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  }
+  header { max-width: 1200px; margin: 0 auto 40px; }
+  h1 {
+    margin: 0 0 8px;
+    font-weight: 600;
+    font-size: 32px;
+    letter-spacing: .02em;
+    font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+    color: var(--primary);
+  }
+  .lead { color: var(--muted); margin: 0; font-size: 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .card.full { grid-column: 1 / -1; }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .card .tag {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: .1em;
+  }
+  .preview {
+    background: #FAF7F2;
+    border: 1px solid var(--border);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+  .preview.dark { background: var(--dark-bg); }
+  .preview img { max-width: 100%; max-height: 280px; display: block; }
+  .preview.tiny { min-height: 140px; }
+  .preview.tiny img { width: 96px; height: 96px; }
+  .meta {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  a.file { color: var(--primary); text-decoration: none; }
+  a.file:hover { text-decoration: underline; }
+  .sizes {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #FAF7F2;
+    border: 1px solid var(--border);
+  }
+  .sizes img { display: block; }
+  .swatches { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .sw {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .sw i { width: 18px; height: 18px; border: 1px solid var(--border); display: inline-block; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Yテック工房 — ブランドアセット</h1>
+    <p class="lead">確定版ロゴと派生バリエーション。すべて SVG ベクター。</p>
+  </header>
+
+  <div class="grid">
+
+    <div class="card full">
+      <h2>横組ロックアップ</h2>
+      <div class="tag">SITE HEADER / DOCUMENT / EMAIL SIGNATURE</div>
+      <div class="preview"><img src="logo-horizontal.svg" alt="横組ロックアップ"></div>
+      <div class="meta">
+        <a class="file" href="logo-horizontal.svg">logo-horizontal.svg</a>
+        <span>800 × 200</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Primary（ライト）</h2>
+      <div class="tag">DEFAULT / STORE ICON</div>
+      <div class="preview"><img src="logo-primary.svg" alt="Primary ロゴ"></div>
+      <div class="meta">
+        <a class="file" href="logo-primary.svg">logo-primary.svg</a>
+        <span>200 × 200</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Primary（ダーク）</h2>
+      <div class="tag">DARK MODE / NIGHT UI</div>
+      <div class="preview dark"><img src="logo-primary-dark.svg" alt="Primary ダーク版"></div>
+      <div class="meta">
+        <a class="file" href="logo-primary-dark.svg">logo-primary-dark.svg</a>
+        <span>200 × 200</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>マーク（家紋風）</h2>
+      <div class="tag">SOCIAL AVATAR / APP ICON SOURCE</div>
+      <div class="preview"><img src="logo-mark.svg" alt="マーク"></div>
+      <div class="meta">
+        <a class="file" href="logo-mark.svg">logo-mark.svg</a>
+        <span>200 × 200</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Favicon</h2>
+      <div class="tag">16 / 32 / 64 px</div>
+      <div class="sizes">
+        <img src="favicon.svg" alt="favicon 16" width="16" height="16">
+        <img src="favicon.svg" alt="favicon 32" width="32" height="32">
+        <img src="favicon.svg" alt="favicon 64" width="64" height="64">
+      </div>
+      <div class="meta">
+        <a class="file" href="favicon.svg">favicon.svg</a>
+        <span>64 × 64</span>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2>カラーパレット</h2>
+      <div class="tag">BRAND COLORS</div>
+      <div class="swatches">
+        <div class="sw"><i style="background:#2D5A2D"></i>苔緑 #2D5A2D</div>
+        <div class="sw"><i style="background:#6B8E5A"></i>若葉 #6B8E5A</div>
+        <div class="sw"><i style="background:#A0382A"></i>朱 #A0382A</div>
+        <div class="sw"><i style="background:#FAF7F2"></i>生成り #FAF7F2</div>
+        <div class="sw"><i style="background:#EDE7DC"></i>砥粉 #EDE7DC</div>
+        <div class="sw"><i style="background:#0F1A0F"></i>墨緑 #0F1A0F</div>
+        <div class="sw"><i style="background:#1A1A1A"></i>漆黒 #1A1A1A</div>
+        <div class="sw"><i style="background:#D6CFC2"></i>薄墨 #D6CFC2</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

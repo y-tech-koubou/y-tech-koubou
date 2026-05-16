@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Yテック工房 — ロゴ案比較</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #FAF7F2;
+    --fg: #1A1A1A;
+    --muted: #6B7280;
+    --border: #D6CFC2;
+  }
+  body {
+    margin: 0;
+    padding: 48px 32px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  }
+  h1 {
+    margin: 0 0 8px;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: .02em;
+  }
+  .lead { color: var(--muted); margin: 0 0 32px; font-size: 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+  .card .tag { color: var(--muted); font-size: 12px; margin-bottom: 16px; }
+  .card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 16px;
+    background: #FAF7F2;
+  }
+  .card p { margin: 0; font-size: 13px; line-height: 1.65; color: #333; }
+  .card .pros { margin-top: 12px; font-size: 12px; color: var(--muted); }
+  .swatches { display: flex; gap: 6px; margin-top: 14px; }
+  .sw { width: 22px; height: 22px; border: 1px solid var(--border); }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <h1>Yテック工房 — ロゴ案比較</h1>
+  <p class="lead">3案を並べて比較。クリックすると拡大表示できます。</p>
+  <div class="grid">
+
+    <a class="card" href="A-tenkoku.svg">
+      <h2>案A 篆刻「工」</h2>
+      <div class="tag">朱印 / 落款 / 信用の刻印</div>
+      <img src="A-tenkoku.svg" alt="案A 篆刻">
+      <p>朱の角印に「工」の一文字。建築・工房・職人を一字で表す。落款のような威厳と信用感。</p>
+      <p class="pros">向き：書類・名刺・サイトのfaviconに強い。和の重みが立つ。</p>
+      <div class="swatches">
+        <div class="sw" style="background:#A0382A" title="朱"></div>
+        <div class="sw" style="background:#FAF7F2" title="生成り"></div>
+      </div>
+    </a>
+
+    <a class="card" href="B-kanejaku.svg">
+      <h2>案B 矩尺Y</h2>
+      <div class="tag">製図 / 道具 / 精度</div>
+      <img src="B-kanejaku.svg" alt="案B 矩尺Y">
+      <p>大工の矩尺（L字定規）に目盛を刻み、その内側に Y を太線で重ねる。建築の道具と Y のモノグラム。</p>
+      <p class="pros">向き：エンジニアリング寄りに見せたいとき。線一本の潔さ。</p>
+      <div class="swatches">
+        <div class="sw" style="background:#1A1A1A" title="墨"></div>
+        <div class="sw" style="background:#FAF7F2" title="生成り"></div>
+      </div>
+    </a>
+
+    <a class="card" href="C-torii.svg">
+      <h2>案C 鳥居門Y</h2>
+      <div class="tag">境界 / 越境 / 国際協力</div>
+      <img src="C-torii.svg" alt="案C 鳥居">
+      <p>鳥居型の門に Y の脚を下ろす。「境を越える」の象徴。建築と国際協力を1つの形で重ねる。</p>
+      <p class="pros">向き：国際性を打ち出したいとき。シルエットだけで認知できる強さ。</p>
+      <div class="swatches">
+        <div class="sw" style="background:#14213D" title="藍墨"></div>
+        <div class="sw" style="background:#FAF7F2" title="生成り"></div>
+      </div>
+    </a>
+
+  </div>
+</body>
+</html>

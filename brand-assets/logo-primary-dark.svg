@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="400" height="400" role="img" aria-label="Yテック工房ロゴ ダーク反転版">
+  <title>Yテック工房 — Dark</title>
+  <rect width="200" height="200" fill="#0F1A0F"/>
+
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#FAF7F2" stroke-width="4"/>
+
+  <g fill="#FAF7F2">
+    <path d="M100 38 Q 112 58 100 82 Q 88 58 100 38 Z"/>
+    <path d="M64 52 Q 86 62 84 86 Q 62 76 64 52 Z"/>
+    <path d="M136 52 Q 114 62 116 86 Q 138 76 136 52 Z"/>
+  </g>
+  <g stroke="#0F1A0F" stroke-width="1.4" fill="none" stroke-linecap="round">
+    <path d="M100 46 L 100 78"/>
+    <path d="M70 58 L 82 82"/>
+    <path d="M130 58 L 118 82"/>
+  </g>
+
+  <g stroke="#FAF7F2" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M84 82 L 120 122"/>
+    <path d="M116 82 L 80 122"/>
+  </g>
+
+  <g stroke="#FAF7F2" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M66 132 L 100 105 L 134 132"/>
+    <path d="M76 130 L 76 158"/>
+    <path d="M124 130 L 124 158"/>
+    <path d="M76 158 L 124 158"/>
+  </g>
+
+  <g stroke="#FAF7F2" stroke-width="2.4" fill="none">
+    <rect x="89" y="134" width="22" height="20"/>
+    <line x1="100" y1="134" x2="100" y2="154"/>
+    <line x1="89" y1="144" x2="111" y2="144"/>
+  </g>
+
+  <g stroke="#FAF7F2" stroke-width="2.6" fill="none" stroke-linecap="round">
+    <path d="M100 158 L 100 178"/>
+    <path d="M88 158 Q 80 170 70 178"/>
+    <path d="M76 158 Q 62 168 52 174"/>
+    <path d="M112 158 Q 120 170 130 178"/>
+    <path d="M124 158 Q 138 168 148 174"/>
+  </g>
+</svg>
