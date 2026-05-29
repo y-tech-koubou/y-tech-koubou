@@ -1,13 +1,18 @@
 :root {
   --kokemidori: #2D5A2D;
-  --wakaba: #6B8E5A;
+  --wakaba: #6B8E5A;        /* 装飾・罫・ホバー枠用（UIコンポーネント） */
+  --wakaba-deep: #42693A;   /* 小さな情報テキスト用（AA 4.5+ on 生成り） */
+  --wakaba-light: #9DB889;  /* 暗背景上のラベル用 */
   --shu: #A0382A;
   --kinari: #FAF7F2;
   --tonoko: #EDE7DC;
   --sumimidori: #0F1A0F;
   --shikkoku: #1A1A1A;
-  --nibiiro: #6B7280;
+  --nibiiro: #5A606B;       /* 補足テキスト（AA 5.9 on 生成り・実測で#6B7280から濃色化） */
   --usuzumi: #D6CFC2;
+
+  --space-section: 100px;
+  --space-section-compact: 88px;
 
   --serif-jp: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
   --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
@@ -149,8 +154,11 @@ header.site nav a:hover::after { transform: scaleX(1); }
   position: relative;
   overflow: hidden;
   background:
+    linear-gradient(rgba(45, 90, 45, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 90, 45, 0.035) 1px, transparent 1px),
     radial-gradient(ellipse 70% 60% at 50% -10%, rgba(107, 142, 90, 0.18), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 80% 120%, rgba(160, 56, 42, 0.06), transparent 70%);
+    radial-gradient(ellipse 50% 40% at 80% 120%, rgba(160, 56, 42, 0.07), transparent 70%);
+  background-size: 28px 28px, 28px 28px, auto, auto;
 }
 .hero .mark {
   width: 116px;
@@ -172,8 +180,8 @@ header.site nav a:hover::after { transform: scaleX(1); }
   font-family: var(--serif-en);
   font-size: clamp(13px, 1.5vw, 17px);
   font-weight: 500;
-  letter-spacing: 0.4em;
-  color: var(--wakaba);
+  letter-spacing: 0.34em;
+  color: var(--wakaba-deep);
   text-transform: uppercase;
 }
 .hero .tagline {
@@ -205,7 +213,9 @@ header.site nav a:hover::after { transform: scaleX(1); }
 }
 
 /* ====== Section ====== */
-section { padding: 100px 0; }
+section { padding: var(--space-section) 0; }
+.products,
+.works { padding: var(--space-section-compact) 0; }
 section .section-head {
   text-align: center;
   margin-bottom: 56px;
@@ -214,10 +224,18 @@ section .section-head .kicker {
   display: block;
   font-family: var(--serif-en);
   font-size: 12px;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--wakaba);
+  color: var(--wakaba-deep);
   margin-bottom: 12px;
+}
+section .section-head .kicker::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  margin: 12px auto 0;
+  background: var(--shu);
 }
 section h2 {
   margin: 0;
@@ -244,21 +262,33 @@ section h2 {
   gap: 24px;
 }
 .about .field {
+  position: relative;
   background: var(--kinari);
   border: 1px solid var(--usuzumi);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 34px 28px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.about .field::before {
+  content: "";
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  width: 9px;
+  height: 13px;
+  border-radius: 10px 10px 10px 2px;
+  background: rgba(107, 142, 90, 0.3);
+  transform: rotate(35deg);
+}
 .about .field:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(45, 90, 45, 0.08);
+  box-shadow: 0 12px 26px rgba(45, 90, 45, 0.07);
 }
 .about .field .label-en {
   font-family: var(--serif-en);
   font-size: 11px;
   letter-spacing: 0.3em;
-  color: var(--wakaba);
+  color: var(--wakaba-deep);
   text-transform: uppercase;
   margin-bottom: 10px;
 }
@@ -287,22 +317,25 @@ section h2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+  max-width: 880px;
+  margin: 0 auto;
 }
 .product {
   background: #fff;
   border: 1px solid var(--usuzumi);
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   color: var(--shikkoku);
+  box-shadow: 0 1px 0 rgba(15, 26, 15, 0.04);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .product:hover {
   transform: translateY(-4px);
   border-color: var(--wakaba);
-  box-shadow: 0 18px 40px rgba(45, 90, 45, 0.1);
+  box-shadow: 0 10px 24px rgba(45, 90, 45, 0.08);
   text-decoration: none;
 }
 .product .top {
@@ -338,13 +371,13 @@ section h2 {
   font-family: var(--serif-en);
   font-size: 12px;
   letter-spacing: 0.12em;
-  color: var(--wakaba);
+  color: var(--wakaba-deep);
 }
 .product p {
   margin: 0;
   color: var(--shikkoku);
-  font-size: 14px;
-  line-height: 1.85;
+  font-size: 14.5px;
+  line-height: 1.8;
 }
 .product .meta {
   display: flex;
@@ -361,7 +394,7 @@ section h2 {
   font-family: var(--serif-en);
   font-size: 13px;
   letter-spacing: 0.1em;
-  color: var(--kokemidori);
+  color: var(--shu);
   transition: transform 0.2s ease;
 }
 .product:hover .open { transform: translateX(4px); }
@@ -372,11 +405,25 @@ section h2 {
   color: var(--kinari);
 }
 .contact h2 { color: var(--kinari); }
-.contact .section-head .kicker { color: var(--wakaba); }
+.contact .section-head .kicker { color: var(--wakaba-light); }
 .contact .card {
   max-width: 560px;
   margin: 0 auto;
   text-align: center;
+}
+.contact .card::after {
+  content: "Y";
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 30px;
+  color: var(--shu);
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  font-family: var(--serif-en);
+  font-size: 22px;
+  opacity: 0.7;
 }
 .contact .card p {
   color: rgba(250, 247, 242, 0.72);
@@ -432,13 +479,16 @@ footer.site .inner {
 /* ====== Focus ====== */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--kokemidori);
-  outline-offset: 3px;
+  outline: 3px solid var(--shu);
+  outline-offset: 4px;
   border-radius: 4px;
 }
 
 /* ====== Responsive ====== */
 @media (max-width: 880px) {
+  .container { padding: 0 24px; }
+  .pc-only { display: none; }
+  .hero .lead { max-width: 34em; font-size: 14.5px; line-height: 1.85; }
   .nav-toggle { display: flex; }
   header.site nav ul {
     position: absolute;
@@ -464,6 +514,17 @@ button:focus-visible {
   .products .grid,
   .works .grid.two { grid-template-columns: 1fr; }
   section { padding: 72px 0; }
+  .products,
+  .works { padding: 64px 0; }
   .hero { padding: 72px 0 84px; }
   footer.site .inner { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+@media (max-width: 520px) {
+  .product .top { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .product { padding: 26px 22px; }
+}
+
+@media (max-width: 420px) {
+  .container { padding: 0 20px; }
 }

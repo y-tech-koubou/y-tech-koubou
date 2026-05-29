@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FAF7F2"/>
+
+  <!-- 方眼（図面）テクスチャ -->
+  <g stroke="#2D5A2D" stroke-opacity="0.05" stroke-width="1">
+    <g>
+      <line x1="0"  y1="0" x2="0"  y2="630"/><line x1="40" y1="0" x2="40" y2="630"/><line x1="80" y1="0" x2="80" y2="630"/><line x1="120" y1="0" x2="120" y2="630"/><line x1="160" y1="0" x2="160" y2="630"/><line x1="200" y1="0" x2="200" y2="630"/><line x1="240" y1="0" x2="240" y2="630"/><line x1="280" y1="0" x2="280" y2="630"/><line x1="320" y1="0" x2="320" y2="630"/><line x1="360" y1="0" x2="360" y2="630"/><line x1="400" y1="0" x2="400" y2="630"/><line x1="440" y1="0" x2="440" y2="630"/><line x1="480" y1="0" x2="480" y2="630"/><line x1="520" y1="0" x2="520" y2="630"/><line x1="560" y1="0" x2="560" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="640" y1="0" x2="640" y2="630"/><line x1="680" y1="0" x2="680" y2="630"/><line x1="720" y1="0" x2="720" y2="630"/><line x1="760" y1="0" x2="760" y2="630"/><line x1="800" y1="0" x2="800" y2="630"/><line x1="840" y1="0" x2="840" y2="630"/><line x1="880" y1="0" x2="880" y2="630"/><line x1="920" y1="0" x2="920" y2="630"/><line x1="960" y1="0" x2="960" y2="630"/><line x1="1000" y1="0" x2="1000" y2="630"/><line x1="1040" y1="0" x2="1040" y2="630"/><line x1="1080" y1="0" x2="1080" y2="630"/><line x1="1120" y1="0" x2="1120" y2="630"/><line x1="1160" y1="0" x2="1160" y2="630"/><line x1="1200" y1="0" x2="1200" y2="630"/>
+    </g>
+    <g>
+      <line x1="0" y1="0"  x2="1200" y2="0"/><line x1="0" y1="40" x2="1200" y2="40"/><line x1="0" y1="80" x2="1200" y2="80"/><line x1="0" y1="120" x2="1200" y2="120"/><line x1="0" y1="160" x2="1200" y2="160"/><line x1="0" y1="200" x2="1200" y2="200"/><line x1="0" y1="240" x2="1200" y2="240"/><line x1="0" y1="280" x2="1200" y2="280"/><line x1="0" y1="320" x2="1200" y2="320"/><line x1="0" y1="360" x2="1200" y2="360"/><line x1="0" y1="400" x2="1200" y2="400"/><line x1="0" y1="440" x2="1200" y2="440"/><line x1="0" y1="480" x2="1200" y2="480"/><line x1="0" y1="520" x2="1200" y2="520"/><line x1="0" y1="560" x2="1200" y2="560"/><line x1="0" y1="600" x2="1200" y2="600"/>
+    </g>
+  </g>
+
+  <!-- ロゴマーク（円＋3葉＋X茎） 左に配置 -->
+  <g transform="translate(150, 175) scale(1.4)">
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#2D5A2D" stroke-width="6"/>
+    <g fill="#2D5A2D">
+      <path d="M100 38 Q 116 64 100 96 Q 84 64 100 38 Z"/>
+      <path d="M52 58 Q 80 70 80 102 Q 50 90 52 58 Z"/>
+      <path d="M148 58 Q 120 70 120 102 Q 150 90 148 58 Z"/>
+    </g>
+    <g stroke="#2D5A2D" stroke-width="7" fill="none" stroke-linecap="round">
+      <path d="M70 100 L 130 156"/>
+      <path d="M130 100 L 70 156"/>
+    </g>
+  </g>
+
+  <!-- 区切り罫 -->
+  <line x1="560" y1="180" x2="560" y2="450" stroke="#D6CFC2" stroke-width="2"/>
+
+  <!-- テキスト -->
+  <text x="610" y="270" font-family="'Noto Serif JP','Yu Mincho','YuMincho','Hiragino Mincho ProN','MS Mincho',serif" font-size="92" font-weight="700" fill="#2D5A2D" letter-spacing="4">Yテック工房</text>
+  <text x="614" y="330" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="34" font-weight="600" fill="#42693A" letter-spacing="10">Y-TECH KOUBOU</text>
+
+  <!-- 朱の落款線 -->
+  <rect x="614" y="362" width="56" height="4" fill="#A0382A"/>
+
+  <text x="614" y="430" font-family="'Noto Serif JP','Yu Mincho','YuMincho','Hiragino Mincho ProN','MS Mincho',serif" font-size="40" font-weight="500" fill="#1A1A1A" letter-spacing="3">種から育てる工房</text>
+
+  <!-- フッタ URL -->
+  <text x="610" y="560" font-family="'Cormorant Garamond','Times New Roman',serif" font-size="24" font-weight="500" fill="#5A606B" letter-spacing="4">Y-TECH-KOUBOU.COM</text>
+</svg>
