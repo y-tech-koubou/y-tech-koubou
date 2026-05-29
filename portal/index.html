@@ -4,146 +4,197 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Yテック工房 — 種から育てる工房</title>
-  <meta name="description" content="建築・IT・国際協力を、根を張って丁寧に育てる。Yテック工房は4つのプロダクトを束ねる屋号です。">
+  <meta name="description" content="建築の現場感と、ITの道具で。学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。Yテック工房 / Y-Tech Koubou。">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <meta property="og:title" content="Yテック工房 — 種から育てる工房">
-  <meta property="og:description" content="建築・IT・国際協力を、根を張って丁寧に育てる。">
+  <meta property="og:description" content="学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。">
   <meta property="og:image" content="assets/logo-primary.svg">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://y-tech-koubou.com">
+  <meta name="theme-color" content="#FAF7F2">
 </head>
 <body>
 
-  <header class="site">
+  <a class="skip" href="#main">本文へスキップ</a>
+
+  <header class="site" id="top">
     <div class="container inner">
-      <a href="#" class="brand">
+      <a href="#top" class="brand" aria-label="Yテック工房 ホーム">
         <img src="assets/logo-mark.svg" alt="">
         <span>Yテック工房</span>
       </a>
-      <nav>
-        <ul>
+      <nav class="nav" aria-label="メインナビゲーション">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="メニューを開く">
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="nav-menu">
           <li><a href="#about">ABOUT</a></li>
-          <li><a href="#products">PRODUCTS</a></li>
+          <li><a href="#apps">APPS</a></li>
+          <li><a href="#works">WORKS</a></li>
           <li><a href="#contact">CONTACT</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <section class="hero">
       <div class="container">
-        <img class="mark" src="assets/logo-mark.svg" alt="Yテック工房マーク">
-        <h1>Yテック工房</h1>
-        <p class="en">Y - TECH KOUBOU</p>
-        <p class="tagline">種から育てる工房</p>
-        <p class="lead">建築・IT・国際協力。3つの領域と、その根底にある日本の伝統。<br>越境する手仕事で、確かなものを丁寧につくります。</p>
+        <img class="mark reveal" src="assets/logo-mark.svg" alt="Yテック工房のマーク">
+        <h1 class="reveal">Yテック工房</h1>
+        <p class="en reveal">Y &middot; TECH &middot; KOUBOU</p>
+        <p class="tagline reveal">種から育てる工房</p>
+        <p class="lead reveal">建築の現場感と、IT という道具で。<br>学びを助けるアプリから、暮らしの事業まで。<br>ひとつずつ、根を張って丁寧に育てています。</p>
+        <div class="hero-cta reveal">
+          <a class="btn primary" href="#apps">プロダクトを見る</a>
+          <a class="btn ghost" href="#contact">お問い合わせ</a>
+        </div>
       </div>
     </section>
 
     <section id="about" class="about">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <span class="kicker">About</span>
-          <h2>3つの領域 + 1つの根</h2>
+          <h2>つくる姿勢</h2>
         </div>
-        <p class="lead-text">
-          建築という基盤の上に、IT という新しい道具、そして国際協力という越境する視点を重ねる。<br>
-          その根に、日本の伝統文化が静かに息づいている。<br>
-          ロゴの円は工房という場、3枚の葉は領域、X字の茎は異分野の交差を表します。
+        <p class="lead-text reveal">
+          一級建築士として図面に向き合う確かさと、個人で実装し運用する身軽さ。<br>
+          その二つを束ねるのが「工房」という場です。<br>
+          流行を追うのではなく、誰かの「できた」を静かに支える道具を、種から育てます。
         </p>
-        <div class="grid">
-          <div class="field">
-            <div class="label-en">Architecture</div>
-            <h3>建築</h3>
-            <p>一級建築士としての設計と、学習を支えるアプリ。確かな図面の上に立つ。</p>
+        <div class="grid pillars">
+          <div class="field reveal">
+            <div class="label-en">Craft</div>
+            <h3>手仕事の確かさ</h3>
+            <p>建築の現場で培った「測って、組んで、仕上げる」感覚を、プロダクトづくりにそのまま持ち込みます。</p>
           </div>
-          <div class="field">
-            <div class="label-en">Technology</div>
-            <h3>IT</h3>
-            <p>個人で実装し、個人で運用する。複利で育つプロダクトを増やす。</p>
+          <div class="field reveal">
+            <div class="label-en">Tools</div>
+            <h3>暮らしに効く道具</h3>
+            <p>資格学習・語学・投資・趣味。日々を少し前に進める実用の道具を、使う人の目線で設計します。</p>
           </div>
-          <div class="field">
-            <div class="label-en">Cooperation</div>
-            <h3>国際協力</h3>
-            <p>アフリカのビジネス情報を地図に重ね、越境する人の視点を支える。</p>
-          </div>
-          <div class="field">
-            <div class="label-en">Tradition</div>
-            <h3>伝統</h3>
-            <p>麹をはじめとする日本の食文化。手仕事の知恵を次の世代へ。</p>
+          <div class="field reveal">
+            <div class="label-en">Grow</div>
+            <h3>種から育てる</h3>
+            <p>小さく出して、使いながら磨く。複利で育つプロダクトを一本ずつ、長く手入れし続けます。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="products" class="products">
+    <section id="apps" class="products">
       <div class="container">
-        <div class="section-head">
-          <span class="kicker">Products</span>
-          <h2>育てているプロダクト</h2>
+        <div class="section-head reveal">
+          <span class="kicker">Apps</span>
+          <h2>公開中のアプリ</h2>
         </div>
         <div class="grid">
 
-          <article class="product">
+          <a class="product reveal" href="https://1architectexam.com" target="_blank" rel="noopener">
             <div class="top">
-              <h3 class="name">一級建築士〇×問題集</h3>
+              <h3 class="name">勉強工房</h3>
               <span class="status live">Live</span>
             </div>
             <div class="domain">1ARCHITECTEXAM.COM</div>
-            <p>一級建築士試験のための〇×一問一答。5科目を横断し、誤答だけを重点復習。Web と Android で公開中。</p>
+            <p>一級・二級建築士／宅建の〇×一問一答。資格を切り替えて学べ、誤答だけを重点復習。Web と Android で公開中。</p>
             <div class="meta">
-              <span>建築</span>
-              <span>Expo SDK 54</span>
+              <span>建築・資格</span>
+              <span>Expo</span>
               <span>Web / Android</span>
             </div>
-          </article>
+            <span class="open">開く &rarr;</span>
+          </a>
 
-          <article class="product">
+          <a class="product reveal" href="https://english-koubou.vercel.app" target="_blank" rel="noopener">
             <div class="top">
-              <h3 class="name">麹ワークショップ</h3>
-              <span class="status">Setup</span>
+              <h3 class="name">English工房</h3>
+              <span class="status live">Live</span>
             </div>
-            <div class="domain">KOJI-APP</div>
-            <p>日本の発酵文化を学ぶワークショップアプリ。麹を起点に、伝統と食を再発見する。</p>
+            <div class="domain">ENGLISH-KOUBOU.VERCEL.APP</div>
+            <p>英語試験対策アプリ。Reading・Listening・Vocabulary・Writing・Speaking を一通り。AI 採点と実音声に対応。</p>
             <div class="meta">
-              <span>伝統</span>
+              <span>語学・IELTS</span>
+              <span>Expo</span>
+              <span>Web</span>
+            </div>
+            <span class="open">開く &rarr;</span>
+          </a>
+
+          <a class="product reveal" href="https://invest-ai-iota-seven.vercel.app" target="_blank" rel="noopener">
+            <div class="top">
+              <h3 class="name">投資の相棒</h3>
+              <span class="status live">Live</span>
+            </div>
+            <div class="domain">INVEST-AI-IOTA-SEVEN.VERCEL.APP</div>
+            <p>投資を一から学び、明日のプランと記録を整える学習アプリ。中立的に情報を整理し、判断は自分の手に残す設計。</p>
+            <div class="meta">
+              <span>投資・学習</span>
               <span>Firebase</span>
-              <span>準備中</span>
+              <span>Web</span>
             </div>
-          </article>
+            <span class="open">開く &rarr;</span>
+          </a>
 
-          <article class="product">
+          <a class="product reveal" href="https://mlb-oshi.vercel.app" target="_blank" rel="noopener">
             <div class="top">
-              <h3 class="name">Invest AI</h3>
-              <span class="status">Building</span>
+              <h3 class="name">MLB推し</h3>
+              <span class="status live">Live</span>
             </div>
-            <div class="domain">INVEST-AI</div>
-            <p>AI が銘柄調査と投資判断を支えるサポートアプリ。Phase 1 完了、Auth + Firestore 実装へ。</p>
+            <div class="domain">MLB-OSHI.VERCEL.APP</div>
+            <p>推し選手の成績を追いかけるトラッカー。打撃スタッツや能力値レーダー、ホームラン速報をまとめて確認できる。</p>
             <div class="meta">
-              <span>IT・金融</span>
-              <span>Firebase</span>
-              <span>Phase 2</span>
+              <span>スポーツ</span>
+              <span>Expo</span>
+              <span>Web</span>
             </div>
-          </article>
+            <span class="open">開く &rarr;</span>
+          </a>
 
-          <article class="product">
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="works">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Works</span>
+          <h2>運営している事業</h2>
+        </div>
+        <div class="grid two">
+
+          <a class="product reveal" href="https://yoshino-koumuten.com" target="_blank" rel="noopener">
             <div class="top">
-              <h3 class="name">Africa Business Map</h3>
-              <span class="status">Setup</span>
+              <h3 class="name">吉野工務店</h3>
+              <span class="status live">Live</span>
             </div>
-            <div class="domain">AFRICA-MAP</div>
-            <p>アフリカのビジネス情報を地図に重ねる。越境する起業家・投資家・支援者のための一枚。</p>
+            <div class="domain">YOSHINO-KOUMUTEN.COM</div>
+            <p>先代から引き継ぐ工務店。施工事例やまな板削りの工程を、写真主役の日英2言語サイトで紹介しています。</p>
             <div class="meta">
-              <span>国際協力</span>
-              <span>Mapbox</span>
-              <span>初期構築</span>
+              <span>建築・工務店</span>
+              <span>日本語 / English</span>
             </div>
-          </article>
+            <span class="open">開く &rarr;</span>
+          </a>
+
+          <a class="product reveal" href="https://hugtime-salon.com" target="_blank" rel="noopener">
+            <div class="top">
+              <h3 class="name">Hugtime salon</h3>
+              <span class="status live">Live</span>
+            </div>
+            <div class="domain">HUGTIME-SALON.COM</div>
+            <p>育児と発酵をテーマにしたワークショップサロン。開催スケジュール・予約導線・ブログを備えた事業サイト。</p>
+            <div class="meta">
+              <span>育児・発酵</span>
+              <span>ワークショップ</span>
+            </div>
+            <span class="open">開く &rarr;</span>
+          </a>
 
         </div>
       </div>
@@ -151,11 +202,11 @@
 
     <section id="contact" class="contact">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <span class="kicker">Contact</span>
           <h2>お問い合わせ</h2>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <p>プロダクトに関するご質問、共同制作のご相談、設計のご依頼など。お気軽にどうぞ。</p>
           <a class="email" href="mailto:kichiyakoushou@gmail.com">kichiyakoushou@gmail.com</a>
         </div>
@@ -166,10 +217,51 @@
 
   <footer class="site">
     <div class="container inner">
-      <span>© 2026 Y-TECH KOUBOU</span>
+      <span>&copy; 2026 Y-TECH KOUBOU</span>
+      <span>建築 &times; IT &times; 暮らし</span>
       <span>Y-TECH-KOUBOU.COM</span>
     </div>
   </footer>
+
+  <script>
+    // モバイルナビ開閉
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var menu = document.getElementById('nav-menu');
+      if (!toggle || !menu) return;
+      function close() {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        menu.classList.toggle('open', !open);
+      });
+      menu.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') close();
+      });
+    })();
+
+    // スクロールリビール（prefers-reduced-motion 尊重）
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add('in');
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>
