@@ -1109,7 +1109,7 @@ button:focus-visible {
           var pulse = 1 + (reduce ? 0 : 0.08 * Math.sin(t * 0.0016 + f.phase));
           var fx = sway(f.x, f.y, t), fy = f.y;
           f.cx = fx; f.cy = fy;
-          var R = (f.flower ? 8.5 : 7.5) * pop * pulse;
+          var R = (f.flower ? 11 : 10) * pop * pulse;
           var grd = ctx.createRadialGradient(fx, fy, 0, fx, fy, R * 2.6);
           if (f.flower) {
             grd.addColorStop(0, 'rgba(232,196,176,' + (0.55 * bp) + ')');
@@ -1161,7 +1161,7 @@ button:focus-visible {
             var f = fruits[i];
             if (!f.product || f.cx == null) continue;
             var dx = mx - f.cx, dy = my - f.cy;
-            if (dx * dx + dy * dy < 324) { hit = f; break; }
+            if (dx * dx + dy * dy < 676) { hit = f; break; }
           }
           hoverFruit = hit;
           if (hit && tip) {
