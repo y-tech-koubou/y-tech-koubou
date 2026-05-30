@@ -389,6 +389,18 @@ section h2 {
   max-width: 880px;
   margin: 0 auto;
 }
+.works-lead {
+  max-width: 620px;
+  margin: -40px auto 60px;
+  text-align: center;
+  color: var(--nibiiro);
+  font-size: 16px;
+  line-height: 1.9;
+}
+.works-cta {
+  text-align: center;
+  margin-top: 60px;
+}
 .product {
   background: #fff;
   border: 1px solid var(--usuzumi);
@@ -574,13 +586,29 @@ footer.site .inner {
 /* ====== Reveal ====== */
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(36px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.in {
   opacity: 1;
   transform: none;
 }
+/* スライドインの段階表示（grid内の2枚目以降を少し遅らせる） */
+.grid .product:nth-child(2) { transition-delay: 0.08s; }
+.grid .product:nth-child(3) { transition-delay: 0.16s; }
+.grid .product:nth-child(4) { transition-delay: 0.08s; }
+.grid .product:nth-child(5) { transition-delay: 0.16s; }
+.pillars .field:nth-child(2) { transition-delay: 0.1s; }
+.pillars .field:nth-child(3) { transition-delay: 0.2s; }
+
+/* ヒーロー視差（Lenis スクロール連動・JSが transform を設定） */
+.hero-parallax { display: block; will-change: transform; }
+
+/* Lenis スムーススクロール */
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
@@ -681,7 +709,7 @@ button:focus-visible {
 
     <section class="hero">
       <p class="hero-eyebrow reveal">Y &middot; Tech &middot; Koubou</p>
-      <img class="hero-emblem reveal" src="assets/logo-mark.png" alt="Yテック工房" width="236" height="236">
+      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png" alt="Yテック工房" width="236" height="236"></span>
       <h1 class="hero-wordmark reveal">Yテック工房</h1>
       <p class="hero-tag reveal">種から育てる工房</p>
       <p class="hero-lead reveal">建築の現場感と、IT という道具で。<br class="pc-only">学びを助けるアプリから、暮らしの事業まで。</p>
@@ -836,45 +864,49 @@ button:focus-visible {
     <section id="works" class="works">
       <div class="container">
         <div class="section-head reveal">
-          <span class="kicker">Works</span>
-          <h2>運営している事業</h2>
+          <span class="kicker">Web Production</span>
+          <h2>サイト制作の例</h2>
         </div>
+        <p class="works-lead reveal">企業・店舗の Web サイト制作も承っています。<br class="pc-only">下記は実際に手がけた制作例です。同じように、あなたの事業のサイトもお作りします。</p>
         <div class="grid two">
 
-          <a class="product reveal" href="https://yoshino-koumuten.com" target="_blank" rel="noopener" aria-label="吉野工務店を新規タブで開く">
+          <a class="product reveal" href="https://yoshino-koumuten.com" target="_blank" rel="noopener" aria-label="制作例：吉野工務店のサイトを新規タブで開く">
             <div class="top">
               <span class="mono" aria-hidden="true">吉</span>
               <div class="head">
                 <h3 class="name">吉野工務店</h3>
                 <div class="domain">YOSHINO-KOUMUTEN.COM</div>
               </div>
-              <span class="status live">Live</span>
+              <span class="status">制作例</span>
             </div>
-            <p>先代から引き継ぐ工務店。施工事例やまな板削りの工程を、写真主役の日英2言語サイトで紹介しています。</p>
+            <p>工務店の Web サイトを制作。施工事例やまな板削りの工程を、写真主役の日英2言語サイトに仕立てました。</p>
             <div class="meta">
-              <span>建築・工務店</span>
+              <span>コーポレート</span>
               <span>日本語 / English</span>
             </div>
-            <span class="open">開く &rarr;</span>
+            <span class="open">サイトを見る &rarr;</span>
           </a>
 
-          <a class="product reveal" href="https://hugtime-salon.com" target="_blank" rel="noopener" aria-label="Hugtime salonを新規タブで開く">
+          <a class="product reveal" href="https://hugtime-salon.com" target="_blank" rel="noopener" aria-label="制作例：Hugtime salon のサイトを新規タブで開く">
             <div class="top">
               <span class="mono en" aria-hidden="true">H</span>
               <div class="head">
                 <h3 class="name">Hugtime salon</h3>
                 <div class="domain">HUGTIME-SALON.COM</div>
               </div>
-              <span class="status live">Live</span>
+              <span class="status">制作例</span>
             </div>
-            <p>育児と発酵をテーマにしたワークショップサロン。開催スケジュール・予約導線・ブログを備えた事業サイト。</p>
+            <p>ワークショップサロンの Web サイトを制作。開催スケジュール・予約導線・ブログ(CMS)まで一式を構築しました。</p>
             <div class="meta">
-              <span>育児・発酵</span>
-              <span>ワークショップ</span>
+              <span>店舗・予約</span>
+              <span>ブログ / CMS</span>
             </div>
-            <span class="open">開く &rarr;</span>
+            <span class="open">サイトを見る &rarr;</span>
           </a>
 
+        </div>
+        <div class="works-cta reveal">
+          <a class="hero-cta" href="#contact">サイト制作を相談する <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -903,6 +935,7 @@ button:focus-visible {
     </div>
   </footer>
 
+  <script src="assets/lenis.min.js"></script>
   <script>
     // ヘッダー: スクロールで出現
     (function () {
@@ -911,6 +944,40 @@ button:focus-visible {
       var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 32); };
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // スムーススクロール(Lenis) + ヒーロー視差 + アンカー
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !window.Lenis) return;
+      var pels = document.querySelectorAll('[data-speed]');
+      var header = document.querySelector('header.site');
+      var lenis = new Lenis({
+        duration: 1.1,
+        smoothWheel: true,
+        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }
+      });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      lenis.on('scroll', function (e) {
+        var y = e.scroll || 0;
+        if (header) header.classList.toggle('scrolled', y > 32);
+        for (var i = 0; i < pels.length; i++) {
+          var el = pels[i];
+          var sp = parseFloat(el.getAttribute('data-speed')) || 0;
+          el.style.transform = y > 0 ? 'translate3d(0,' + (y * sp).toFixed(1) + 'px,0)' : '';
+        }
+      });
+      var links = document.querySelectorAll('a[href^="#"]');
+      for (var j = 0; j < links.length; j++) {
+        links[j].addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          if (href && href.length > 1) {
+            var target = document.querySelector(href);
+            if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -80 }); }
+          }
+        });
+      }
     })();
 
     // モバイルナビ開閉
