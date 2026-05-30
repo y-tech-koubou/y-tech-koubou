@@ -187,7 +187,13 @@ header.site nav a:hover::after { transform: scaleX(1); }
   pointer-events: none;
   background: radial-gradient(ellipse 48% 42% at 50% 44%, rgba(107, 142, 90, 0.10), transparent 70%);
 }
-.hero > * { position: relative; }
+.hero > *:not(.hero-bg) { position: relative; z-index: 1; }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 .hero-eyebrow {
   font-family: var(--serif-en);
   font-size: 13px;
@@ -708,6 +714,7 @@ button:focus-visible {
   <main id="main">
 
     <section class="hero">
+      <canvas class="hero-bg" aria-hidden="true"></canvas>
       <p class="hero-eyebrow reveal">Y &middot; Tech &middot; Koubou</p>
       <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png" alt="Yテック工房" width="236" height="236"></span>
       <h1 class="hero-wordmark reveal">Yテック工房</h1>
@@ -978,6 +985,81 @@ button:focus-visible {
           }
         });
       }
+    })();
+
+    // 背景: 木が成長するアニメーション（canvas・淡色）
+    (function () {
+      var canvas = document.querySelector('.hero-bg');
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+      var hero = canvas.parentElement;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var W = 0, H = 0, branches, leaves, startTime, raf, GROW = 5200;
+
+      function grow(x, y, angle, len, depth, t0) {
+        if (depth > 7 || len < 7) { leaves.push({ x: x, y: y, t: t0 }); return; }
+        var x2 = x + Math.cos(angle) * len;
+        var y2 = y + Math.sin(angle) * len;
+        branches.push({ x1: x, y1: y, x2: x2, y2: y2, depth: depth, t0: t0, t1: t0 + 1 });
+        var spread = 0.36 + Math.random() * 0.14;
+        var nlen = len * 0.74;
+        grow(x2, y2, angle - spread + (Math.random() - 0.5) * 0.18, nlen, depth + 1, t0 + 0.85);
+        grow(x2, y2, angle + spread + (Math.random() - 0.5) * 0.18, nlen, depth + 1, t0 + 0.85);
+        if (depth < 2 && Math.random() < 0.55) {
+          grow(x2, y2, angle + (Math.random() - 0.5) * 0.3, nlen * 0.9, depth + 1, t0 + 0.9);
+        }
+      }
+      function build() {
+        var rect = hero.getBoundingClientRect();
+        W = rect.width; H = rect.height;
+        canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        branches = []; leaves = [];
+        grow(W / 2, H * 1.02, -Math.PI / 2, H * 0.2, 0, 0);
+        var maxT = 0.0001;
+        branches.forEach(function (b) { if (b.t1 > maxT) maxT = b.t1; });
+        leaves.forEach(function (l) { if (l.t > maxT) maxT = l.t; });
+        branches.forEach(function (b) { b.t0 /= maxT; b.t1 /= maxT; });
+        leaves.forEach(function (l) { l.t /= maxT; });
+      }
+      function ease(p) { return 1 - Math.pow(1 - p, 3); }
+      function draw(now) {
+        var p = reduce ? 1 : ease(Math.min(1, (now - startTime) / GROW));
+        ctx.clearRect(0, 0, W, H);
+        ctx.lineCap = 'round';
+        for (var i = 0; i < branches.length; i++) {
+          var b = branches[i];
+          if (p < b.t0) continue;
+          var seg = b.t1 > b.t0 ? Math.min(1, (p - b.t0) / (b.t1 - b.t0)) : 1;
+          ctx.beginPath();
+          ctx.moveTo(b.x1, b.y1);
+          ctx.lineTo(b.x1 + (b.x2 - b.x1) * seg, b.y1 + (b.y2 - b.y1) * seg);
+          ctx.lineWidth = Math.max(0.7, 4.0 - b.depth * 0.42);
+          ctx.strokeStyle = 'rgba(45,90,45,' + (0.22 - b.depth * 0.014) + ')';
+          ctx.stroke();
+        }
+        for (var j = 0; j < leaves.length; j++) {
+          var l = leaves[j];
+          if (p < l.t) continue;
+          var a = Math.min(1, (p - l.t) / 0.06);
+          ctx.beginPath();
+          ctx.arc(l.x, l.y, 3.0, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(107,142,90,' + (0.26 * a) + ')';
+          ctx.fill();
+        }
+        if (!reduce && p < 1) { raf = requestAnimationFrame(draw); }
+      }
+      function start() {
+        build();
+        cancelAnimationFrame(raf);
+        if (reduce) { draw(0); }
+        else { startTime = performance.now(); raf = requestAnimationFrame(draw); }
+      }
+      start();
+      var rt;
+      window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(start, 250); });
     })();
 
     // モバイルナビ開閉
