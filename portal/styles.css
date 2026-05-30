@@ -16,7 +16,7 @@
 
   --serif-jp: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
   --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
-  --sans-jp: 'Noto Sans JP', -apple-system, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  --sans-jp: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
   --sans-en: 'Inter', -apple-system, sans-serif;
 }
 
@@ -29,7 +29,7 @@ body {
   background: var(--kinari);
   color: var(--shikkoku);
   font-family: var(--sans-jp);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -170,10 +170,11 @@ header.site nav a:hover::after { transform: scaleX(1); }
 .hero h1 {
   margin: 0 0 10px;
   font-family: var(--serif-jp);
-  font-size: clamp(38px, 5.5vw, 60px);
+  font-size: clamp(42px, 6vw, 68px);
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--kokemidori);
+  line-height: 1.1;
 }
 .hero .en {
   margin: 0 0 30px;
@@ -284,13 +285,36 @@ section h2 {
   transform: translateY(-3px);
   box-shadow: 0 12px 26px rgba(45, 90, 45, 0.07);
 }
+.about .field-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.about .field .idx {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--serif-en);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--kokemidori);
+  border: 1px solid var(--kokemidori);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.about .field:hover .idx {
+  border-color: var(--wakaba);
+  background: rgba(107, 142, 90, 0.08);
+}
 .about .field .label-en {
   font-family: var(--serif-en);
   font-size: 11px;
   letter-spacing: 0.3em;
   color: var(--wakaba-deep);
   text-transform: uppercase;
-  margin-bottom: 10px;
 }
 .about .field h3 {
   margin: 0 0 10px;
@@ -301,16 +325,21 @@ section h2 {
 }
 .about .field p {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--nibiiro);
   line-height: 1.8;
 }
 
 /* ====== Products / Works ====== */
 .products .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
+}
+.products .product {
+  flex: 1 1 300px;
+  max-width: 360px;
 }
 .works { background: var(--tonoko); }
 .works .grid.two {
@@ -340,13 +369,40 @@ section h2 {
 }
 .product .top {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 14px;
+}
+.product .head {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.product .mono {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--serif-jp);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--kokemidori);
+  background: transparent;
+  border: 1px solid var(--kokemidori);
+  border-radius: 8px;
+  line-height: 1;
+}
+.product .mono.en {
+  font-family: var(--serif-en);
+  font-size: 19px;
+  letter-spacing: 0.02em;
+}
+.product:hover .mono {
+  border-color: var(--wakaba);
+  background: rgba(107, 142, 90, 0.08);
 }
 .product .name {
   font-family: var(--serif-jp);
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--kokemidori);
   margin: 0;
@@ -372,7 +428,10 @@ section h2 {
   font-size: 12px;
   letter-spacing: 0.12em;
   color: var(--wakaba-deep);
+  margin-top: 5px;
+  overflow-wrap: anywhere;
 }
+.product .status { align-self: center; }
 .product p {
   margin: 0;
   color: var(--shikkoku);
@@ -401,7 +460,9 @@ section h2 {
 
 /* ====== Contact ====== */
 .contact {
-  background: var(--sumimidori);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(107, 142, 90, 0.14), transparent 70%),
+    var(--sumimidori);
   color: var(--kinari);
 }
 .contact h2 { color: var(--kinari); }
@@ -417,30 +478,40 @@ section h2 {
   place-items: center;
   width: 40px;
   height: 40px;
-  margin-top: 30px;
+  margin-top: 36px;
   color: var(--shu);
   border: 1px solid currentColor;
-  border-radius: 6px;
+  border-radius: 8px;
   font-family: var(--serif-en);
   font-size: 22px;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 .contact .card p {
-  color: rgba(250, 247, 242, 0.72);
-  margin: 0 0 26px;
+  color: rgba(250, 247, 242, 0.78);
+  margin: 0 0 30px;
 }
-.contact .email {
+.contact .cta {
   display: inline-block;
   font-family: var(--serif-en);
-  font-size: 19px;
+  font-size: 15px;
   letter-spacing: 0.1em;
-  color: var(--kinari);
-  border-bottom: 1px solid var(--wakaba);
-  padding-bottom: 4px;
+  padding: 14px 34px;
+  border-radius: 999px;
+  background: var(--kinari);
+  color: var(--sumimidori);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
-.contact .email:hover {
-  color: var(--wakaba);
+.contact .cta:hover {
+  transform: translateY(-2px);
+  background: #fff;
   text-decoration: none;
+}
+.contact .card .addr {
+  margin: 20px 0 0;
+  font-family: var(--serif-en);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: rgba(250, 247, 242, 0.55);
 }
 
 /* ====== Footer ====== */
@@ -511,7 +582,6 @@ button:focus-visible {
   }
   header.site nav ul li:last-child a { border-bottom: none; }
   .about .pillars { grid-template-columns: 1fr; }
-  .products .grid,
   .works .grid.two { grid-template-columns: 1fr; }
   section { padding: 72px 0; }
   .products,
@@ -521,8 +591,8 @@ button:focus-visible {
 }
 
 @media (max-width: 520px) {
-  .product .top { flex-direction: column; align-items: flex-start; gap: 8px; }
   .product { padding: 26px 22px; }
+  .product .domain { letter-spacing: 0.06em; }
 }
 
 @media (max-width: 420px) {

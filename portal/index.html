@@ -8,7 +8,9 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css">
   <meta property="og:title" content="Yテック工房 — 種から育てる工房">
   <meta property="og:description" content="学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。">
@@ -77,17 +79,26 @@
         </p>
         <div class="grid pillars">
           <div class="field reveal">
-            <div class="label-en">Craft</div>
+            <div class="field-head">
+              <span class="idx" aria-hidden="true">01</span>
+              <div class="label-en">Craft</div>
+            </div>
             <h3>手仕事の確かさ</h3>
             <p>建築の現場で培った「測って、組んで、仕上げる」感覚を、プロダクトづくりにそのまま持ち込みます。</p>
           </div>
           <div class="field reveal">
-            <div class="label-en">Tools</div>
+            <div class="field-head">
+              <span class="idx" aria-hidden="true">02</span>
+              <div class="label-en">Tools</div>
+            </div>
             <h3>暮らしに効く道具</h3>
             <p>資格学習・語学・投資・趣味。日々を少し前に進める実用の道具を、使う人の目線で設計します。</p>
           </div>
           <div class="field reveal">
-            <div class="label-en">Grow</div>
+            <div class="field-head">
+              <span class="idx" aria-hidden="true">03</span>
+              <div class="label-en">Grow</div>
+            </div>
             <h3>種から育てる</h3>
             <p>小さく出して、使いながら磨く。複利で育つプロダクトを一本ずつ、長く手入れし続けます。</p>
           </div>
@@ -105,10 +116,13 @@
 
           <a class="product reveal" href="https://1architectexam.com" target="_blank" rel="noopener" aria-label="勉強工房を新規タブで開く">
             <div class="top">
-              <h3 class="name">勉強工房</h3>
+              <span class="mono" aria-hidden="true">勉</span>
+              <div class="head">
+                <h3 class="name">勉強工房</h3>
+                <div class="domain">1ARCHITECTEXAM.COM</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">1ARCHITECTEXAM.COM</div>
             <p>一級・二級建築士／宅建の〇×一問一答。資格を切り替えて学べ、誤答だけを重点復習。Web と Android で公開中。</p>
             <div class="meta">
               <span>建築・資格</span>
@@ -120,10 +134,13 @@
 
           <a class="product reveal" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" aria-label="English工房を新規タブで開く">
             <div class="top">
-              <h3 class="name">English工房</h3>
+              <span class="mono en" aria-hidden="true">E</span>
+              <div class="head">
+                <h3 class="name">English工房</h3>
+                <div class="domain">ENGLISH-KOUBOU.VERCEL.APP</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">ENGLISH-KOUBOU.VERCEL.APP</div>
             <p>英語試験対策アプリ。Reading・Listening・Vocabulary・Writing・Speaking を一通り。AI 採点と実音声に対応。</p>
             <div class="meta">
               <span>語学・IELTS</span>
@@ -135,10 +152,13 @@
 
           <a class="product reveal" href="https://invest-ai-iota-seven.vercel.app" target="_blank" rel="noopener" aria-label="投資の相棒を新規タブで開く">
             <div class="top">
-              <h3 class="name">投資の相棒</h3>
+              <span class="mono" aria-hidden="true">投</span>
+              <div class="head">
+                <h3 class="name">投資の相棒</h3>
+                <div class="domain">INVEST-AI-IOTA-SEVEN.VERCEL.APP</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">INVEST-AI-IOTA-SEVEN.VERCEL.APP</div>
             <p>投資を一から学び、明日のプランと記録を整える学習アプリ。中立的に情報を整理し、判断は自分の手に残す設計。</p>
             <div class="meta">
               <span>投資・学習</span>
@@ -150,10 +170,13 @@
 
           <a class="product reveal" href="https://mlb-oshi.vercel.app" target="_blank" rel="noopener" aria-label="MLB推しを新規タブで開く">
             <div class="top">
-              <h3 class="name">MLB推し</h3>
+              <span class="mono" aria-hidden="true">推</span>
+              <div class="head">
+                <h3 class="name">MLB推し</h3>
+                <div class="domain">MLB-OSHI.VERCEL.APP</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">MLB-OSHI.VERCEL.APP</div>
             <p>推し選手の成績を追いかけるトラッカー。打撃スタッツや能力値レーダー、ホームラン速報をまとめて確認できる。</p>
             <div class="meta">
               <span>スポーツ</span>
@@ -165,10 +188,13 @@
 
           <a class="product reveal" href="https://ai-koubou.vercel.app" target="_blank" rel="noopener" aria-label="AI工房を新規タブで開く">
             <div class="top">
-              <h3 class="name">AI工房</h3>
+              <span class="mono en" aria-hidden="true">AI</span>
+              <div class="head">
+                <h3 class="name">AI工房</h3>
+                <div class="domain">AI-KOUBOU.VERCEL.APP</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">AI-KOUBOU.VERCEL.APP</div>
             <p>AI を一から学ぶアプリ。「使う・導入」と「作る」の2タブで、〇×クイズとプロンプト練習を通して手を動かしながら身につける。</p>
             <div class="meta">
               <span>AI・学習</span>
@@ -192,10 +218,13 @@
 
           <a class="product reveal" href="https://yoshino-koumuten.com" target="_blank" rel="noopener" aria-label="吉野工務店を新規タブで開く">
             <div class="top">
-              <h3 class="name">吉野工務店</h3>
+              <span class="mono" aria-hidden="true">吉</span>
+              <div class="head">
+                <h3 class="name">吉野工務店</h3>
+                <div class="domain">YOSHINO-KOUMUTEN.COM</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">YOSHINO-KOUMUTEN.COM</div>
             <p>先代から引き継ぐ工務店。施工事例やまな板削りの工程を、写真主役の日英2言語サイトで紹介しています。</p>
             <div class="meta">
               <span>建築・工務店</span>
@@ -206,10 +235,13 @@
 
           <a class="product reveal" href="https://hugtime-salon.com" target="_blank" rel="noopener" aria-label="Hugtime salonを新規タブで開く">
             <div class="top">
-              <h3 class="name">Hugtime salon</h3>
+              <span class="mono en" aria-hidden="true">H</span>
+              <div class="head">
+                <h3 class="name">Hugtime salon</h3>
+                <div class="domain">HUGTIME-SALON.COM</div>
+              </div>
               <span class="status live">Live</span>
             </div>
-            <div class="domain">HUGTIME-SALON.COM</div>
             <p>育児と発酵をテーマにしたワークショップサロン。開催スケジュール・予約導線・ブログを備えた事業サイト。</p>
             <div class="meta">
               <span>育児・発酵</span>
@@ -229,8 +261,9 @@
           <h2>お問い合わせ</h2>
         </div>
         <div class="card reveal">
-          <p>プロダクトに関するご質問、共同制作のご相談、設計のご依頼など。お気軽にどうぞ。</p>
-          <a class="email" href="mailto:kichiyakoushou@gmail.com">kichiyakoushou@gmail.com</a>
+          <p>プロダクトに関するご質問、共同制作のご相談、設計のご依頼など。<br class="pc-only">お気軽にどうぞ。</p>
+          <a class="cta" href="mailto:kichiyakoushou@gmail.com">メールで相談する</a>
+          <p class="addr">kichiyakoushou@gmail.com</p>
         </div>
       </div>
     </section>
