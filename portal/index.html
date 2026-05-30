@@ -194,6 +194,26 @@ header.site nav a:hover::after { transform: scaleX(1); }
   z-index: 0;
   pointer-events: none;
 }
+.tree-tip {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  font-family: var(--serif-jp);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--kokemidori);
+  background: rgba(250, 247, 242, 0.96);
+  border: 1px solid var(--usuzumi);
+  border-radius: 999px;
+  padding: 5px 13px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  box-shadow: 0 6px 18px rgba(45, 90, 45, 0.12);
+}
+.tree-tip.show { opacity: 1; }
 .hero-eyebrow {
   font-family: var(--serif-en);
   font-size: 13px;
@@ -715,6 +735,7 @@ button:focus-visible {
 
     <section class="hero">
       <canvas class="hero-bg" aria-hidden="true"></canvas>
+      <div class="tree-tip" aria-hidden="true"></div>
       <p class="hero-eyebrow reveal">Y &middot; Tech &middot; Koubou</p>
       <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png" alt="Yテック工房" width="236" height="236"></span>
       <h1 class="hero-wordmark reveal">Yテック工房</h1>
@@ -995,8 +1016,15 @@ button:focus-visible {
       var hero = canvas.parentElement;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var W = 0, H = 0, branches, leaves, fruits, startTime, raf, visible = true;
-      var GROW = 5200, BLOOM = 1700, FRUITS = 7;
+      var W = 0, H = 0, branches, leaves, fruits, startTime, raf, visible = true, hoverFruit = null;
+      var GROW = 5200, BLOOM = 1700;
+      var PRODUCTS = [
+        { name: '勉強工房', url: 'https://1architectexam.com' },
+        { name: 'English工房', url: 'https://english-koubou.vercel.app' },
+        { name: '投資の相棒', url: 'https://invest-ai-iota-seven.vercel.app' },
+        { name: 'MLB推し', url: 'https://mlb-oshi.vercel.app' },
+        { name: 'AI工房', url: 'https://ai-koubou.vercel.app' }
+      ];
 
       function grow(x, y, angle, len, depth, t0) {
         if (depth > 7 || len < 7) { leaves.push({ x: x, y: y, t: t0 }); return; }
@@ -1026,14 +1054,16 @@ button:focus-visible {
         leaves.forEach(function (l) { l.t /= maxT; });
         // 上部の枝先を等間隔で選び、作ったプロダクト＝実/花にする
         var pool = leaves.slice().sort(function (a, b) { return a.y - b.y; });
-        pool = pool.slice(0, Math.max(FRUITS, Math.floor(pool.length * 0.55)));
-        var outer = pool.filter(function (l) { return Math.abs(l.x - W / 2) > W * 0.14; });
-        if (outer.length >= FRUITS) pool = outer;
+        pool = pool.slice(0, Math.max(8, Math.floor(pool.length * 0.55)));
+        var outer = pool.filter(function (l) { return Math.abs(l.x - W / 2) > W * 0.13; });
+        if (outer.length >= 7) pool = outer;
         pool.sort(function (a, b) { return a.x - b.x; });
-        var n = Math.min(FRUITS, pool.length), step = pool.length / (n || 1);
+        var n = Math.min(7, pool.length), step = pool.length / (n || 1), pi = 0;
         for (var k = 0; k < n; k++) {
           var s = pool[Math.floor(k * step + step * 0.5)];
-          fruits.push({ x: s.x, y: s.y, flower: (k % 3 === 1), delay: k * 0.13, phase: Math.random() * 6.28 });
+          var isFlower = (k === 1 || k === 5);
+          var prod = (!isFlower && pi < PRODUCTS.length) ? PRODUCTS[pi++] : null;
+          fruits.push({ x: s.x, y: s.y, flower: isFlower, delay: k * 0.13, phase: Math.random() * 6.28, product: prod });
         }
       }
       function ease(p) { return 1 - Math.pow(1 - p, 3); }
@@ -1078,6 +1108,7 @@ button:focus-visible {
           var pop = bp < 1 ? (1 - Math.pow(1 - bp, 2)) * (1 + 0.2 * (1 - bp)) : 1;
           var pulse = 1 + (reduce ? 0 : 0.08 * Math.sin(t * 0.0016 + f.phase));
           var fx = sway(f.x, f.y, t), fy = f.y;
+          f.cx = fx; f.cy = fy;
           var R = (f.flower ? 8.5 : 7.5) * pop * pulse;
           var grd = ctx.createRadialGradient(fx, fy, 0, fx, fy, R * 2.6);
           if (f.flower) {
@@ -1096,6 +1127,10 @@ button:focus-visible {
             ctx.beginPath(); ctx.arc(fx, fy, R * 0.34, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(250,247,242,' + (0.9 * bp) + ')'; ctx.fill();
           }
+          if (f === hoverFruit) {
+            ctx.beginPath(); ctx.arc(fx, fy, R + 5, 0, Math.PI * 2);
+            ctx.lineWidth = 1.3; ctx.strokeStyle = 'rgba(160,56,42,0.55)'; ctx.stroke();
+          }
         }
         if (!reduce && visible) { raf = requestAnimationFrame(draw); }
       }
@@ -1113,6 +1148,41 @@ button:focus-visible {
           visible = en[0].isIntersecting;
           if (visible) loop(); else cancelAnimationFrame(raf);
         }, { threshold: 0 }).observe(hero);
+      }
+
+      // 実/花にカーソルを合わせるとアプリ名を表示・クリックで開く（hover対応端末のみ）
+      var tip = hero.querySelector('.tree-tip');
+      if (!reduce && window.matchMedia('(hover: hover)').matches) {
+        canvas.style.pointerEvents = 'auto';
+        canvas.addEventListener('mousemove', function (e) {
+          var r = canvas.getBoundingClientRect();
+          var mx = e.clientX - r.left, my = e.clientY - r.top, hit = null;
+          for (var i = 0; i < fruits.length; i++) {
+            var f = fruits[i];
+            if (!f.product || f.cx == null) continue;
+            var dx = mx - f.cx, dy = my - f.cy;
+            if (dx * dx + dy * dy < 324) { hit = f; break; }
+          }
+          hoverFruit = hit;
+          if (hit && tip) {
+            tip.textContent = hit.product.name;
+            tip.style.left = hit.cx + 'px';
+            tip.style.top = (hit.cy - 12) + 'px';
+            tip.classList.add('show');
+            canvas.style.cursor = 'pointer';
+          } else {
+            if (tip) tip.classList.remove('show');
+            canvas.style.cursor = '';
+          }
+        });
+        canvas.addEventListener('mouseleave', function () {
+          hoverFruit = null;
+          if (tip) tip.classList.remove('show');
+          canvas.style.cursor = '';
+        });
+        canvas.addEventListener('click', function () {
+          if (hoverFruit && hoverFruit.product) window.open(hoverFruit.product.url, '_blank', 'noopener');
+        });
       }
     })();
 
