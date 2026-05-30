@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Yテック工房 — 種から育てる工房</title>
   <meta name="description" content="建築の現場感と、ITの道具で。学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。Yテック工房 / Y-Tech Koubou。">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap">
@@ -25,8 +25,8 @@
   --nibiiro: #5A606B;       /* 補足テキスト（AA 5.9 on 生成り・実測で#6B7280から濃色化） */
   --usuzumi: #D6CFC2;
 
-  --space-section: 100px;
-  --space-section-compact: 88px;
+  --space-section: 128px;
+  --space-section-compact: 112px;
 
   --serif-jp: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
   --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
@@ -71,13 +71,20 @@ a:hover { text-decoration: underline; }
 
 /* ====== Header ====== */
 header.site {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background: rgba(250, 247, 242, 0.9);
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  z-index: 30;
+  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+header.site.scrolled {
+  background: rgba(250, 247, 242, 0.85);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--usuzumi);
-  z-index: 30;
+  border-bottom-color: var(--usuzumi);
 }
 header.site .inner {
   display: flex;
@@ -161,79 +168,118 @@ header.site nav a:hover::after { transform: scaleX(1); }
 .btn.ghost { border: 1px solid var(--kokemidori); color: var(--kokemidori); }
 .btn.ghost:hover { background: var(--kokemidori); color: var(--kinari); }
 
-/* ====== Hero ====== */
+/* ====== Hero (minimal) ====== */
 .hero {
-  padding: 110px 0 120px;
-  text-align: center;
   position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(rgba(45, 90, 45, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45, 90, 45, 0.035) 1px, transparent 1px),
-    radial-gradient(ellipse 70% 60% at 50% -10%, rgba(107, 142, 90, 0.18), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 80% 120%, rgba(160, 56, 42, 0.07), transparent 70%);
-  background-size: 28px 28px, 28px 28px, auto, auto;
-}
-.hero .mark {
-  width: 116px;
-  height: 116px;
-  margin: 0 auto 32px;
-  opacity: 0.97;
-  filter: drop-shadow(0 8px 20px rgba(45, 90, 45, 0.12));
-}
-.hero h1 {
-  margin: 0 0 10px;
-  font-family: var(--serif-jp);
-  font-size: clamp(42px, 6vw, 68px);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--kokemidori);
-  line-height: 1.1;
-}
-.hero .en {
-  margin: 0 0 30px;
-  font-family: var(--serif-en);
-  font-size: clamp(13px, 1.5vw, 17px);
-  font-weight: 500;
-  letter-spacing: 0.34em;
-  color: var(--wakaba-deep);
-  text-transform: uppercase;
-}
-.hero .tagline {
-  font-family: var(--serif-jp);
-  font-size: clamp(21px, 2.6vw, 30px);
-  font-weight: 500;
-  color: var(--shikkoku);
-  margin: 0 0 26px;
-  letter-spacing: 0.05em;
-}
-.hero .lead {
-  max-width: 640px;
-  margin: 0 auto 40px;
-  color: var(--nibiiro);
-  font-size: 15px;
-}
-.hero-cta {
+  min-height: 100vh;
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  text-align: center;
+  padding: 132px 24px 92px;
+  overflow: hidden;
 }
-.hero::after {
+.hero::before {
   content: "";
   position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--usuzumi), transparent);
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 48% 42% at 50% 44%, rgba(107, 142, 90, 0.10), transparent 70%);
+}
+.hero > * { position: relative; }
+.hero-eyebrow {
+  font-family: var(--serif-en);
+  font-size: 13px;
+  letter-spacing: 0.44em;
+  text-transform: uppercase;
+  color: var(--wakaba-deep);
+  margin: 0 0 38px;
+}
+.hero-emblem {
+  width: clamp(150px, 19vw, 236px);
+  height: auto;
+  display: block;
+  margin: 0 0 34px;
+  filter: drop-shadow(0 16px 38px rgba(45, 90, 45, 0.15));
+}
+.hero-wordmark {
+  font-family: var(--serif-jp);
+  font-weight: 600;
+  font-size: clamp(40px, 9vw, 96px);
+  letter-spacing: 0.06em;
+  line-height: 1.02;
+  color: var(--kokemidori);
+  margin: 0 0 22px;
+}
+.hero-tag {
+  font-family: var(--serif-jp);
+  font-size: clamp(17px, 2vw, 23px);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--shikkoku);
+  margin: 0 0 26px;
+}
+.hero-lead {
+  max-width: 30em;
+  margin: 0 0 46px;
+  color: var(--nibiiro);
+  font-size: 15px;
+  line-height: 1.9;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--serif-en);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  color: var(--kokemidori);
+  border-bottom: 1px solid var(--wakaba);
+  padding-bottom: 6px;
+  transition: gap 0.2s ease;
+}
+.hero-cta:hover { text-decoration: none; gap: 16px; }
+.hero-edge {
+  position: absolute;
+  bottom: 42px;
+  font-family: var(--serif-en);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--nibiiro);
+}
+.hero-edge-l { left: 48px; }
+.hero-edge-r { right: 48px; }
+.hero-scroll {
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif-en);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--wakaba-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hero-scroll::after {
+  content: "";
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(var(--wakaba), transparent);
 }
 
 /* ====== Section ====== */
-section { padding: var(--space-section) 0; }
+section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 .products,
 .works { padding: var(--space-section-compact) 0; }
 section .section-head {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 72px;
 }
 section .section-head .kicker {
   display: block;
@@ -255,49 +301,30 @@ section .section-head .kicker::after {
 section h2 {
   margin: 0;
   font-family: var(--serif-jp);
-  font-size: clamp(26px, 3vw, 34px);
+  font-size: clamp(30px, 4vw, 46px);
   font-weight: 600;
   color: var(--kokemidori);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
 }
 
 /* ====== About ====== */
-.about { background: var(--tonoko); }
 .about .lead-text {
-  max-width: 760px;
-  margin: 0 auto 56px;
+  max-width: 720px;
+  margin: 0 auto 84px;
   text-align: center;
   color: var(--shikkoku);
-  font-size: 16px;
-  line-height: 1.95;
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 2;
 }
 .about .pillars {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 48px;
 }
 .about .field {
   position: relative;
-  background: var(--kinari);
-  border: 1px solid var(--usuzumi);
-  border-radius: 12px;
-  padding: 34px 28px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.about .field::before {
-  content: "";
-  position: absolute;
-  top: 26px;
-  right: 26px;
-  width: 9px;
-  height: 13px;
-  border-radius: 10px 10px 10px 2px;
-  background: rgba(107, 142, 90, 0.3);
-  transform: rotate(35deg);
-}
-.about .field:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(45, 90, 45, 0.07);
+  padding-top: 28px;
+  border-top: 1px solid var(--usuzumi);
 }
 .about .field-head {
   display: flex;
@@ -355,7 +382,6 @@ section h2 {
   flex: 1 1 300px;
   max-width: 360px;
 }
-.works { background: var(--tonoko); }
 .works .grid.two {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -366,19 +392,18 @@ section h2 {
 .product {
   background: #fff;
   border: 1px solid var(--usuzumi);
-  border-radius: 12px;
-  padding: 32px;
+  border-radius: 14px;
+  padding: 34px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   color: var(--shikkoku);
-  box-shadow: 0 1px 0 rgba(15, 26, 15, 0.04);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .product:hover {
   transform: translateY(-4px);
   border-color: var(--wakaba);
-  box-shadow: 0 10px 24px rgba(45, 90, 45, 0.08);
+  box-shadow: 0 14px 30px rgba(45, 90, 45, 0.07);
   text-decoration: none;
 }
 .product .top {
@@ -573,7 +598,8 @@ button:focus-visible {
 @media (max-width: 880px) {
   .container { padding: 0 24px; }
   .pc-only { display: none; }
-  .hero .lead { max-width: 34em; font-size: 14.5px; line-height: 1.85; }
+  .hero-lead { font-size: 14.5px; line-height: 1.85; }
+  .hero-edge { display: none; }
   .nav-toggle { display: flex; }
   header.site nav ul {
     position: absolute;
@@ -600,7 +626,7 @@ button:focus-visible {
   section { padding: 72px 0; }
   .products,
   .works { padding: 64px 0; }
-  .hero { padding: 72px 0 84px; }
+  .hero { min-height: 90vh; padding: 108px 22px 76px; }
   footer.site .inner { flex-direction: column; gap: 8px; text-align: center; }
 }
 
@@ -654,17 +680,15 @@ button:focus-visible {
   <main id="main">
 
     <section class="hero">
-      <div class="container">
-        <img class="mark reveal" src="assets/logo-mark.png" alt="Yテック工房のマーク" width="116" height="116">
-        <h1 class="reveal">Yテック工房</h1>
-        <p class="en reveal">Y &middot; TECH &middot; KOUBOU</p>
-        <p class="tagline reveal">種から育てる工房</p>
-        <p class="lead reveal">建築の現場感と、IT という道具で。<br class="pc-only">学びを助けるアプリから、暮らしの事業まで。<br class="pc-only">ひとつずつ、根を張って丁寧に育てています。</p>
-        <div class="hero-cta reveal">
-          <a class="btn primary" href="#apps">プロダクトを見る</a>
-          <a class="btn ghost" href="#contact">お問い合わせ</a>
-        </div>
-      </div>
+      <p class="hero-eyebrow reveal">Y &middot; Tech &middot; Koubou</p>
+      <img class="hero-emblem reveal" src="assets/logo-mark.png" alt="Yテック工房" width="236" height="236">
+      <h1 class="hero-wordmark reveal">Yテック工房</h1>
+      <p class="hero-tag reveal">種から育てる工房</p>
+      <p class="hero-lead reveal">建築の現場感と、IT という道具で。<br class="pc-only">学びを助けるアプリから、暮らしの事業まで。</p>
+      <a class="hero-cta reveal" href="#apps">プロダクトを見る <span aria-hidden="true">&darr;</span></a>
+      <span class="hero-edge hero-edge-l">建築 &times; IT &times; 暮らし</span>
+      <span class="hero-edge hero-edge-r">Since 2026</span>
+      <span class="hero-scroll" aria-hidden="true">Scroll</span>
     </section>
 
     <section id="about" class="about">
@@ -880,6 +904,15 @@ button:focus-visible {
   </footer>
 
   <script>
+    // ヘッダー: スクロールで出現
+    (function () {
+      var header = document.querySelector('header.site');
+      if (!header) return;
+      var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 32); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
     // モバイルナビ開閉
     (function () {
       var toggle = document.querySelector('.nav-toggle');
