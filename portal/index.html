@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Yテック工房 — 種から育てる工房</title>
   <meta name="description" content="建築の現場感と、ITの道具で。学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。Yテック工房 / Y-Tech Koubou。">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="canonical" href="https://www.y-tech-koubou.com/">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500&family=Noto+Serif+JP:wght@500;600;700&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@500;600&display=optional">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@500;600&display=optional" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@500;600&display=optional"></noscript>
   <style>
 :root {
   --kokemidori: #2D5A2D;
@@ -31,7 +32,7 @@
   --serif-jp: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
   --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
   --sans-jp: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
-  --sans-en: 'Inter', -apple-system, sans-serif;
+  --sans-en: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -213,6 +214,8 @@ header.site nav a:hover::after { transform: scaleX(1); }
   transition: opacity 0.18s ease;
   box-shadow: 0 6px 18px rgba(45, 90, 45, 0.12);
 }
+.tree-tip { display: inline-flex; align-items: center; gap: 7px; }
+.tree-tip .tip-logo { width: 18px; height: 18px; object-fit: contain; display: block; flex-shrink: 0; }
 .tree-tip.show { opacity: 1; }
 .hero-eyebrow {
   font-family: var(--serif-en);
@@ -427,6 +430,16 @@ section h2 {
   text-align: center;
   margin-top: 60px;
 }
+.work-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--usuzumi);
+  margin-bottom: 8px;
+  background: var(--tonoko);
+}
 .product {
   background: #fff;
   border: 1px solid var(--usuzumi);
@@ -473,9 +486,24 @@ section h2 {
   font-size: 19px;
   letter-spacing: 0.02em;
 }
+.product .mono.logo {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+.product .mono.logo img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  display: block;
+}
 .product:hover .mono {
   border-color: var(--wakaba);
   background: rgba(107, 142, 90, 0.08);
+}
+.product:hover .mono.logo {
+  border-color: transparent;
+  background: transparent;
 }
 .product .name {
   font-family: var(--serif-jp);
@@ -695,17 +723,46 @@ button:focus-visible {
   </style>
   <meta property="og:title" content="Yテック工房 — 種から育てる工房">
   <meta property="og:description" content="学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。">
-  <meta property="og:image" content="https://y-tech-koubou.com/assets/og.png">
+  <meta property="og:image" content="https://www.y-tech-koubou.com/assets/og.png?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://y-tech-koubou.com">
+  <meta property="og:url" content="https://www.y-tech-koubou.com/">
   <meta property="og:site_name" content="Yテック工房">
+  <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yテック工房 — 種から育てる工房">
   <meta name="twitter:description" content="学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。">
-  <meta name="twitter:image" content="https://y-tech-koubou.com/assets/og.png">
+  <meta name="twitter:image" content="https://www.y-tech-koubou.com/assets/og.png?v=2">
   <meta name="theme-color" content="#FAF7F2">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.y-tech-koubou.com/#org",
+        "name": "Yテック工房",
+        "alternateName": "Y-Tech Koubou",
+        "url": "https://www.y-tech-koubou.com/",
+        "logo": "https://www.y-tech-koubou.com/assets/logo-mark.png",
+        "image": "https://www.y-tech-koubou.com/assets/og.png",
+        "email": "kichiyakoushou@gmail.com",
+        "foundingDate": "2026",
+        "description": "建築の現場感と、ITの道具で。学びを助けるアプリから暮らしの事業まで、ひとつずつ種から育てる個人工房。",
+        "knowsAbout": ["建築", "資格学習", "語学学習", "投資", "Webサイト制作"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.y-tech-koubou.com/#website",
+        "url": "https://www.y-tech-koubou.com/",
+        "name": "Yテック工房",
+        "inLanguage": "ja",
+        "publisher": { "@id": "https://www.y-tech-koubou.com/#org" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -714,7 +771,7 @@ button:focus-visible {
   <header class="site" id="top">
     <div class="container inner">
       <a href="#top" class="brand" aria-label="Yテック工房 ホーム">
-        <img src="assets/logo-mark.png" alt="" width="36" height="36">
+        <img src="assets/logo-mark.png?v=2" alt="" width="36" height="36">
         <span>Yテック工房</span>
       </a>
       <nav class="nav" aria-label="メインナビゲーション">
@@ -737,7 +794,7 @@ button:focus-visible {
       <canvas class="hero-bg" aria-hidden="true"></canvas>
       <div class="tree-tip" aria-hidden="true"></div>
       <p class="hero-eyebrow reveal">Y &middot; Tech &middot; Koubou</p>
-      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png" alt="Yテック工房" width="236" height="236"></span>
+      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png?v=2" alt="" width="236" height="236"></span>
       <h1 class="hero-wordmark reveal">Yテック工房</h1>
       <p class="hero-tag reveal">種から育てる工房</p>
       <p class="hero-lead reveal">建築の現場感と、IT という道具で。<br class="pc-only">学びを助けるアプリから、暮らしの事業まで。</p>
@@ -815,7 +872,7 @@ button:focus-visible {
 
           <a class="product reveal" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" aria-label="English工房を新規タブで開く">
             <div class="top">
-              <span class="mono en" aria-hidden="true">E</span>
+              <span class="mono logo" aria-hidden="true"><img src="assets/english-koubou-mark.svg" alt="" width="46" height="46" loading="lazy"></span>
               <div class="head">
                 <h3 class="name">English工房</h3>
                 <div class="domain">ENGLISH-KOUBOU.VERCEL.APP</div>
@@ -876,10 +933,10 @@ button:focus-visible {
               </div>
               <span class="status live">Live</span>
             </div>
-            <p>AI を一から学ぶアプリ。「使う・導入」と「作る」の2タブで、〇×クイズとプロンプト練習を通して手を動かしながら身につける。</p>
+            <p>AI とブロックチェーンを一から学ぶアプリ。「使う・導入」「作る」「ブロックチェーン」の3タブで、〇×クイズとプロンプト練習を通して手を動かしながら身につける。</p>
             <div class="meta">
-              <span>AI・学習</span>
-              <span>Expo</span>
+              <span>AI・ブロックチェーン</span>
+              <span>学習</span>
               <span>Web</span>
             </div>
             <span class="open">開く &rarr;</span>
@@ -899,8 +956,8 @@ button:focus-visible {
         <div class="grid two">
 
           <a class="product reveal" href="https://yoshino-koumuten.com" target="_blank" rel="noopener" aria-label="制作例：吉野工務店のサイトを新規タブで開く">
+            <img class="work-thumb" src="assets/work-yoshino.jpg" alt="吉野工務店サイトのホーム画面" loading="lazy" width="860" height="538">
             <div class="top">
-              <span class="mono" aria-hidden="true">吉</span>
               <div class="head">
                 <h3 class="name">吉野工務店</h3>
                 <div class="domain">YOSHINO-KOUMUTEN.COM</div>
@@ -916,8 +973,8 @@ button:focus-visible {
           </a>
 
           <a class="product reveal" href="https://hugtime-salon.com" target="_blank" rel="noopener" aria-label="制作例：Hugtime salon のサイトを新規タブで開く">
+            <img class="work-thumb" src="assets/work-hugtime.jpg" alt="Hugtime salon サイトのホーム画面" loading="lazy" width="860" height="538">
             <div class="top">
-              <span class="mono en" aria-hidden="true">H</span>
               <div class="head">
                 <h3 class="name">Hugtime salon</h3>
                 <div class="domain">HUGTIME-SALON.COM</div>
@@ -1015,19 +1072,21 @@ button:focus-visible {
       var ctx = canvas.getContext('2d');
       var hero = canvas.parentElement;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       var W = 0, H = 0, branches, leaves, fruits, startTime, raf, visible = true, hoverFruit = null;
+      var lastFrame = 0, FRAME_MS = 1000 / 30;
+      var frozen = false, rest = false, SETTLE = 9200;
       var GROW = 5200, BLOOM = 1700;
       var PRODUCTS = [
         { name: '勉強工房', url: 'https://1architectexam.com' },
-        { name: 'English工房', url: 'https://english-koubou.vercel.app' },
+        { name: 'English工房', url: 'https://english-koubou.vercel.app', icon: 'assets/english-koubou-mark.svg' },
         { name: '投資の相棒', url: 'https://invest-ai-iota-seven.vercel.app' },
         { name: 'MLB推し', url: 'https://mlb-oshi.vercel.app' },
         { name: 'AI工房', url: 'https://ai-koubou.vercel.app' }
       ];
 
       function grow(x, y, angle, len, depth, t0) {
-        if (depth > 7 || len < 7) { leaves.push({ x: x, y: y, t: t0 }); return; }
+        if (depth > 6 || len < 9) { leaves.push({ x: x, y: y, t: t0 }); return; }
         var x2 = x + Math.cos(angle) * len;
         var y2 = y + Math.sin(angle) * len;
         branches.push({ x1: x, y1: y, x2: x2, y2: y2, depth: depth, t0: t0, t1: t0 + 1 });
@@ -1035,7 +1094,7 @@ button:focus-visible {
         var nlen = len * 0.74;
         grow(x2, y2, angle - spread + (Math.random() - 0.5) * 0.18, nlen, depth + 1, t0 + 0.85);
         grow(x2, y2, angle + spread + (Math.random() - 0.5) * 0.18, nlen, depth + 1, t0 + 0.85);
-        if (depth < 2 && Math.random() < 0.55) {
+        if (depth < 2 && Math.random() < 0.4) {
           grow(x2, y2, angle + (Math.random() - 0.5) * 0.3, nlen * 0.9, depth + 1, t0 + 0.9);
         }
       }
@@ -1072,9 +1131,15 @@ button:focus-visible {
         return x + 9 * h * h * Math.sin(t * 0.00085 + (H - y) * 0.011);
       }
       function draw(now) {
+        if (frozen) { return; }
+        if (!reduce && visible) { raf = requestAnimationFrame(draw); }
+        if (!branches) { return; }
+        if (!reduce && now - lastFrame < FRAME_MS) { return; }
+        lastFrame = now;
         var el = now - startTime;
-        var p = reduce ? 1 : ease(Math.min(1, el / GROW));
-        var t = reduce ? 0 : now;
+        var still = reduce || rest;
+        var p = still ? 1 : ease(Math.min(1, el / GROW));
+        var t = still ? 0 : now;
         ctx.clearRect(0, 0, W, H);
         ctx.lineCap = 'round';
         var i;
@@ -1100,13 +1165,13 @@ button:focus-visible {
           ctx.fill();
         }
         // 実 / 花（成長後に咲く → 軽く脈動 + ゆらぎ）
-        var bloomBase = reduce ? Infinity : (el - GROW);
+        var bloomBase = still ? Infinity : (el - GROW);
         for (i = 0; i < fruits.length; i++) {
           var f = fruits[i];
           var bp = reduce ? 1 : Math.max(0, Math.min(1, (bloomBase - f.delay * 1000) / BLOOM));
           if (bp <= 0) continue;
           var pop = bp < 1 ? (1 - Math.pow(1 - bp, 2)) * (1 + 0.2 * (1 - bp)) : 1;
-          var pulse = 1 + (reduce ? 0 : 0.08 * Math.sin(t * 0.0016 + f.phase));
+          var pulse = 1 + (still ? 0 : 0.08 * Math.sin(t * 0.0016 + f.phase));
           var fx = sway(f.x, f.y, t), fy = f.y;
           f.cx = fx; f.cy = fy;
           f.hv = (f.hv || 0) + (((f === hoverFruit) ? 1 : 0) - (f.hv || 0)) * 0.18;
@@ -1143,15 +1208,26 @@ button:focus-visible {
             ctx.fillStyle = 'rgba(252,242,206,' + (0.95 * bp) + ')'; ctx.fill();
           }
         }
-        if (!reduce && visible) { raf = requestAnimationFrame(draw); }
+        // 開花後しばらく揺れたら静止フレームで凍結（ホバー演出が残っている間は維持）
+        if (!reduce && el > SETTLE) {
+          rest = true;
+          var busy = hoverFruit != null;
+          if (!busy) { for (i = 0; i < fruits.length; i++) { if ((fruits[i].hv || 0) > 0.01) { busy = true; break; } } }
+          if (!busy) { frozen = true; }
+        }
       }
       function loop() { if (!reduce && visible) { cancelAnimationFrame(raf); raf = requestAnimationFrame(draw); } }
+      function wake() { if (!reduce && frozen) { frozen = false; lastFrame = 0; loop(); } }
       function startBuild() {
         build();
         startTime = performance.now();
-        if (reduce) { draw(0); } else { loop(); }
+        frozen = false; rest = false;
+        if (reduce) { draw(0); } else { lastFrame = 0; loop(); }
       }
-      startBuild();
+      // 初期生成は重い→アイドルまで遅延し、FCP/LCP をブロックしない
+      if (reduce) { startBuild(); }
+      else if ('requestIdleCallback' in window) { requestIdleCallback(startBuild, { timeout: 1800 }); }
+      else { setTimeout(startBuild, 200); }
       var rt;
       window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(startBuild, 250); });
       if ('IntersectionObserver' in window && !reduce) {
@@ -1166,6 +1242,7 @@ button:focus-visible {
       if (!reduce && window.matchMedia('(hover: hover)').matches) {
         canvas.style.pointerEvents = 'auto';
         canvas.addEventListener('mousemove', function (e) {
+          if (!fruits) { return; }
           var r = canvas.getBoundingClientRect();
           var mx = e.clientX - r.left, my = e.clientY - r.top, hit = null;
           for (var i = 0; i < fruits.length; i++) {
@@ -1174,9 +1251,18 @@ button:focus-visible {
             var dx = mx - f.cx, dy = my - f.cy;
             if (dx * dx + dy * dy < 676) { hit = f; break; }
           }
-          hoverFruit = hit;
+          if (hit !== hoverFruit) {
+            hoverFruit = hit;
+            wake();
+            if (hit && tip) {
+              if (hit.product.icon) {
+                tip.innerHTML = '<img class="tip-logo" src="' + hit.product.icon + '" alt=""><span>' + hit.product.name + '</span>';
+              } else {
+                tip.textContent = hit.product.name;
+              }
+            }
+          }
           if (hit && tip) {
-            tip.textContent = hit.product.name;
             tip.style.left = hit.cx + 'px';
             tip.style.top = (hit.cy - 12) + 'px';
             tip.classList.add('show');
@@ -1188,6 +1274,7 @@ button:focus-visible {
         });
         canvas.addEventListener('mouseleave', function () {
           hoverFruit = null;
+          wake();
           if (tip) tip.classList.remove('show');
           canvas.style.cursor = '';
         });
