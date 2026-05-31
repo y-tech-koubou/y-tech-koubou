@@ -91,12 +91,14 @@ header.site .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   height: 72px;
 }
 header.site .brand {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
   font-family: var(--serif-jp);
   font-size: 18px;
   font-weight: 600;
@@ -118,6 +120,7 @@ header.site nav a {
   letter-spacing: 0.1em;
   font-family: var(--serif-en);
   position: relative;
+  white-space: nowrap;
 }
 header.site nav a::after {
   content: "";
@@ -676,6 +679,31 @@ button:focus-visible {
 }
 
 /* ====== Responsive ====== */
+/* 中間幅でナビが詰まって文字が重なるのを防ぐ。960px以下はハンバーガーに畳み、言語ボタンは常に右上に残す */
+@media (max-width: 960px) {
+  .nav-toggle { display: flex; }
+  header.site nav ul {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--kinari);
+    border-bottom: 1px solid var(--usuzumi);
+    padding: 8px 32px 16px;
+    display: none;
+  }
+  header.site nav ul.open { display: flex; }
+  header.site nav a {
+    display: block;
+    padding: 14px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--usuzumi);
+  }
+  header.site nav ul li:last-child a { border-bottom: none; }
+}
+
 @media (max-width: 880px) {
   .container { padding: 0 24px; }
   .pc-only { display: none; }
