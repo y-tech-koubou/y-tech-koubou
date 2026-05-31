@@ -908,10 +908,10 @@ button:focus-visible {
             <span class="lang-caret" aria-hidden="true">&#9662;</span>
           </button>
           <ul class="lang-menu" role="listbox" aria-label="言語">
-            <li role="option" data-lang="ja" aria-selected="true">
+            <li role="option" data-lang="ja" aria-selected="true" tabindex="-1">
               <img src="assets/flags/ja.svg" alt="" width="24" height="16"><span>日本語</span><span class="lang-check" aria-hidden="true">&#10003;</span>
             </li>
-            <li role="option" data-lang="en" aria-selected="false">
+            <li role="option" data-lang="en" aria-selected="false" tabindex="-1">
               <img src="assets/flags/en.svg" alt="" width="24" height="16"><span>English</span><span class="lang-check" aria-hidden="true">&#10003;</span>
             </li>
           </ul>
@@ -1470,6 +1470,13 @@ button:focus-visible {
         var open = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', String(!open));
         menu.classList.toggle('open', !open);
+        // 言語メニューが開いていたら閉じて重なりを防ぐ
+        if (!open) {
+          var langMenu = document.querySelector('.lang-menu');
+          var langBtn = document.querySelector('.lang-toggle');
+          if (langMenu) langMenu.classList.remove('open');
+          if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+        }
       });
       menu.addEventListener('click', function (e) {
         if (e.target.tagName === 'A') close();
@@ -1507,7 +1514,10 @@ button:focus-visible {
       var titleJa = document.title;
       var titleEn = 'Y-Tech Koubou — a workshop grown from seed';
       var LABELS = { ja: '日本語', en: 'English' };
-      function apply(lang) {
+      var opts = menu ? [].slice.call(menu.querySelectorAll('[role="option"]')) : [];
+      function norm(lang) { return LABELS[lang] ? lang : 'ja'; }
+      function apply(rawLang) {
+        var lang = norm(rawLang);
         var en = lang === 'en';
         nodes.forEach(function (n) {
           n.innerHTML = en ? n.getAttribute('data-en') : n.getAttribute('data-ja');
@@ -1525,8 +1535,25 @@ button:focus-visible {
       }
       function openMenu(o) {
         if (!menu || !btn) return;
+        // モバイル: ハンバーガーが開いていたら閉じて重なりを防ぐ
+        if (o) {
+          var navMenu = document.getElementById('nav-menu');
+          var navToggle = document.querySelector('.nav-toggle');
+          if (navMenu) navMenu.classList.remove('open');
+          if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        }
         menu.classList.toggle('open', o);
         btn.setAttribute('aria-expanded', String(o));
+        if (o) {
+          var sel = menu.querySelector('[aria-selected="true"]') || opts[0];
+          if (sel) sel.focus();
+        }
+      }
+      function moveFocus(dir) {
+        if (!opts.length) return;
+        var cur = opts.indexOf(document.activeElement);
+        var next = (cur + dir + opts.length) % opts.length;
+        opts[next].focus();
       }
       var saved = 'ja';
       try { saved = localStorage.getItem(KEY) || 'ja'; } catch (e) {}
@@ -1536,17 +1563,28 @@ button:focus-visible {
           e.stopPropagation();
           openMenu(!menu.classList.contains('open'));
         });
+        btn.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openMenu(true);
+          }
+        });
+        function choose(li) { apply(li.getAttribute('data-lang')); openMenu(false); btn.focus(); }
         menu.addEventListener('click', function (e) {
           var li = e.target.closest('[role="option"]');
-          if (!li) return;
-          apply(li.getAttribute('data-lang'));
-          openMenu(false);
+          if (li) choose(li);
+        });
+        menu.addEventListener('keydown', function (e) {
+          var li = e.target.closest('[role="option"]');
+          if (e.key === 'ArrowDown') { e.preventDefault(); moveFocus(1); }
+          else if (e.key === 'ArrowUp') { e.preventDefault(); moveFocus(-1); }
+          else if ((e.key === 'Enter' || e.key === ' ') && li) { e.preventDefault(); choose(li); }
         });
         document.addEventListener('click', function (e) {
           if (!sw.contains(e.target)) openMenu(false);
         });
         document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') openMenu(false);
+          if (e.key === 'Escape' && menu.classList.contains('open')) { openMenu(false); btn.focus(); }
         });
       }
     })();
