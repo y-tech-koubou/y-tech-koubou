@@ -1109,27 +1109,38 @@ button:focus-visible {
           var pulse = 1 + (reduce ? 0 : 0.08 * Math.sin(t * 0.0016 + f.phase));
           var fx = sway(f.x, f.y, t), fy = f.y;
           f.cx = fx; f.cy = fy;
-          var R = (f.flower ? 11 : 10) * pop * pulse;
-          var grd = ctx.createRadialGradient(fx, fy, 0, fx, fy, R * 2.6);
+          f.hv = (f.hv || 0) + (((f === hoverFruit) ? 1 : 0) - (f.hv || 0)) * 0.18;
+          var hv = f.hv;
+          var R = (f.flower ? 11 : 10) * pop * pulse * (1 + 0.42 * hv);
+          var gr = R * (2.6 + hv);
+          var ga = (f.flower ? 0.58 : 0.55) * bp * (1 + 0.7 * hv);
+          var glow = ctx.createRadialGradient(fx, fy, 0, fx, fy, gr);
           if (f.flower) {
-            grd.addColorStop(0, 'rgba(232,196,176,' + (0.55 * bp) + ')');
-            grd.addColorStop(1, 'rgba(232,196,176,0)');
+            glow.addColorStop(0, 'rgba(240,205,214,' + ga + ')');
+            glow.addColorStop(1, 'rgba(240,205,214,0)');
           } else {
-            grd.addColorStop(0, 'rgba(160,56,42,' + (0.5 * bp) + ')');
-            grd.addColorStop(1, 'rgba(160,56,42,0)');
+            glow.addColorStop(0, 'rgba(170,52,40,' + ga + ')');
+            glow.addColorStop(1, 'rgba(170,52,40,0)');
           }
-          ctx.fillStyle = grd;
-          ctx.beginPath(); ctx.arc(fx, fy, R * 2.6, 0, Math.PI * 2); ctx.fill();
-          ctx.beginPath(); ctx.arc(fx, fy, R, 0, Math.PI * 2);
-          ctx.fillStyle = f.flower ? 'rgba(214,142,120,' + (0.85 * bp) + ')' : 'rgba(160,56,42,' + (0.8 * bp) + ')';
-          ctx.fill();
+          ctx.fillStyle = glow;
+          ctx.beginPath(); ctx.arc(fx, fy, gr, 0, Math.PI * 2); ctx.fill();
+          // 本体（熟れた朱 / 華やかな花）— ハイライト側を明るく
+          var core = ctx.createRadialGradient(fx - R * 0.32, fy - R * 0.34, R * 0.1, fx, fy, R);
           if (f.flower) {
-            ctx.beginPath(); ctx.arc(fx, fy, R * 0.34, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(250,247,242,' + (0.9 * bp) + ')'; ctx.fill();
+            core.addColorStop(0, 'rgba(246,184,200,' + (0.96 * bp) + ')');
+            core.addColorStop(1, 'rgba(210,116,150,' + (0.92 * bp) + ')');
+          } else {
+            core.addColorStop(0, 'rgba(198,74,54,' + (0.96 * bp) + ')');
+            core.addColorStop(1, 'rgba(148,38,28,' + (0.94 * bp) + ')');
           }
-          if (f === hoverFruit) {
-            ctx.beginPath(); ctx.arc(fx, fy, R + 5, 0, Math.PI * 2);
-            ctx.lineWidth = 1.3; ctx.strokeStyle = 'rgba(160,56,42,0.55)'; ctx.stroke();
+          ctx.fillStyle = core;
+          ctx.beginPath(); ctx.arc(fx, fy, R, 0, Math.PI * 2); ctx.fill();
+          // つや
+          ctx.beginPath(); ctx.arc(fx - R * 0.32, fy - R * 0.34, R * 0.22, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,250,246,' + ((f.flower ? 0.5 : 0.42) * bp) + ')'; ctx.fill();
+          if (f.flower) {
+            ctx.beginPath(); ctx.arc(fx, fy, R * 0.3, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(252,242,206,' + (0.95 * bp) + ')'; ctx.fill();
           }
         }
         if (!reduce && visible) { raf = requestAnimationFrame(draw); }
