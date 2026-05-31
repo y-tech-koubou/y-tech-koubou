@@ -1244,7 +1244,8 @@ button:focus-visible {
         // 横方向に均等な目標位置を作り、各位置に最も近い枝先を「最低間隔」を保って割り当てる（咲く花が固まらないように）
         var minX = pool[0].x, maxX = pool[pool.length - 1].x;
         var span = Math.max(1, maxX - minX);
-        var minGap = Math.max(W * 0.11, span / (n + 1) * 0.7);
+        // 狭い画面で端へはみ出さないよう間隔は span に対しても上限を設ける
+        var minGap = Math.min(span / n * 0.9, Math.max(W * 0.16, span / (n + 1) * 0.92));
         var picks = [], used = [];
         for (var k = 0; k < n; k++) {
           var target = minX + span * ((k + 0.5) / n);
@@ -1436,9 +1437,13 @@ button:focus-visible {
             }
           }
           if (hit && tip) {
-            tip.style.left = hit.cx + 'px';
-            tip.style.top = (hit.cy - 12) + 'px';
             tip.classList.add('show');
+            // 中央寄せ(translateX -50%)なので、左右端で見切れないよう実幅でクランプ
+            var half = tip.offsetWidth / 2;
+            var pad = 12;
+            var cx = Math.max(half + pad, Math.min(W - half - pad, hit.cx));
+            tip.style.left = cx + 'px';
+            tip.style.top = (hit.cy - 12) + 'px';
             canvas.style.cursor = 'pointer';
           } else {
             if (tip) tip.classList.remove('show');
