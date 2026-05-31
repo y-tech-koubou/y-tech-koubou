@@ -711,6 +711,12 @@ button:focus-visible {
   footer.site .inner { flex-direction: column; gap: 8px; text-align: center; }
 }
 
+/* 背が低いウィンドウでは装飾の隅ラベル/スクロール表示を隠し、CTA と重ならないようにする */
+@media (max-height: 760px) {
+  .hero-edge { display: none; }
+  .hero-scroll { display: none; }
+}
+
 @media (max-width: 520px) {
   .product { padding: 26px 22px; }
   .product .domain { letter-spacing: 0.06em; }
@@ -1100,6 +1106,9 @@ button:focus-visible {
         // 上部の枝先を等間隔で選び、作ったプロダクト＝実/花にする
         var pool = leaves.slice().sort(function (a, b) { return a.y - b.y; });
         pool = pool.slice(0, Math.max(8, Math.floor(pool.length * 0.55)));
+        // ロゴ＋ワードマークの中央上部ゾーンには咲かせない（実/花がロゴに重ならないように）
+        var clear = pool.filter(function (l) { return !(Math.abs(l.x - W / 2) < W * 0.3 && l.y < H * 0.55); });
+        if (clear.length >= 7) pool = clear;
         var outer = pool.filter(function (l) { return Math.abs(l.x - W / 2) > W * 0.13; });
         if (outer.length >= 7) pool = outer;
         pool.sort(function (a, b) { return a.x - b.x; });
