@@ -433,8 +433,7 @@ section h2 {
 .work-thumb {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  height: auto;
   border-radius: 10px;
   border: 1px solid var(--usuzumi);
   margin-bottom: 8px;
@@ -852,11 +851,12 @@ button:focus-visible {
         </div>
         <div class="grid">
 
-          <a class="product reveal" href="https://1architectexam.com" target="_blank" rel="noopener" aria-label="勉強工房を新規タブで開く">
+          <a class="product reveal" href="https://1architectexam.com" target="_blank" rel="noopener" aria-label="建築資格工房を新規タブで開く">
+            <img class="work-thumb" src="assets/app-kenchiku.jpg" alt="建築資格工房のホーム画面" loading="lazy" width="860" height="538">
             <div class="top">
-              <span class="mono" aria-hidden="true">勉</span>
+              <span class="mono" aria-hidden="true">建</span>
               <div class="head">
-                <h3 class="name">勉強工房</h3>
+                <h3 class="name">建築資格工房</h3>
                 <div class="domain">1ARCHITECTEXAM.COM</div>
               </div>
               <span class="status live">Live</span>
@@ -871,6 +871,7 @@ button:focus-visible {
           </a>
 
           <a class="product reveal" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" aria-label="English工房を新規タブで開く">
+            <img class="work-thumb" src="assets/app-english.jpg" alt="English工房のホーム画面" loading="lazy" width="860" height="538">
             <div class="top">
               <span class="mono logo" aria-hidden="true"><img src="assets/english-koubou-mark.svg" alt="" width="46" height="46" loading="lazy"></span>
               <div class="head">
@@ -888,27 +889,10 @@ button:focus-visible {
             <span class="open">開く &rarr;</span>
           </a>
 
-          <a class="product reveal" href="https://invest-ai-iota-seven.vercel.app" target="_blank" rel="noopener" aria-label="投資の相棒を新規タブで開く">
-            <div class="top">
-              <span class="mono" aria-hidden="true">投</span>
-              <div class="head">
-                <h3 class="name">投資の相棒</h3>
-                <div class="domain">INVEST-AI-IOTA-SEVEN.VERCEL.APP</div>
-              </div>
-              <span class="status live">Live</span>
-            </div>
-            <p>投資を一から学び、明日のプランと記録を整える学習アプリ。中立的に情報を整理し、判断は自分の手に残す設計。</p>
-            <div class="meta">
-              <span>投資・学習</span>
-              <span>Firebase</span>
-              <span>Web</span>
-            </div>
-            <span class="open">開く &rarr;</span>
-          </a>
-
           <a class="product reveal" href="https://mlb-oshi.vercel.app" target="_blank" rel="noopener" aria-label="MLB推しを新規タブで開く">
+            <img class="work-thumb" src="assets/app-mlb.jpg" alt="MLB推しのホーム画面" loading="lazy" width="860" height="538">
             <div class="top">
-              <span class="mono" aria-hidden="true">推</span>
+              <span class="mono logo" aria-hidden="true"><img src="assets/mlb-oshi-mark.png" alt="" width="46" height="46" loading="lazy"></span>
               <div class="head">
                 <h3 class="name">MLB推し</h3>
                 <div class="domain">MLB-OSHI.VERCEL.APP</div>
@@ -925,6 +909,7 @@ button:focus-visible {
           </a>
 
           <a class="product reveal" href="https://ai-koubou.vercel.app" target="_blank" rel="noopener" aria-label="AI工房を新規タブで開く">
+            <img class="work-thumb" src="assets/app-ai.jpg" alt="AI工房のホーム画面" loading="lazy" width="860" height="538">
             <div class="top">
               <span class="mono logo" aria-hidden="true"><img src="assets/ai-koubou-mark.png" alt="" width="46" height="46" loading="lazy"></span>
               <div class="head">
@@ -1078,12 +1063,13 @@ button:focus-visible {
       var frozen = false, rest = false, SETTLE = 9200;
       var GROW = 5200, BLOOM = 1700;
       var PRODUCTS = [
-        { name: '勉強工房', url: 'https://1architectexam.com' },
+        { name: '建築資格工房', url: 'https://1architectexam.com', icon: 'assets/kenchiku-mark.png' },
         { name: 'English工房', url: 'https://english-koubou.vercel.app', icon: 'assets/english-koubou-mark.svg' },
-        { name: '投資の相棒', url: 'https://invest-ai-iota-seven.vercel.app' },
-        { name: 'MLB推し', url: 'https://mlb-oshi.vercel.app' },
-        { name: 'AI工房', url: 'https://ai-koubou.vercel.app' }
+        { name: 'MLB推し', url: 'https://mlb-oshi.vercel.app', icon: 'assets/mlb-oshi-mark.png' },
+        { name: 'AI工房', url: 'https://ai-koubou.vercel.app', icon: 'assets/ai-koubou-mark.png' }
       ];
+      var ICONS = {};
+      PRODUCTS.forEach(function (p) { if (p.icon) { var im = new Image(); im.onload = function () { if (typeof wake === 'function') { wake(); } }; im.src = p.icon; ICONS[p.icon] = im; } });
 
       function grow(x, y, angle, len, depth, t0) {
         if (depth > 6 || len < 9) { leaves.push({ x: x, y: y, t: t0 }); return; }
@@ -1117,11 +1103,14 @@ button:focus-visible {
         var outer = pool.filter(function (l) { return Math.abs(l.x - W / 2) > W * 0.13; });
         if (outer.length >= 7) pool = outer;
         pool.sort(function (a, b) { return a.x - b.x; });
-        var n = Math.min(7, pool.length), step = pool.length / (n || 1), pi = 0;
+        // 公開アプリ＝ロゴの実 + 2輪の装飾花。プレーンな実は作らない（咲くもの＝ロゴ）
+        var n = Math.min(PRODUCTS.length + 2, pool.length), step = pool.length / (n || 1), pi = 0;
+        var flowerAt = (n >= 4) ? [1, n - 2] : [];
         for (var k = 0; k < n; k++) {
           var s = pool[Math.floor(k * step + step * 0.5)];
-          var isFlower = (k === 1 || k === 5);
+          var isFlower = flowerAt.indexOf(k) !== -1;
           var prod = (!isFlower && pi < PRODUCTS.length) ? PRODUCTS[pi++] : null;
+          if (!isFlower && !prod) { isFlower = true; }
           fruits.push({ x: s.x, y: s.y, flower: isFlower, delay: k * 0.13, phase: Math.random() * 6.28, product: prod });
         }
       }
@@ -1176,6 +1165,26 @@ button:focus-visible {
           f.cx = fx; f.cy = fy;
           f.hv = (f.hv || 0) + (((f === hoverFruit) ? 1 : 0) - (f.hv || 0)) * 0.18;
           var hv = f.hv;
+          // 公開アプリ＝ロゴの花として咲く（白いブロッサム＋ロゴ画像）
+          var picon = (f.product && f.product.icon) ? ICONS[f.product.icon] : null;
+          if (picon && picon.complete && picon.naturalWidth) {
+            var LR = 15 * pop * pulse * (1 + 0.42 * hv);
+            var lgr = LR * (2.2 + hv);
+            var lglow = ctx.createRadialGradient(fx, fy, 0, fx, fy, lgr);
+            lglow.addColorStop(0, 'rgba(160,180,140,' + (0.5 * bp * (1 + 0.7 * hv)) + ')');
+            lglow.addColorStop(1, 'rgba(160,180,140,0)');
+            ctx.fillStyle = lglow;
+            ctx.beginPath(); ctx.arc(fx, fy, lgr, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(fx, fy, LR, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,' + (0.97 * bp) + ')'; ctx.fill();
+            ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(45,90,45,' + (0.16 * bp) + ')'; ctx.stroke();
+            var ls = LR * 1.55;
+            ctx.save();
+            ctx.globalAlpha = bp;
+            ctx.drawImage(picon, fx - ls / 2, fy - ls / 2, ls, ls);
+            ctx.restore();
+            continue;
+          }
           var R = (f.flower ? 11 : 10) * pop * pulse * (1 + 0.42 * hv);
           var gr = R * (2.6 + hv);
           var ga = (f.flower ? 0.58 : 0.55) * bp * (1 + 0.7 * hv);
