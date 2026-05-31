@@ -771,25 +771,29 @@ button:focus-visible {
 </head>
 <body>
 
-  <a class="skip" href="#main">本文へスキップ</a>
+  <a class="skip" href="#main" data-en="Skip to content">本文へスキップ</a>
 
   <header class="site" id="top">
     <div class="container inner">
       <a href="#top" class="brand" aria-label="Yテック工房 ホーム">
         <img src="assets/logo-mark.png?v=2" alt="" width="36" height="36">
-        <span>Yテック工房</span>
+        <span data-en="Y-Tech Koubou">Yテック工房</span>
       </a>
-      <nav class="nav" aria-label="メインナビゲーション">
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="メニューを開く">
-          <span></span><span></span><span></span>
-        </button>
-        <ul id="nav-menu">
-          <li><a href="#about">ABOUT</a></li>
-          <li><a href="#apps">APPS</a></li>
-          <li><a href="#works">WORKS</a></li>
-          <li><a href="#contact">CONTACT</a></li>
-        </ul>
-      </nav>
+      <div class="nav-cluster">
+        <nav class="nav" aria-label="メインナビゲーション">
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="メニューを開く">
+            <span></span><span></span><span></span>
+          </button>
+          <ul id="nav-menu">
+            <li><a href="#top">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#apps">APPS</a></li>
+            <li><a href="#works">WORKS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+          </ul>
+        </nav>
+        <button class="lang-toggle" type="button" aria-label="Switch to English">EN</button>
+      </div>
     </div>
   </header>
 
@@ -800,11 +804,11 @@ button:focus-visible {
       <div class="tree-tip" aria-hidden="true"></div>
       <p class="hero-eyebrow reveal">Y &middot; Tech &middot; Koubou</p>
       <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png?v=2" alt="" width="236" height="236"></span>
-      <h1 class="hero-wordmark reveal">Yテック工房</h1>
-      <p class="hero-tag reveal">種から育てる工房</p>
-      <p class="hero-lead reveal">建築の現場感と、IT という道具で。<br class="pc-only">学びを助けるアプリから、暮らしの事業まで。</p>
-      <a class="hero-cta reveal" href="#apps">プロダクトを見る <span aria-hidden="true">&darr;</span></a>
-      <span class="hero-edge hero-edge-l">建築 &times; IT &times; 暮らし</span>
+      <h1 class="hero-wordmark reveal" data-en="Y-Tech Koubou">Yテック工房</h1>
+      <p class="hero-tag reveal" data-en="A workshop grown from seed">種から育てる工房</p>
+      <p class="hero-lead reveal" data-en="On-site construction know-how, with IT as our tool.<br class='pc-only'>From learning apps to everyday businesses.">建築の現場感と、IT という道具で。<br class="pc-only">学びを助けるアプリから、暮らしの事業まで。</p>
+      <a class="hero-cta reveal" href="#apps" data-en="View products <span aria-hidden=&quot;true&quot;>&darr;</span>">プロダクトを見る <span aria-hidden="true">&darr;</span></a>
+      <span class="hero-edge hero-edge-l" data-en="Architecture &times; IT &times; Life">建築 &times; IT &times; 暮らし</span>
       <span class="hero-edge hero-edge-r">Since 2026</span>
       <span class="hero-scroll" aria-hidden="true">Scroll</span>
     </section>
@@ -813,9 +817,9 @@ button:focus-visible {
       <div class="container">
         <div class="section-head reveal">
           <span class="kicker">About</span>
-          <h2>つくる姿勢</h2>
+          <h2 data-en="How we build">つくる姿勢</h2>
         </div>
-        <p class="lead-text reveal">
+        <p class="lead-text reveal" data-en="The precision of a first-class architect facing the drawings, and the agility of building and running things solo.<br>The place that ties the two together is the &lsquo;koubou&rsquo; &mdash; the workshop.<br>Rather than chasing trends, we grow tools from seed that quietly support someone&rsquo;s &lsquo;I did it.&rsquo;">
           一級建築士として図面に向き合う確かさと、個人で実装し運用する身軽さ。<br>
           その二つを束ねるのが「工房」という場です。<br>
           流行を追うのではなく、誰かの「できた」を静かに支える道具を、種から育てます。
@@ -826,24 +830,24 @@ button:focus-visible {
               <span class="idx" aria-hidden="true">01</span>
               <div class="label-en">Craft</div>
             </div>
-            <h3>手仕事の確かさ</h3>
-            <p>建築の現場で培った「測って、組んで、仕上げる」感覚を、プロダクトづくりにそのまま持ち込みます。</p>
+            <h3 data-en="The certainty of craft">手仕事の確かさ</h3>
+            <p data-en="We bring the &lsquo;measure, assemble, finish&rsquo; instinct honed on construction sites straight into product-making.">建築の現場で培った「測って、組んで、仕上げる」感覚を、プロダクトづくりにそのまま持ち込みます。</p>
           </div>
           <div class="field reveal">
             <div class="field-head">
               <span class="idx" aria-hidden="true">02</span>
               <div class="label-en">Tools</div>
             </div>
-            <h3>暮らしに効く道具</h3>
-            <p>資格学習・語学・投資・趣味。日々を少し前に進める実用の道具を、使う人の目線で設計します。</p>
+            <h3 data-en="Tools that help daily life">暮らしに効く道具</h3>
+            <p data-en="Exam prep, languages, investing, hobbies. We design practical tools that nudge each day forward, from the user&rsquo;s point of view.">資格学習・語学・投資・趣味。日々を少し前に進める実用の道具を、使う人の目線で設計します。</p>
           </div>
           <div class="field reveal">
             <div class="field-head">
               <span class="idx" aria-hidden="true">03</span>
               <div class="label-en">Grow</div>
             </div>
-            <h3>種から育てる</h3>
-            <p>小さく出して、使いながら磨く。複利で育つプロダクトを一本ずつ、長く手入れし続けます。</p>
+            <h3 data-en="Grown from seed">種から育てる</h3>
+            <p data-en="Ship small, polish while using. We tend each compounding product one by one, for the long haul.">小さく出して、使いながら磨く。複利で育つプロダクトを一本ずつ、長く手入れし続けます。</p>
           </div>
         </div>
       </div>
@@ -853,7 +857,7 @@ button:focus-visible {
       <div class="container">
         <div class="section-head reveal">
           <span class="kicker">Apps</span>
-          <h2>公開中のアプリ</h2>
+          <h2 data-en="Published apps">公開中のアプリ</h2>
         </div>
         <div class="grid">
 
@@ -867,13 +871,13 @@ button:focus-visible {
               </div>
               <span class="status live">Live</span>
             </div>
-            <p>一級・二級建築士／宅建の〇×一問一答。資格を切り替えて学べ、誤答だけを重点復習。Web と Android で公開中。</p>
+            <p data-en="True/false drills for first- and second-class architect and real-estate (takken) exams. Switch licenses to study, and focus-review only your mistakes. Live on Web and Android.">一級・二級建築士／宅建の〇×一問一答。資格を切り替えて学べ、誤答だけを重点復習。Web と Android で公開中。</p>
             <div class="meta">
-              <span>建築・資格</span>
+              <span data-en="Architecture / Exams">建築・資格</span>
               <span>Expo</span>
               <span>Web / Android</span>
             </div>
-            <span class="open">開く &rarr;</span>
+            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
           </a>
 
           <a class="product reveal" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" aria-label="English工房を新規タブで開く">
@@ -886,13 +890,13 @@ button:focus-visible {
               </div>
               <span class="status live">Live</span>
             </div>
-            <p>英語試験対策アプリ。Reading・Listening・Vocabulary・Writing・Speaking を一通り。AI 採点と実音声に対応。</p>
+            <p data-en="An English exam-prep app covering Reading, Listening, Vocabulary, Writing and Speaking. With AI scoring and real audio.">英語試験対策アプリ。Reading・Listening・Vocabulary・Writing・Speaking を一通り。AI 採点と実音声に対応。</p>
             <div class="meta">
-              <span>語学・IELTS</span>
+              <span data-en="Languages / IELTS">語学・IELTS</span>
               <span>Expo</span>
               <span>Web</span>
             </div>
-            <span class="open">開く &rarr;</span>
+            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
           </a>
 
           <a class="product reveal" href="https://mlb-oshi.vercel.app" target="_blank" rel="noopener" aria-label="MLB推しを新規タブで開く">
@@ -905,13 +909,13 @@ button:focus-visible {
               </div>
               <span class="status live">Live</span>
             </div>
-            <p>推し選手の成績を追いかけるトラッカー。打撃スタッツや能力値レーダー、ホームラン速報をまとめて確認できる。</p>
+            <p data-en="A tracker for following your favorite players. Check batting stats, ability radar charts and home-run alerts all in one place.">推し選手の成績を追いかけるトラッカー。打撃スタッツや能力値レーダー、ホームラン速報をまとめて確認できる。</p>
             <div class="meta">
-              <span>スポーツ</span>
+              <span data-en="Sports">スポーツ</span>
               <span>Expo</span>
               <span>Web</span>
             </div>
-            <span class="open">開く &rarr;</span>
+            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
           </a>
 
           <a class="product reveal" href="https://ai-koubou.vercel.app" target="_blank" rel="noopener" aria-label="AI工房を新規タブで開く">
@@ -924,13 +928,13 @@ button:focus-visible {
               </div>
               <span class="status live">Live</span>
             </div>
-            <p>AI とブロックチェーンを一から学ぶアプリ。「使う・導入」「作る」「ブロックチェーン」の3タブで、〇×クイズとプロンプト練習を通して手を動かしながら身につける。</p>
+            <p data-en="Learn AI and blockchain from scratch. Three tabs &mdash; Use, Build, Blockchain &mdash; let you learn hands-on through true/false quizzes and prompt practice.">AI とブロックチェーンを一から学ぶアプリ。「使う・導入」「作る」「ブロックチェーン」の3タブで、〇×クイズとプロンプト練習を通して手を動かしながら身につける。</p>
             <div class="meta">
-              <span>AI・ブロックチェーン</span>
-              <span>学習</span>
+              <span data-en="AI / Blockchain">AI・ブロックチェーン</span>
+              <span data-en="Learning">学習</span>
               <span>Web</span>
             </div>
-            <span class="open">開く &rarr;</span>
+            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
           </a>
 
         </div>
@@ -941,9 +945,9 @@ button:focus-visible {
       <div class="container">
         <div class="section-head reveal">
           <span class="kicker">Web Production</span>
-          <h2>サイト制作の例</h2>
+          <h2 data-en="Web production examples">サイト制作の例</h2>
         </div>
-        <p class="works-lead reveal">企業・店舗の Web サイト制作も承っています。<br class="pc-only">下記は実際に手がけた制作例です。同じように、あなたの事業のサイトもお作りします。</p>
+        <p class="works-lead reveal" data-en="We also build websites for companies and shops.<br class='pc-only'>Below are real examples &mdash; we can craft a site for your business too.">企業・店舗の Web サイト制作も承っています。<br class="pc-only">下記は実際に手がけた制作例です。同じように、あなたの事業のサイトもお作りします。</p>
         <div class="grid two">
 
           <a class="product reveal" href="https://yoshino-koumuten.com" target="_blank" rel="noopener" aria-label="制作例：吉野工務店のサイトを新規タブで開く">
@@ -953,14 +957,14 @@ button:focus-visible {
                 <h3 class="name">吉野工務店</h3>
                 <div class="domain">YOSHINO-KOUMUTEN.COM</div>
               </div>
-              <span class="status">制作例</span>
+              <span class="status" data-en="Example">制作例</span>
             </div>
-            <p>工務店の Web サイトを制作。施工事例やまな板削りの工程を、写真主役の日英2言語サイトに仕立てました。</p>
+            <p data-en="Built a construction firm&rsquo;s website. Photo-led and bilingual (JP/EN), showcasing projects and the cutting-board planing process.">工務店の Web サイトを制作。施工事例やまな板削りの工程を、写真主役の日英2言語サイトに仕立てました。</p>
             <div class="meta">
-              <span>コーポレート</span>
-              <span>日本語 / English</span>
+              <span data-en="Corporate">コーポレート</span>
+              <span data-en="Japanese / English">日本語 / English</span>
             </div>
-            <span class="open">サイトを見る &rarr;</span>
+            <span class="open" data-en="Visit site &rarr;">サイトを見る &rarr;</span>
           </a>
 
           <a class="product reveal" href="https://hugtime-salon.com" target="_blank" rel="noopener" aria-label="制作例：Hugtime salon のサイトを新規タブで開く">
@@ -970,19 +974,19 @@ button:focus-visible {
                 <h3 class="name">Hugtime salon</h3>
                 <div class="domain">HUGTIME-SALON.COM</div>
               </div>
-              <span class="status">制作例</span>
+              <span class="status" data-en="Example">制作例</span>
             </div>
-            <p>ワークショップサロンの Web サイトを制作。開催スケジュール・予約導線・ブログ(CMS)まで一式を構築しました。</p>
+            <p data-en="Built a website for a workshop salon &mdash; event schedule, booking flow and a CMS blog, all in one.">ワークショップサロンの Web サイトを制作。開催スケジュール・予約導線・ブログ(CMS)まで一式を構築しました。</p>
             <div class="meta">
-              <span>店舗・予約</span>
-              <span>ブログ / CMS</span>
+              <span data-en="Shop / Booking">店舗・予約</span>
+              <span data-en="Blog / CMS">ブログ / CMS</span>
             </div>
-            <span class="open">サイトを見る &rarr;</span>
+            <span class="open" data-en="Visit site &rarr;">サイトを見る &rarr;</span>
           </a>
 
         </div>
         <div class="works-cta reveal">
-          <a class="hero-cta" href="#contact">サイト制作を相談する <span aria-hidden="true">&rarr;</span></a>
+          <a class="hero-cta" href="#contact" data-en="Discuss a website <span aria-hidden=&quot;true&quot;>&rarr;</span>">サイト制作を相談する <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -991,11 +995,11 @@ button:focus-visible {
       <div class="container">
         <div class="section-head reveal">
           <span class="kicker">Contact</span>
-          <h2>お問い合わせ</h2>
+          <h2 data-en="Contact">お問い合わせ</h2>
         </div>
         <div class="card reveal">
-          <p>プロダクトに関するご質問、共同制作のご相談、設計のご依頼など。<br class="pc-only">お気軽にどうぞ。</p>
-          <a class="cta" href="mailto:kichiyakoushou@gmail.com">メールで相談する</a>
+          <p data-en="Questions about our products, collaboration ideas, design requests &mdash;<br class='pc-only'>feel free to reach out.">プロダクトに関するご質問、共同制作のご相談、設計のご依頼など。<br class="pc-only">お気軽にどうぞ。</p>
+          <a class="cta" href="mailto:kichiyakoushou@gmail.com" data-en="Email us">メールで相談する</a>
           <p class="addr">kichiyakoushou@gmail.com</p>
         </div>
       </div>
@@ -1006,7 +1010,7 @@ button:focus-visible {
   <footer class="site">
     <div class="container inner">
       <span>&copy; 2026 Y-TECH KOUBOU</span>
-      <span>建築 &times; IT &times; 暮らし</span>
+      <span data-en="Architecture &times; IT &times; Life">建築 &times; IT &times; 暮らし</span>
       <span>Y-TECH-KOUBOU.COM</span>
     </div>
   </footer>
@@ -1366,6 +1370,37 @@ button:focus-visible {
         });
       }, { threshold: 0.12 });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // 言語切り替え（JP/EN）— JPがDOMの既定、data-en に英語を持たせて入れ替え
+    (function () {
+      var KEY = 'ytk_lang';
+      var nodes = [].slice.call(document.querySelectorAll('[data-en]'));
+      nodes.forEach(function (n) { n.setAttribute('data-ja', n.innerHTML); });
+      var btn = document.querySelector('.lang-toggle');
+      var titleJa = document.title;
+      var titleEn = 'Y-Tech Koubou — a workshop grown from seed';
+      function apply(lang) {
+        var en = lang === 'en';
+        nodes.forEach(function (n) {
+          n.innerHTML = en ? n.getAttribute('data-en') : n.getAttribute('data-ja');
+        });
+        document.documentElement.lang = en ? 'en' : 'ja';
+        document.title = en ? titleEn : titleJa;
+        if (btn) {
+          btn.textContent = en ? '日本語' : 'EN';
+          btn.setAttribute('aria-label', en ? 'Switch to Japanese' : 'Switch to English');
+        }
+        try { localStorage.setItem(KEY, lang); } catch (e) {}
+      }
+      var saved = 'ja';
+      try { saved = localStorage.getItem(KEY) || 'ja'; } catch (e) {}
+      apply(saved);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          apply(document.documentElement.lang === 'en' ? 'ja' : 'en');
+        });
+      }
     })();
   </script>
 
