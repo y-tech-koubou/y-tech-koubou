@@ -142,26 +142,80 @@ header.site nav a:hover::after { transform: scaleX(1); }
   flex-shrink: 0;
   gap: 24px;
 }
+.lang-switch {
+  position: relative;
+  flex-shrink: 0;
+}
 .lang-toggle {
-  font-family: var(--serif-en);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  color: var(--sumimidori);
+  display: flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
-  border: 1px solid var(--usuzumi);
+  border: 1px solid transparent;
   border-radius: 999px;
-  padding: 6px 13px;
+  padding: 5px 9px;
   line-height: 1;
   cursor: pointer;
-  white-space: nowrap;
   flex-shrink: 0;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
-.lang-toggle:hover {
-  background: var(--kokemidori);
-  color: var(--kinari);
-  border-color: var(--kokemidori);
+.lang-toggle:hover { border-color: var(--usuzumi); }
+.lang-flag {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 1px;
+  border: 1px solid var(--usuzumi);
+  display: block;
 }
+.lang-caret {
+  font-size: 9px;
+  line-height: 1;
+  color: var(--nibiiro);
+  transition: transform 0.2s ease;
+}
+.lang-toggle[aria-expanded="true"] .lang-caret { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 150px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--usuzumi);
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(45, 90, 45, 0.14);
+  overflow: hidden;
+  z-index: 50;
+  display: none;
+}
+.lang-menu.open { display: block; }
+.lang-menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: var(--sans-jp);
+  color: var(--shikkoku);
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+.lang-menu li img {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 1px;
+  border: 1px solid var(--usuzumi);
+  flex-shrink: 0;
+}
+.lang-menu li span:nth-of-type(1) { flex: 1; }
+.lang-menu li:hover { background: #f4f1ea; }
+.lang-menu li[aria-selected="true"] { background: var(--tonoko); color: var(--kokemidori); }
+.lang-check { color: var(--kokemidori); font-size: 12px; opacity: 0; }
+.lang-menu li[aria-selected="true"] .lang-check { opacity: 1; }
 
 .nav-toggle {
   display: none;
@@ -848,7 +902,20 @@ button:focus-visible {
             <li><a href="#contact">CONTACT</a></li>
           </ul>
         </nav>
-        <button class="lang-toggle" type="button" aria-label="Switch to English">EN</button>
+        <div class="lang-switch">
+          <button class="lang-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="言語を選択（現在: 日本語）">
+            <img class="lang-flag" src="assets/flags/ja.svg" alt="" width="24" height="16">
+            <span class="lang-caret" aria-hidden="true">&#9662;</span>
+          </button>
+          <ul class="lang-menu" role="listbox" aria-label="言語">
+            <li role="option" data-lang="ja" aria-selected="true">
+              <img src="assets/flags/ja.svg" alt="" width="24" height="16"><span>日本語</span><span class="lang-check" aria-hidden="true">&#10003;</span>
+            </li>
+            <li role="option" data-lang="en" aria-selected="false">
+              <img src="assets/flags/en.svg" alt="" width="24" height="16"><span>English</span><span class="lang-check" aria-hidden="true">&#10003;</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -1433,9 +1500,13 @@ button:focus-visible {
       var KEY = 'ytk_lang';
       var nodes = [].slice.call(document.querySelectorAll('[data-en]'));
       nodes.forEach(function (n) { n.setAttribute('data-ja', n.innerHTML); });
-      var btn = document.querySelector('.lang-toggle');
+      var sw = document.querySelector('.lang-switch');
+      var btn = sw && sw.querySelector('.lang-toggle');
+      var menu = sw && sw.querySelector('.lang-menu');
+      var flag = btn && btn.querySelector('.lang-flag');
       var titleJa = document.title;
       var titleEn = 'Y-Tech Koubou — a workshop grown from seed';
+      var LABELS = { ja: '日本語', en: 'English' };
       function apply(lang) {
         var en = lang === 'en';
         nodes.forEach(function (n) {
@@ -1443,18 +1514,39 @@ button:focus-visible {
         });
         document.documentElement.lang = en ? 'en' : 'ja';
         document.title = en ? titleEn : titleJa;
-        if (btn) {
-          btn.textContent = en ? '日本語' : 'EN';
-          btn.setAttribute('aria-label', en ? 'Switch to Japanese' : 'Switch to English');
+        if (flag) flag.src = 'assets/flags/' + lang + '.svg';
+        if (btn) btn.setAttribute('aria-label', '言語を選択（現在: ' + LABELS[lang] + '）');
+        if (menu) {
+          menu.querySelectorAll('[role="option"]').forEach(function (li) {
+            li.setAttribute('aria-selected', String(li.getAttribute('data-lang') === lang));
+          });
         }
         try { localStorage.setItem(KEY, lang); } catch (e) {}
+      }
+      function openMenu(o) {
+        if (!menu || !btn) return;
+        menu.classList.toggle('open', o);
+        btn.setAttribute('aria-expanded', String(o));
       }
       var saved = 'ja';
       try { saved = localStorage.getItem(KEY) || 'ja'; } catch (e) {}
       apply(saved);
-      if (btn) {
-        btn.addEventListener('click', function () {
-          apply(document.documentElement.lang === 'en' ? 'ja' : 'en');
+      if (btn && menu) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          openMenu(!menu.classList.contains('open'));
+        });
+        menu.addEventListener('click', function (e) {
+          var li = e.target.closest('[role="option"]');
+          if (!li) return;
+          apply(li.getAttribute('data-lang'));
+          openMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+          if (!sw.contains(e.target)) openMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') openMenu(false);
         });
       }
     })();
