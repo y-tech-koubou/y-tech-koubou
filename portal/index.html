@@ -1113,14 +1113,42 @@ button:focus-visible {
         if (outer.length >= 7) pool = outer;
         pool.sort(function (a, b) { return a.x - b.x; });
         // 公開アプリ＝ロゴの実 + 2輪の装飾花。プレーンな実は作らない（咲くもの＝ロゴ）
-        var n = Math.min(PRODUCTS.length + 2, pool.length), step = pool.length / (n || 1), pi = 0;
-        var flowerAt = (n >= 4) ? [1, n - 2] : [];
+        var n = Math.min(PRODUCTS.length + 2, pool.length);
+        // 横方向に均等な目標位置を作り、各位置に最も近い枝先を「最低間隔」を保って割り当てる（咲く花が固まらないように）
+        var minX = pool[0].x, maxX = pool[pool.length - 1].x;
+        var span = Math.max(1, maxX - minX);
+        var minGap = Math.max(W * 0.11, span / (n + 1) * 0.7);
+        var picks = [], used = [];
         for (var k = 0; k < n; k++) {
-          var s = pool[Math.floor(k * step + step * 0.5)];
-          var isFlower = flowerAt.indexOf(k) !== -1;
+          var target = minX + span * ((k + 0.5) / n);
+          var best = null, bestD = Infinity;
+          for (var j = 0; j < pool.length; j++) {
+            if (used.indexOf(j) !== -1) continue;
+            var cand = pool[j], ok = true;
+            for (var u = 0; u < picks.length; u++) { if (Math.abs(cand.x - picks[u].x) < minGap) { ok = false; break; } }
+            if (!ok) continue;
+            var d = Math.abs(cand.x - target);
+            if (d < bestD) { bestD = d; best = j; }
+          }
+          if (best === null) { // 間隔条件を満たせない時は最近傍で妥協
+            for (var j2 = 0; j2 < pool.length; j2++) {
+              if (used.indexOf(j2) !== -1) continue;
+              var d2 = Math.abs(pool[j2].x - target);
+              if (d2 < bestD) { bestD = d2; best = j2; }
+            }
+          }
+          if (best === null) break;
+          used.push(best); picks.push(pool[best]);
+        }
+        picks.sort(function (a, b) { return a.x - b.x; });
+        var flowerAt = (picks.length >= 4) ? [1, picks.length - 2] : [];
+        var pi = 0;
+        for (var m = 0; m < picks.length; m++) {
+          var s = picks[m];
+          var isFlower = flowerAt.indexOf(m) !== -1;
           var prod = (!isFlower && pi < PRODUCTS.length) ? PRODUCTS[pi++] : null;
           if (!isFlower && !prod) { isFlower = true; }
-          fruits.push({ x: s.x, y: s.y, flower: isFlower, delay: k * 0.13, phase: Math.random() * 6.28, product: prod });
+          fruits.push({ x: s.x, y: s.y, flower: isFlower, delay: m * 0.13, phase: Math.random() * 6.28, product: prod });
         }
       }
       function ease(p) { return 1 - Math.pow(1 - p, 3); }
