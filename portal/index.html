@@ -355,6 +355,19 @@ header.site nav a:hover::after { transform: scaleX(1); }
   transition: gap 0.2s ease;
 }
 .hero-cta:hover { text-decoration: none; gap: 16px; }
+/* 幹・枝と重なっても読めるよう、ヒーロー文字にクリーム地のハロー（白箱を作らず、文字の行に沿ってクリームのクッションを敷く） */
+.hero-wordmark {
+  text-shadow: 0 0 16px var(--kinari), 0 0 16px var(--kinari), 0 0 30px var(--kinari), 0 0 30px var(--kinari);
+}
+.hero-eyebrow,
+.hero-tag,
+.hero-cta,
+.hero-scroll {
+  text-shadow:
+    0 0 10px var(--kinari), 0 0 10px var(--kinari), 0 0 10px var(--kinari),
+    0 0 20px var(--kinari), 0 0 20px var(--kinari),
+    0 0 34px var(--kinari);
+}
 .hero-edge {
   position: absolute;
   bottom: 42px;
