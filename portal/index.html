@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yテック工房 — 種から育てる工房</title>
+  <title>Yテック工房 — IT × 建築 × 海外</title>
   <meta name="description" content="IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。Yテック工房 / Y-Tech Koubou。">
   <link rel="canonical" href="https://www.y-tech-koubou.com/">
   <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
@@ -541,6 +541,115 @@ section h2 {
   font-size: 16px;
   line-height: 1.9;
 }
+
+/* ====== Service ====== */
+.service { padding: var(--space-section-compact) 0; }
+.service .service-lead {
+  max-width: 680px;
+  margin: -40px auto 64px;
+  text-align: center;
+  color: var(--shikkoku);
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 2;
+}
+.service .strengths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 72px;
+}
+.service .field {
+  position: relative;
+  padding-top: 28px;
+  border-top: 1px solid var(--usuzumi);
+}
+.service .field-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.service .field .idx {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--serif-en);
+  font-size: 15px;
+  color: var(--kokemidori);
+  border: 1px solid var(--kokemidori);
+  border-radius: 8px;
+}
+.service .field .label-en {
+  font-family: var(--serif-en);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--wakaba-deep);
+  text-transform: uppercase;
+}
+.service .field h3 {
+  margin: 0 0 10px;
+  font-family: var(--serif-jp);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--kokemidori);
+}
+.service .field p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--nibiiro);
+  line-height: 1.8;
+}
+.service .price {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #FFFDFA;
+  border: 1px solid var(--usuzumi);
+  border-radius: 14px;
+  padding: 36px 40px;
+}
+.service .price h3 {
+  margin: 0 0 6px;
+  text-align: center;
+  font-family: var(--serif-jp);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--kokemidori);
+}
+.service .price-note {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--nibiiro);
+}
+.service .price-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.service .price-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--usuzumi);
+}
+.service .price-list li:last-child { border-bottom: none; }
+.service .price-name { font-size: 15px; color: var(--shikkoku); }
+.service .price-val {
+  flex-shrink: 0;
+  font-family: var(--serif-en);
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+  color: var(--kokemidori);
+}
+.service .service-cta {
+  text-align: center;
+  margin-top: 56px;
+}
 .work-thumb {
   display: block;
   width: 100%;
@@ -840,9 +949,12 @@ button:focus-visible {
   header.site nav ul li:last-child a { border-bottom: none; }
   .about .pillars { grid-template-columns: 1fr; }
   .works .grid.two { grid-template-columns: 1fr; }
+  .service .strengths { grid-template-columns: 1fr; gap: 32px; }
+  .service .price { padding: 28px 22px; }
   section { padding: 72px 0; }
   .products,
-  .works { padding: 64px 0; }
+  .works,
+  .service { padding: 64px 0; }
   .hero { min-height: 90vh; padding: 108px 22px 76px; }
   footer.site .inner { flex-direction: column; gap: 8px; text-align: center; }
 }
@@ -862,7 +974,7 @@ button:focus-visible {
   .container { padding: 0 20px; }
 }
   </style>
-  <meta property="og:title" content="Yテック工房 — 種から育てる工房">
+  <meta property="og:title" content="Yテック工房 — IT × 建築 × 海外">
   <meta property="og:description" content="IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。">
   <meta property="og:image" content="https://www.y-tech-koubou.com/assets/og.png?v=2">
   <meta property="og:image:width" content="1200">
@@ -872,7 +984,7 @@ button:focus-visible {
   <meta property="og:site_name" content="Yテック工房">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Yテック工房 — 種から育てる工房">
+  <meta name="twitter:title" content="Yテック工房 — IT × 建築 × 海外">
   <meta name="twitter:description" content="IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。">
   <meta name="twitter:image" content="https://www.y-tech-koubou.com/assets/og.png?v=2">
   <meta name="theme-color" content="#FAF7F2">
@@ -925,6 +1037,7 @@ button:focus-visible {
             <li><a href="#about">ABOUT</a></li>
             <li><a href="#apps">APPS</a></li>
             <li><a href="#works">WORKS</a></li>
+            <li><a href="#service">SERVICE</a></li>
             <li><a href="#contact">CONTACT</a></li>
           </ul>
         </nav>
@@ -1136,6 +1249,59 @@ button:focus-visible {
         </div>
         <div class="works-cta reveal">
           <a class="hero-cta" href="#contact" data-en="Discuss a website <span aria-hidden=&quot;true&quot;>&rarr;</span>">サイト制作を相談する <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="service" class="service">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Service</span>
+          <h2 data-en="Web &amp; app development">制作のご依頼</h2>
+        </div>
+        <p class="service-lead reveal" data-en="From planning to live operation, delivered solo and end-to-end. Every app and site above is currently running in production &mdash; we build your website or app to that same standard.">企画から本番運用まで、ひとりで一気通貫。上に並ぶアプリ・サイトは、すべて現在も本番で動いているものです。同じ品質で、あなたの Web サイト・アプリをお作りします。</p>
+
+        <div class="grid strengths">
+          <div class="field reveal">
+            <div class="field-head">
+              <span class="idx" aria-hidden="true">01</span>
+              <div class="label-en">End-to-end</div>
+            </div>
+            <h3 data-en="One person, start to finish">一気通貫でつくる</h3>
+            <p data-en="No outsourcing in between &mdash; planning, design, build and deployment are all handled by one person. Fast, with no gaps in understanding.">外注を挟まず、企画・設計から実装・本番デプロイまで一人で完結。速く、認識のズレがありません。</p>
+          </div>
+          <div class="field reveal">
+            <div class="field-head">
+              <span class="idx" aria-hidden="true">02</span>
+              <div class="label-en">In production</div>
+            </div>
+            <h3 data-en="Proven in production">本番運用の実績</h3>
+            <p data-en="Not &ldquo;we can build it&rdquo; but &ldquo;we run it.&rdquo; Every example can be checked live by URL.">「作れます」ではなく「運用しています」。すべての実績は URL で確認できます。</p>
+          </div>
+          <div class="field reveal">
+            <div class="field-head">
+              <span class="idx" aria-hidden="true">03</span>
+              <div class="label-en">Architecture &times; IT</div>
+            </div>
+            <h3 data-en="Architecture &times; IT">建築 × IT</h3>
+            <p data-en="Familiar with the work and websites of the construction and real-estate industries &mdash; ready for industry-specific requests, in Japanese and English.">建設・不動産業界の業務やサイトに精通。業界特化のご相談にも、日英どちらでも対応します。</p>
+          </div>
+        </div>
+
+        <div class="price reveal">
+          <h3 data-en="Price guide">料金の目安</h3>
+          <p class="price-note" data-en="Varies by scope. Estimates are free.">※ 内容により変動します。お見積りは無料です。</p>
+          <ul class="price-list">
+            <li><span class="price-name" data-en="Landing page (1 page)">LP（1ページ）</span><span class="price-val" data-en="from &yen;30,000">3〜8万円</span></li>
+            <li><span class="price-name" data-en="Corporate site (up to ~5 pages)">コーポレートHP（〜5ページ）</span><span class="price-val" data-en="&yen;80,000&ndash;250,000">8〜25万円</span></li>
+            <li><span class="price-name" data-en="Site with booking / payments">予約・決済つきサイト</span><span class="price-val" data-en="&yen;150,000&ndash;400,000">15〜40万円</span></li>
+            <li><span class="price-name" data-en="Web / mobile app">Web・モバイルアプリ</span><span class="price-val" data-en="from &yen;300,000">30万円〜</span></li>
+            <li><span class="price-name" data-en="Spot fixes / maintenance">スポット改修・保守</span><span class="price-val" data-en="&yen;3,000&ndash;5,000 / hr">時間 3,000〜5,000円</span></li>
+          </ul>
+        </div>
+
+        <div class="service-cta reveal">
+          <a class="hero-cta" href="#contact" data-en="Discuss a project <span aria-hidden=&quot;true&quot;>&rarr;</span>">制作を相談する <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
     </section>
