@@ -424,16 +424,12 @@ section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
   justify-content: center;
   gap: 14px;
 }
-.app-tile .tile-shot {
+/* 端末フレーム入り縦長スクショ（影はPNGに焼き込み済み=Apple流の製品影） */
+.app-tile .tile-phone {
   display: block;
-  width: min(100%, 880px);
+  width: min(68vw, 330px);
   height: auto;
-  margin: 46px auto 0;
-  border-radius: 12px;
-  border: 1px solid var(--usuzumi);
-  /* Apple流: システム唯一の「製品の影」（製品ビジュアルにのみ許可） */
-  box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
-  background: var(--tonoko);
+  margin: 44px auto 0;
 }
 .tile-dark {
   background: var(--sumimidori);
@@ -441,7 +437,6 @@ section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 .tile-dark h2 { color: var(--kinari); }
 .tile-dark .kicker { color: var(--wakaba-light); }
 .tile-dark .tile-tag { color: rgba(250, 247, 242, 0.82); }
-.tile-dark .tile-shot { border-color: rgba(250, 247, 242, 0.18); }
 .tile-dark .btn.primary { background: var(--kinari); color: var(--sumimidori); }
 .tile-dark .btn.primary:hover { background: #fff; }
 .tile-dark .btn.ghost { border-color: rgba(250, 247, 242, 0.65); color: var(--kinari); }
@@ -451,7 +446,7 @@ section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 }
 @media (max-width: 880px) {
   .app-tile { padding: 64px 0 60px; }
-  .app-tile .tile-shot { margin-top: 34px; }
+  .app-tile .tile-phone { margin-top: 32px; }
 }
 section .section-head {
   text-align: center;
@@ -1121,7 +1116,7 @@ button:focus-visible {
           <a class="btn primary" href="https://1architectexam.com" target="_blank" rel="noopener" data-en="Open the app" aria-label="建築資格工房を新規タブで開く">アプリを開く</a>
           <a class="btn ghost" href="#contact" data-en="Discuss a project">制作を相談する</a>
         </div>
-        <img class="tile-shot" src="assets/app-kenchiku.jpg" alt="建築資格工房のホーム画面" loading="eager" width="860" height="538">
+        <img class="tile-phone" src="assets/app-kenchiku-phone.png" alt="建築資格工房のホーム画面（スマートフォン表示）" loading="eager" width="1060" height="2140">
       </div>
     </section>
 
@@ -1134,7 +1129,7 @@ button:focus-visible {
           <a class="btn primary" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" data-en="Open the app" aria-label="English工房を新規タブで開く">アプリを開く</a>
           <a class="btn ghost" href="#contact" data-en="Discuss a project">制作を相談する</a>
         </div>
-        <img class="tile-shot" src="assets/app-english.jpg" alt="English工房のホーム画面" loading="eager" width="860" height="538">
+        <img class="tile-phone" src="assets/app-english-phone.png" alt="English工房のホーム画面（スマートフォン表示）" loading="eager" width="1060" height="2140">
       </div>
     </section>
 
