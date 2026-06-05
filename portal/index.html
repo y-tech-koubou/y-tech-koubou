@@ -415,6 +415,66 @@ section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 .works { padding: var(--space-section-compact) 0; }
 /* Apple流タイル交互リズム: 背景色の変化そのものが区切り（罫線・影は足さない） */
 .about, .works { background: #fff; }
+
+/* ====== App flagship tiles（Apple homepage型・ハイブリッド構成） ====== */
+.app-tile {
+  padding: 96px 0 88px;
+  text-align: center;
+}
+.app-tile .kicker {
+  display: block;
+  font-family: var(--serif-en);
+  font-size: 12px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--wakaba-deep);
+  margin-bottom: 14px;
+}
+.app-tile h2 {
+  margin: 0 0 12px;
+}
+.app-tile .tile-tag {
+  max-width: 34em;
+  margin: 0 auto 30px;
+  font-size: clamp(15px, 1.8vw, 18px);
+  line-height: 1.9;
+  color: var(--nibiiro);
+}
+.app-tile .tile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+.app-tile .tile-shot {
+  display: block;
+  width: min(100%, 880px);
+  height: auto;
+  margin: 46px auto 0;
+  border-radius: 12px;
+  border: 1px solid var(--usuzumi);
+  /* Apple流: システム唯一の「製品の影」（製品ビジュアルにのみ許可） */
+  box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+  background: var(--tonoko);
+}
+.tile-dark {
+  background: var(--sumimidori);
+}
+.tile-dark h2 { color: var(--kinari); }
+.tile-dark .kicker { color: var(--wakaba-light); }
+.tile-dark .tile-tag { color: rgba(250, 247, 242, 0.82); }
+.tile-dark .tile-shot { border-color: rgba(250, 247, 242, 0.18); }
+.tile-dark .btn.primary { background: var(--kinari); color: var(--sumimidori); }
+.tile-dark .btn.primary:hover { background: #fff; }
+.tile-dark .btn.ghost { border-color: rgba(250, 247, 242, 0.65); color: var(--kinari); }
+.tile-dark .btn.ghost:hover { background: rgba(250, 247, 242, 0.12); color: var(--kinari); }
+.tile-white {
+  background: #fff;
+}
+@media (max-width: 880px) {
+  .app-tile { padding: 64px 0 60px; }
+  .app-tile .tile-shot { margin-top: 34px; }
+}
 section .section-head {
   text-align: center;
   margin-bottom: 72px;
@@ -1073,55 +1133,44 @@ button:focus-visible {
       </div>
     </section>
 
-    <section id="apps" class="products">
+    <!-- Apple homepage型: 主力2本をフルブリードタイルで（墨→白）。色の変化が区切り -->
+    <section id="apps" class="app-tile tile-dark">
+      <div class="container reveal">
+        <span class="kicker">Architect Exam Prep</span>
+        <h2>建築資格工房</h2>
+        <p class="tile-tag" data-en="True/false drills for first- and second-class architect, takken and Class-2 electrician exams. Switch licenses, and focus-review only your mistakes.">一級・二級建築士・宅建・第二種電気工事士の〇×一問一答。<br class="pc-only">資格を切り替えて学び、誤答だけを重点復習。</p>
+        <div class="tile-actions">
+          <a class="btn primary" href="https://1architectexam.com" target="_blank" rel="noopener" data-en="Open the app" aria-label="建築資格工房を新規タブで開く">アプリを開く</a>
+          <a class="btn ghost" href="#contact" data-en="Discuss a project">制作を相談する</a>
+        </div>
+        <img class="tile-shot" src="assets/app-kenchiku.jpg" alt="建築資格工房のホーム画面" loading="eager" width="860" height="538">
+      </div>
+    </section>
+
+    <section class="app-tile tile-white">
+      <div class="container reveal">
+        <span class="kicker">English Exam Prep</span>
+        <h2>English工房</h2>
+        <p class="tile-tag" data-en="IELTS, TOEFL and TOEIC in one app &mdash; Reading, Listening, Vocabulary, Writing and Speaking, with AI scoring and real audio.">IELTS・TOEFL・TOEIC をこれひとつで。<br class="pc-only">4技能＋語彙を、AI 採点と実音声で。</p>
+        <div class="tile-actions">
+          <a class="btn primary" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" data-en="Open the app" aria-label="English工房を新規タブで開く">アプリを開く</a>
+          <a class="btn ghost" href="#contact" data-en="Discuss a project">制作を相談する</a>
+        </div>
+        <img class="tile-shot" src="assets/app-english.jpg" alt="English工房のホーム画面" loading="eager" width="860" height="538">
+      </div>
+    </section>
+
+    <section class="products">
       <div class="container">
         <div class="section-head reveal">
           <span class="kicker">Apps</span>
-          <h2 data-en="Published apps">公開中のアプリ</h2>
+          <h2 data-en="More apps">その他のアプリ</h2>
         </div>
         <div class="apps-intro reveal">
           <p class="apps-note" data-en="All of these apps are developed in-house. We also take on app development &mdash; from idea to release on iOS, Android and Web.">公開中のアプリはすべて自社開発です。アプリ制作（iOS・Android・Web）も、企画から公開まで承ります。</p>
           <a class="btn ghost" href="#contact" data-en="Discuss app development">アプリ制作を相談する</a>
         </div>
         <div class="grid">
-
-          <a class="product reveal" href="https://1architectexam.com" target="_blank" rel="noopener" aria-label="建築資格工房を新規タブで開く">
-            <img class="work-thumb" src="assets/app-kenchiku.jpg" alt="建築資格工房のホーム画面" loading="lazy" width="860" height="538">
-            <div class="top">
-              <span class="mono" aria-hidden="true">建</span>
-              <div class="head">
-                <h3 class="name">建築資格工房</h3>
-                <div class="domain">1ARCHITECTEXAM.COM</div>
-              </div>
-              <span class="status live">Live</span>
-            </div>
-            <p data-en="True/false drills for first- and second-class architect, real-estate (takken), and Class-2 electrician exams. Switch licenses to study, and focus-review only your mistakes. Live on Web and Android.">一級・二級建築士／宅建／第二種電気工事士の〇×一問一答。資格を切り替えて学べ、誤答だけを重点復習。Web と Android で公開中。</p>
-            <div class="meta">
-              <span data-en="Architecture / Exams">建築・資格</span>
-              <span>Expo</span>
-              <span>Web / Android</span>
-            </div>
-            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
-          </a>
-
-          <a class="product reveal" href="https://english-koubou.vercel.app" target="_blank" rel="noopener" aria-label="English工房を新規タブで開く">
-            <img class="work-thumb" src="assets/app-english.jpg" alt="English工房のホーム画面" loading="lazy" width="860" height="538">
-            <div class="top">
-              <span class="mono logo" aria-hidden="true"><img src="assets/english-koubou-mark.svg" alt="" width="46" height="46" loading="lazy"></span>
-              <div class="head">
-                <h3 class="name">English工房</h3>
-                <div class="domain">ENGLISH-KOUBOU.VERCEL.APP</div>
-              </div>
-              <span class="status live">Live</span>
-            </div>
-            <p data-en="An English exam-prep app covering Reading, Listening, Vocabulary, Writing and Speaking. With AI scoring and real audio.">英語試験対策アプリ。Reading・Listening・Vocabulary・Writing・Speaking を一通り。AI 採点と実音声に対応。</p>
-            <div class="meta">
-              <span data-en="Languages / IELTS">語学・IELTS</span>
-              <span>Expo</span>
-              <span>Web</span>
-            </div>
-            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
-          </a>
 
           <a class="product reveal" href="https://ai-koubou.vercel.app" target="_blank" rel="noopener" aria-label="AI工房を新規タブで開く">
             <img class="work-thumb" src="assets/app-ai.jpg?v=2" alt="AI工房のホーム画面" loading="lazy" width="860" height="538">
