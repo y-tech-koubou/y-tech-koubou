@@ -21,3 +21,12 @@ _preview-*.png
 # Local env
 .env
 .env.local
+# secrets guard (git-safety-rules 2026-05-30 / added 2026-06-05)
+.env*
+!.env.example
+sk_live_*
+sk_test_*
+whsec_*
+*.secret
+*.key
+*.pem
