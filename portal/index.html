@@ -26,8 +26,8 @@
   --nibiiro: #5A606B;       /* 補足テキスト（AA 5.9 on 生成り・実測で#6B7280から濃色化） */
   --usuzumi: #D6CFC2;
 
-  --space-section: 128px;
-  --space-section-compact: 112px;
+  --space-section: 112px;
+  --space-section-compact: 96px;
 
   --serif-jp: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
   --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
@@ -44,7 +44,7 @@ body {
   background: var(--kinari);
   color: var(--shikkoku);
   font-family: var(--sans-jp);
-  font-size: 16px;
+  font-size: 17px; /* Apple流: 本文は16でなく17＝「読む」ペース */
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -249,10 +249,18 @@ header.site nav a:hover::after { transform: scaleX(1); }
   transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
+.btn:active { transform: scale(0.96); } /* Apple流: 押下=縮小のマイクロインタラクション */
 .btn.primary { background: var(--kokemidori); color: var(--kinari); }
 .btn.primary:hover { background: #244a24; }
 .btn.ghost { border: 1px solid var(--kokemidori); color: var(--kokemidori); }
 .btn.ghost:hover { background: var(--kokemidori); color: var(--kinari); }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
 
 /* ====== Hero (minimal) ====== */
 .hero {
@@ -405,6 +413,8 @@ header.site nav a:hover::after { transform: scaleX(1); }
 section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 .products,
 .works { padding: var(--space-section-compact) 0; }
+/* Apple流タイル交互リズム: 背景色の変化そのものが区切り（罫線・影は足さない） */
+.about, .works { background: #fff; }
 section .section-head {
   text-align: center;
   margin-bottom: 72px;
@@ -418,21 +428,14 @@ section .section-head .kicker {
   color: var(--wakaba-deep);
   margin-bottom: 12px;
 }
-section .section-head .kicker::after {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 2px;
-  margin: 12px auto 0;
-  background: var(--shu);
-}
 section h2 {
   margin: 0;
   font-family: var(--serif-jp);
-  font-size: clamp(30px, 4vw, 46px);
+  font-size: clamp(33px, 4.4vw, 52px);
   font-weight: 600;
   color: var(--kokemidori);
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
+  line-height: 1.14;
 }
 
 /* ====== About ====== */
@@ -609,7 +612,7 @@ section h2 {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--usuzumi);
   margin-bottom: 8px;
   background: var(--tonoko);
@@ -617,20 +620,21 @@ section h2 {
 .product {
   background: #fff;
   border: 1px solid var(--usuzumi);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 34px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   color: var(--shikkoku);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
+/* Apple流: カードに影は足さない（ヘアライン境界＋微小リフトのみ） */
 .product:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   border-color: var(--wakaba);
-  box-shadow: 0 14px 30px rgba(45, 90, 45, 0.07);
   text-decoration: none;
 }
+.product:active { transform: scale(0.985); }
 .product .top {
   display: flex;
   align-items: flex-start;
@@ -732,7 +736,7 @@ section h2 {
   font-family: var(--serif-en);
   font-size: 13px;
   letter-spacing: 0.1em;
-  color: var(--shu);
+  color: var(--kokemidori); /* Apple流: クリック可能の合図は単一アクセント（苔緑）に統一 */
   transition: transform 0.2s ease;
 }
 .product:hover .open { transform: translateX(4px); }
@@ -785,6 +789,7 @@ section h2 {
   background: #fff;
   text-decoration: none;
 }
+.contact .cta:active { transform: scale(0.96); }
 .contact .card .addr {
   margin: 20px 0 0;
   font-family: var(--serif-en);
@@ -1021,7 +1026,10 @@ button:focus-visible {
       <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png?v=2" alt="" width="236" height="236"></span>
       <h1 class="hero-eyebrow reveal" aria-label="Yテック工房 / Y-Tech Koubou">Y &middot; Tech &middot; Koubou</h1>
       <p class="hero-tag reveal" data-en="IT &times; Architecture &times; Overseas">IT &times; 建築 &times; 海外</p>
-      <a class="hero-cta reveal" href="#apps" data-en="View products <span aria-hidden=&quot;true&quot;>&darr;</span>">プロダクトを見る <span aria-hidden="true">&darr;</span></a>
+      <div class="hero-actions reveal">
+        <a class="btn primary" href="#apps" data-en="View products">プロダクトを見る</a>
+        <a class="btn ghost" href="#contact" data-en="Discuss a project">制作を相談する</a>
+      </div>
       <span class="hero-scroll" aria-hidden="true">Scroll</span>
     </section>
 
@@ -1073,7 +1081,7 @@ button:focus-visible {
         </div>
         <div class="apps-intro reveal">
           <p class="apps-note" data-en="All of these apps are developed in-house. We also take on app development &mdash; from idea to release on iOS, Android and Web.">公開中のアプリはすべて自社開発です。アプリ制作（iOS・Android・Web）も、企画から公開まで承ります。</p>
-          <a class="hero-cta" href="#contact" data-en="Discuss app development <span aria-hidden=&quot;true&quot;>&rarr;</span>">アプリ制作を相談する <span aria-hidden="true">&rarr;</span></a>
+          <a class="btn ghost" href="#contact" data-en="Discuss app development">アプリ制作を相談する</a>
         </div>
         <div class="grid">
 
@@ -1202,7 +1210,7 @@ button:focus-visible {
 
         </div>
         <div class="works-cta reveal">
-          <a class="hero-cta" href="#contact" data-en="Discuss a website <span aria-hidden=&quot;true&quot;>&rarr;</span>">サイト制作を相談する <span aria-hidden="true">&rarr;</span></a>
+          <a class="btn ghost" href="#contact" data-en="Discuss a website">サイト制作を相談する</a>
         </div>
       </div>
     </section>
@@ -1243,7 +1251,7 @@ button:focus-visible {
         </div>
 
         <div class="service-cta reveal">
-          <a class="hero-cta" href="#contact" data-en="Discuss a project <span aria-hidden=&quot;true&quot;>&rarr;</span>">制作を相談する <span aria-hidden="true">&rarr;</span></a>
+          <a class="btn primary" href="#contact" data-en="Discuss a project">制作を相談する</a>
         </div>
       </div>
     </section>
@@ -1407,7 +1415,7 @@ button:focus-visible {
         } else { logoCx = W / 2; logoCy = H * 0.34; logoR = W * 0.12; }
         // 文字要素の矩形を集めて、木がその上に描かれないよう後で消去する
         textClears = [];
-        ['.hero-eyebrow', '.hero-wordmark', '.hero-tag', '.hero-lead', '.hero-cta', '.hero-scroll', '.hero-edge-l', '.hero-edge-r'].forEach(function (sel) {
+        ['.hero-eyebrow', '.hero-wordmark', '.hero-tag', '.hero-lead', '.hero-actions', '.hero-scroll', '.hero-edge-l', '.hero-edge-r'].forEach(function (sel) {
           var elx = hero.querySelector(sel);
           if (elx) { var q = elx.getBoundingClientRect(); if (q.width > 0 && q.height > 0) { textClears.push({ x: q.left - rect.left, y: q.top - rect.top, w: q.width, h: q.height }); } }
         });
