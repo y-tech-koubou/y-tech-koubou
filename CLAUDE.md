@@ -39,3 +39,8 @@
 cd C:\Users\yoshino.takayuki\y-tech-koubou\portal
 npx vercel --prod
 ```
+
+## デザイン指針
+- **ブランド文言・事実表現は BRAND.md が正本（このセクションより優先）。** 以下はビジュアル数値の参照
+- 正本: `C:\Users\yoshino.takayuki\design-system\DESIGN-SYSTEM.md`（規律）＋ `design-system\DESIGN-LIBRARY.md`（70ブランド索引）
+- 参照ブランド: 第一= **linear, vercel** / 補助= claude（フルMD= `Desktop\Yテック工房\デザイン\DESIGN-<brand>.md`）。引く要素: 静かな技術感・mono eyebrow・「IT×建築×海外」の編集性
