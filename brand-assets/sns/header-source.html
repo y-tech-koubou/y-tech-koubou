@@ -1,39 +1,73 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* Yテック工房 Xヘッダー 1500x500 — 墨緑ダーク×図面トーン
+     palette: BRAND.md §カラー（sumimidori/kinari/wakaba/shu） */
   html,body{margin:0;padding:0;width:1500px;height:500px;overflow:hidden;}
   body{
-    background:#FAF7F2;
-    display:flex;align-items:center;justify-content:center;gap:64px;
+    background:#0F1A0F;
     position:relative;
+    font-kerning:normal;
   }
-  body::after{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:#2D5A2D;
+  /* ごく薄い図面グリッド */
+  .grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, rgba(250,247,242,0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(250,247,242,0.035) 1px, transparent 1px);
+    background-size:125px 125px;
+    background-position:-0.5px -0.5px;
   }
-  .mark{width:300px;height:300px;flex:0 0 auto;clip-path:circle(46% at 50% 50%);object-fit:cover;}
-  .text{display:flex;flex-direction:column;}
+  /* 右上からの淡い若葉グロー */
+  .glow{
+    position:absolute;inset:0;
+    background:radial-gradient(900px 460px at 78% 30%, rgba(107,142,90,0.16), transparent 70%);
+  }
+  /* 右側のロゴ線画ウォーターマーク（右端で切る） */
+  .watermark{
+    position:absolute;top:50%;right:-150px;transform:translateY(-50%);
+    width:660px;height:660px;opacity:0.42;
+  }
+  /* テキストブロック（アバターが被る左下を避け、やや上寄せ） */
+  .text{
+    position:absolute;left:110px;top:50%;transform:translateY(-54%);
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:19px;
+    color:#6B8E5A;letter-spacing:0.42em;text-transform:uppercase;
+  }
+  .eyebrow .tick{color:#A0382A;}
   .name-ja{
-    font-family:"Noto Serif JP",serif;font-weight:700;font-size:84px;color:#1A1A1A;
-    letter-spacing:0.06em;line-height:1.1;
+    font-family:"Noto Serif JP",serif;font-weight:600;font-size:98px;color:#FAF7F2;
+    letter-spacing:0.045em;line-height:1.06;margin-top:26px;
   }
-  .name-en{
-    font-family:"Cormorant Garamond",serif;font-weight:600;font-size:34px;color:#6B8E5A;
-    letter-spacing:0.32em;margin-top:14px;text-transform:uppercase;
+  .rule{
+    width:560px;height:1px;background:linear-gradient(to right, rgba(250,247,242,0.36), rgba(250,247,242,0.04));
+    margin-top:34px;
   }
   .tagline{
-    font-family:"Noto Sans JP",sans-serif;font-weight:500;font-size:34px;color:#2D5A2D;
-    letter-spacing:0.18em;margin-top:30px;
+    font-family:"Noto Sans JP",sans-serif;font-weight:400;font-size:29px;
+    color:rgba(250,247,242,0.78);letter-spacing:0.30em;margin-top:30px;
   }
-  .tagline .x{color:#A0382A;padding:0 6px;}
+  .tagline .x{color:#A0382A;padding:0 10px;font-weight:500;}
+  /* 図面の寸法線風アクセント（右下・さりげなく） */
+  .dim{
+    position:absolute;right:96px;bottom:54px;
+    font-family:"IBM Plex Mono",monospace;font-size:14px;letter-spacing:0.22em;
+    color:rgba(250,247,242,0.30);
+  }
 </style></head>
 <body>
-  <img class="mark" src="../logo-primary.png" alt="">
-
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <img class="watermark" src="../logo-primary-dark.svg" alt="">
   <div class="text">
+    <div class="eyebrow"><span class="tick">&#9632;</span>&nbsp; Y-TECH KOUBOU</div>
     <div class="name-ja">Yテック工房</div>
-    <div class="name-en">Y-Tech Koubou</div>
-    <div class="tagline">IT <span class="x">×</span> 建築 <span class="x">×</span> 海外</div>
+    <div class="rule"></div>
+    <div class="tagline">IT<span class="x">&#215;</span>建築<span class="x">&#215;</span>海外</div>
   </div>
+  <div class="dim">IT &#215; ARCHITECTURE &#215; OVERSEAS</div>
 </body></html>
