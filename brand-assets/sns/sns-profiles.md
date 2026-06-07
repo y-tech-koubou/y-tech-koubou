@@ -10,7 +10,7 @@
 | ハンドル（第一候補） | `@ytechkoubou`（Amazonアソシエイト ID `ytechkoubou-22` と整合） |
 | ハンドル（第二候補） | `@ytech_koubou` |
 | 表示名 | Yテック工房 |
-| アイコン | `brand-assets/sns/avatar-1024.png` |
+| アイコン | `brand-assets/sns/avatar-1024.png`（= `logo-primary.png` の1024pxリサイズ。avatar-source.html の簡易マークは廃止） |
 | リンク | https://y-tech-koubou.com |
 | メール | kichiyakoushou@gmail.com |
 
