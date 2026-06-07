@@ -1183,6 +1183,25 @@ button:focus-visible {
             <span class="open" data-en="Open &rarr;">開く &rarr;</span>
           </a>
 
+          <a class="product reveal" href="https://africa-lingo.vercel.app" target="_blank" rel="noopener" aria-label="アフリカ語工房を新規タブで開く">
+            <img class="work-thumb" src="assets/app-africa.png" alt="アフリカ語工房のホーム画面" loading="lazy" width="860" height="538">
+            <div class="top">
+              <span class="mono logo" aria-hidden="true"><img src="assets/africa-lingo-mark.png" alt="" width="46" height="46" loading="lazy"></span>
+              <div class="head">
+                <h3 class="name">アフリカ語工房</h3>
+                <div class="domain">AFRICA-LINGO.VERCEL.APP</div>
+              </div>
+              <span class="status live">Live</span>
+            </div>
+            <p data-en="Learn real-life phrases from 20 African languages across 32 countries &mdash; about 1,900 phrases with kana readings. Pick by country, map or language, then master them with flip cards and quizzes.">アフリカ20言語・32カ国、約1,900の現地で本当に使うフレーズをカナ読み付きで学ぶ。国・マップ・言語の3つの入り口から選び、カードめくりと4択クイズで身につける。</p>
+            <div class="meta">
+              <span data-en="Languages">語学</span>
+              <span data-en="Africa">アフリカ</span>
+              <span>Web</span>
+            </div>
+            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
+          </a>
+
         </div>
       </div>
     </section>
@@ -1366,7 +1385,8 @@ button:focus-visible {
         { name: '建築資格工房', url: 'https://1architectexam.com', icon: 'assets/kenchiku-mark.png' },
         { name: 'English工房', url: 'https://english-koubou.vercel.app', icon: 'assets/english-koubou-mark.svg' },
         { name: 'MLB推し', url: 'https://mlb-oshi.vercel.app', icon: 'assets/mlb-oshi-mark.png?v=2' },
-        { name: 'AI工房', url: 'https://ai-koubou.vercel.app', icon: 'assets/ai-koubou-mark.png' }
+        { name: 'AI工房', url: 'https://ai-koubou.vercel.app', icon: 'assets/ai-koubou-mark.png' },
+        { name: 'アフリカ語工房', url: 'https://africa-lingo.vercel.app', icon: 'assets/africa-lingo-mark.png' }
       ];
       var ICONS = {};
       PRODUCTS.forEach(function (p) { if (p.icon) { var im = new Image(); im.onload = function () { if (typeof wake === 'function') { wake(); } }; im.src = p.icon; ICONS[p.icon] = im; } });
@@ -1490,11 +1510,12 @@ button:focus-visible {
           clusters.push({ x: lc.x, y: lc.y, dots: dots, t: lc.t });
         }
         // 公開アプリ＝ロゴの花。位置はランダムな葉に頼らず、樹冠（楕円）の「固定アンカー」に置く。
-        // 中央はエンブレムが占めるので左右に2つずつ、外側=やや高い／内側=低い円弧状に配置。
+        // 中央はエンブレムが占めるので左右に2つずつ＋頂部に1つ（エンブレム画像より上）の5点配置。
         // → どの画面幅でも必ず等間隔で離れて並び（重なりを構造的に排除）、かつ葉の茂みの上に乗る。
         var anchors = [
           { ax: -0.86, ay: -0.02 },   // 左・外（やや高い）
           { ax: -0.40, ay:  0.56 },   // 左・内（低い）
+          { ax:  0.00, ay: -0.60 },   // 頂部・中央（エンブレムの上）
           { ax:  0.40, ay:  0.56 },   // 右・内（低い）
           { ax:  0.86, ay: -0.02 }    // 右・外（やや高い）
         ];
