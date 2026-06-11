@@ -1408,7 +1408,7 @@ button:focus-visible {
         if (depth === 0) {
           // 幹の上端: 中央の主導枝＋左右の大枝（同一点Y字の単調さを避け、主幹が樹冠内まで通る）
           // 左右の大枝は角度・長さを共有してシンメトリーに＝樹形のバランスを担保
-          var limbA = rnd(0.55, 0.72), limbLen = len * rnd(0.6, 0.68);
+          var limbA = rnd(0.45, 0.6), limbLen = len * rnd(0.6, 0.68);  // 開きすぎると横長キノコ型になる
           grow(px, py, pa + rnd(-0.08, 0.08), len * 0.82, 1, t0 + 0.85, pw * 0.85);
           grow(px, py, pa - limbA, limbLen, 1, t0 + 0.85, pw * 0.58);
           grow(px, py, pa + limbA, limbLen, 1, t0 + 0.85, pw * 0.58);
@@ -1503,20 +1503,21 @@ button:focus-visible {
           var qt = function (arr, f) { return arr[Math.floor((arr.length - 1) * f)]; };
           var x5 = qt(tipXs, 0.05), x95 = qt(tipXs, 0.95), y5 = qt(tipYs, 0.05), y95 = qt(tipYs, 0.95);
           canCx = (x5 + x95) / 2; canCy = (y5 + y95) / 2;
-          canRx = Math.max(W * 0.16, (x95 - x5) / 2 * 1.08);
-          canRy = Math.max(H * 0.18, (y95 - y5) / 2 * 1.12);
+          // 上下限クランプ＝シードによる縦横比のブレを抑え、樹形の均整を安定させる
+          canRx = Math.min(W * 0.26, Math.max(W * 0.16, (x95 - x5) / 2 * 1.08));
+          canRy = Math.min(H * 0.34, Math.max(H * 0.18, (y95 - y5) / 2 * 1.12));
         } else { canCx = W / 2; canCy = H * 0.31; canRx = W * 0.25; canRy = H * 0.29; }
         // 葉の色帯：上＝陽光で黄緑明るめ / 中 / 下＝深緑で陰影。樹冠内の縦位置で選ぶとボリュームが出る
         var leafTop = ['rgba(150,178,96,', 'rgba(125,157,91,', 'rgba(96,140,72,'];   // 明（陽の当たる上面）
         var leafMid = ['rgba(74,122,68,', 'rgba(60,108,58,', 'rgba(96,140,72,'];     // 中
         var leafLow = ['rgba(45,90,45,', 'rgba(36,74,38,', 'rgba(30,62,34,'];        // 暗（影になる下面）
-        var ctips = leaves.filter(function (l) { return l.y < canCy + canRy * 1.45; });  // 下側の枝先も房に含めて樹冠を低く茂らせる
+        var ctips = leaves.filter(function (l) { return l.y < canCy + canRy * 1.22; });  // 下側の枝先も房に含める（深追いすると裾が文字まで垂れる）
         // 樹冠の内側（枝の節）にも房を追加：枝先だけだと外周に偏り、中央・エンブレム下がドーナツ状に空く
         var innerJ = [];
         for (var bj = 0; bj < branches.length; bj++) {
           var bb = branches[bj];
           if (bb.depth < 3) continue;
-          var jx = (bb.x2 - canCx) / canRx, jy = (bb.y2 - canCy) / (canRy * (bb.y2 > canCy ? 1.45 : 1));
+          var jx = (bb.x2 - canCx) / canRx, jy = (bb.y2 - canCy) / (canRy * (bb.y2 > canCy ? 1.2 : 1));
           if (jx * jx + jy * jy < 1.05) { innerJ.push({ x: bb.x2, y: bb.y2, t: bb.t1 }); }
         }
         for (var ji = innerJ.length - 1; ji > 0; ji--) { var jj = Math.floor(Math.random() * (ji + 1)); var jw = innerJ[ji]; innerJ[ji] = innerJ[jj]; innerJ[jj] = jw; }
@@ -1532,8 +1533,8 @@ button:focus-visible {
             var tt = Math.sqrt(Math.random()), aa = rnd(0, Math.PI * 2);
             var ddx = Math.cos(aa) * crx * tt, ddy = Math.sin(aa) * cry * tt;
             var px = lc.x + ddx, py = lc.y + ddy;
-            // 楕円カリング: 下半分は半径を1.55倍に伸ばす＝樹冠の裾が下まで茂る
-            var nxv = (px - canCx) / canRx, nyv = (py - canCy) / (canRy * (py > canCy ? 1.55 : 1));
+            // 楕円カリング: 下半分は半径をやや伸ばして裾を作る（伸ばしすぎはキノコ型）
+            var nxv = (px - canCx) / canRx, nyv = (py - canCy) / (canRy * (py > canCy ? 1.28 : 1));
             if (nxv * nxv + nyv * nyv > rnd(0.92, 1.32)) continue;
             // 葉はロゴに被ってOK（ロゴはcanvasより前面なので隠れない）。文字領域だけ避ける
             var inText = false;
