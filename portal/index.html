@@ -1516,15 +1516,15 @@ button:focus-visible {
         for (var bj = 0; bj < branches.length; bj++) {
           var bb = branches[bj];
           if (bb.depth < 3) continue;
-          var jx = (bb.x2 - canCx) / canRx, jy = (bb.y2 - canCy) / canRy;
-          if (jx * jx + jy * jy < 0.62) { innerJ.push({ x: bb.x2, y: bb.y2, t: bb.t1 }); }
+          var jx = (bb.x2 - canCx) / canRx, jy = (bb.y2 - canCy) / (canRy * (bb.y2 > canCy ? 1.45 : 1));
+          if (jx * jx + jy * jy < 1.05) { innerJ.push({ x: bb.x2, y: bb.y2, t: bb.t1 }); }
         }
         for (var ji = innerJ.length - 1; ji > 0; ji--) { var jj = Math.floor(Math.random() * (ji + 1)); var jw = innerJ[ji]; innerJ[ji] = innerJ[jj]; innerJ[jj] = jw; }
-        ctips = ctips.concat(innerJ.slice(0, 60));
+        ctips = ctips.concat(innerJ.slice(0, 100));
         // 再帰は左の枝から辿る＝枝先リストが左偏り。上限で打ち切る前にシャッフルし左右均等に茂らせる
         for (var si = ctips.length - 1; si > 0; si--) { var sj = Math.floor(Math.random() * (si + 1)); var sw2 = ctips[si]; ctips[si] = ctips[sj]; ctips[sj] = sw2; }
         for (var ci = 0; ci < ctips.length; ci++) {
-          if (clusters.length > (W < 640 ? 150 : 270)) break;
+          if (clusters.length > (W < 640 ? 170 : 300)) break;
           var lc = ctips[ci];
           var crx = rnd(W * 0.028, W * 0.085), cry = crx * rnd(0.72, 1.12);  // 房は枝先に寄せる（散布半径を抑え葉と枝のズレを防ぐ）
           var dots = [], dn = 20 + Math.floor(Math.random() * 20);
