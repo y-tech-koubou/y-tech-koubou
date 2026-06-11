@@ -1391,17 +1391,33 @@ button:focus-visible {
       var ICONS = {};
       PRODUCTS.forEach(function (p) { if (p.icon) { var im = new Image(); im.onload = function () { if (typeof wake === 'function') { wake(); } }; im.src = p.icon; ICONS[p.icon] = im; } });
 
-      function grow(x, y, angle, len, depth, t0) {
-        if (depth > 6 || len < 9) { leaves.push({ x: x, y: y, t: t0 }); return; }
-        var x2 = x + Math.cos(angle) * len;
-        var y2 = y + Math.sin(angle) * len;
-        branches.push({ x1: x, y1: y, x2: x2, y2: y2, depth: depth, t0: t0, t1: t0 + 1 });
-        var spread = 0.38 + Math.random() * 0.14;
-        var nlen = len * 0.74;
-        grow(x2, y2, angle - spread + (Math.random() - 0.5) * 0.18, nlen, depth + 1, t0 + 0.85);
-        grow(x2, y2, angle + spread + (Math.random() - 0.5) * 0.18, nlen, depth + 1, t0 + 0.85);
-        if (depth < 2 && Math.random() < 0.4) {
-          grow(x2, y2, angle + (Math.random() - 0.5) * 0.3, nlen * 0.9, depth + 1, t0 + 0.9);
+      // 木らしさの要：①枝は2〜3分割の折れ線で微妙に曲がる ②太さwを引き継いで連続テーパー
+      // ③幹はY字フォークでなく「主導枝＋左右の大枝」④枝先は上向きに矯正（樹木の向日性）
+      function grow(x, y, angle, len, depth, t0, w) {
+        if (depth > 6 || len < 7 || w < 0.6) { leaves.push({ x: x, y: y, t: t0 }); return; }
+        var segs = depth <= 1 ? 3 : 2;             // 幹・大枝ほど細かく分割＝なめらかなうねり
+        var px = x, py = y, pa = angle, pw = w;
+        for (var s = 0; s < segs; s++) {
+          pa += depth === 0 ? rnd(-0.05, 0.05) : rnd(-0.08, 0.08);
+          if (depth >= 3) { pa += (-Math.PI / 2 - pa) * 0.05; }   // 外側の枝先は空へ向く
+          var sl = len / segs;
+          var bx = px + Math.cos(pa) * sl, by = py + Math.sin(pa) * sl;
+          branches.push({ x1: px, y1: py, x2: bx, y2: by, depth: depth, w: pw, t0: t0 + (s / segs) * 0.85, t1: t0 + ((s + 1) / segs) * 0.85 });
+          pw *= 0.93; px = bx; py = by;
+        }
+        if (depth === 0) {
+          // 幹の上端: 中央の主導枝＋左右の大枝（同一点Y字の単調さを避け、主幹が樹冠内まで通る）
+          grow(px, py, pa + rnd(-0.1, 0.1), len * 0.82, 1, t0 + 0.85, pw * 0.85);
+          grow(px, py, pa - rnd(0.5, 0.78), len * 0.62, 1, t0 + 0.85, pw * 0.58);
+          grow(px, py, pa + rnd(0.5, 0.78), len * 0.62, 1, t0 + 0.85, pw * 0.58);
+        } else {
+          var spread = 0.36 + Math.random() * 0.18;
+          var nlen = len * 0.74;
+          grow(px, py, pa - spread + rnd(-0.09, 0.09), nlen * rnd(0.82, 1.0), depth + 1, t0 + 0.85, pw * 0.72);
+          grow(px, py, pa + spread + rnd(-0.09, 0.09), nlen * rnd(0.82, 1.0), depth + 1, t0 + 0.85, pw * 0.72);
+          if (depth < 3 && Math.random() < 0.45) {
+            grow(px, py, pa + rnd(-0.22, 0.22), nlen * 0.85, depth + 1, t0 + 0.9, pw * 0.6);
+          }
         }
       }
       // 根：地中で何度も枝分かれして広がる立体的な根（曲線ベジェ・太→細・z で奥行き）。
@@ -1462,8 +1478,9 @@ button:focus-visible {
           if (elx) { var q = elx.getBoundingClientRect(); if (q.width > 0 && q.height > 0) { textClears.push({ x: q.left - rect.left, y: q.top - rect.top, w: q.width, h: q.height }); } }
         });
         groundY = H * 0.92;           // 地面（芝の地平線）。根は描かない
-        // 木：根元＝地面ライン。地面の下へは伸ばさない（貫かない）
-        grow(W / 2, groundY, -Math.PI / 2, H * 0.2, 0, 0);
+        // 木：根元＝地面ライン。地面の下へは伸ばさない（貫かない）。幹はわずかに傾けて自然に
+        var baseW = Math.max(15, Math.min(26, W * 0.02));
+        grow(W / 2, groundY, -Math.PI / 2 + rnd(-0.04, 0.04), H * 0.2, 0, 0, baseW);
         // 芝の草ストローク（地面の表現）
         var gn = Math.floor(W / 7);
         for (var gi = 0; gi < gn; gi++) {
@@ -1577,7 +1594,19 @@ button:focus-visible {
         ctx.beginPath();
         ctx.rect(0, 0, W, gY);
         ctx.clip();
-        // ---- 枝（depth0-1＝幹。中央 W/2 から成長）----
+        // ---- 根元の張り出し（根板）: 幹の足元が地面へ広がる接地表現 ----
+        var flp = smooth(0.0, 0.22, p);
+        if (flp > 0) {
+          var fbw = Math.max(15, Math.min(26, W * 0.02)) / 2;
+          ctx.fillStyle = 'rgba(104,70,44,' + (0.46 * flp) + ')';
+          ctx.beginPath();
+          ctx.moveTo(W / 2 - fbw, gY - H * 0.05);
+          ctx.quadraticCurveTo(W / 2 - fbw * 1.2, gY - 7, W / 2 - fbw * 2.5 * flp, gY);
+          ctx.lineTo(W / 2 + fbw * 2.5 * flp, gY);
+          ctx.quadraticCurveTo(W / 2 + fbw * 1.2, gY - 7, W / 2 + fbw, gY - H * 0.05);
+          ctx.closePath(); ctx.fill();
+        }
+        // ---- 枝（連続テーパー: b.w を引き継いで根元→枝先までなめらかに細る）----
         for (i = 0; i < branches.length; i++) {
           var b = branches[i];
           if (p < b.t0) continue;
@@ -1586,11 +1615,12 @@ button:focus-visible {
           ctx.beginPath();
           ctx.moveTo(sway(b.x1, b.y1, t), b.y1);
           ctx.lineTo(sway(bex, bey, t), bey);
-          ctx.lineWidth = Math.max(0.6, 20 * Math.pow(0.58, b.depth));  // 幹を太く＋枝先へ強めのテーパー
-          ctx.strokeStyle = (b.depth <= 1) ? 'rgba(108,74,46,' + (0.52 - b.depth * 0.1) + ')' : 'rgba(70,112,62,' + (0.24 - b.depth * 0.02) + ')';
+          ctx.lineWidth = Math.max(0.6, b.w);
+          // 木質部（太い枝）は樹皮の茶、細い枝先だけ緑がかる＝実際の樹木の色配分
+          ctx.strokeStyle = (b.w >= 2.4) ? 'rgba(98,66,40,' + Math.min(0.6, 0.3 + b.w * 0.016) + ')' : 'rgba(74,108,60,' + (0.26 - b.depth * 0.015) + ')';
           ctx.stroke();
           // 円筒シェーディング：太い木質部(幹〜太枝)に左上ハイライト＋右下の陰で丸みを出す
-          if (b.depth <= 2) {
+          if (b.w >= 6) {
             var bw = ctx.lineWidth;
             var sx1 = sway(b.x1, b.y1, t), sx2 = sway(bex, bey, t);
             var vdx = sx2 - sx1, vdy = bey - b.y1, vl = Math.hypot(vdx, vdy) || 1;
@@ -1600,12 +1630,12 @@ button:focus-visible {
             ctx.beginPath();
             ctx.moveTo(sx1 + nx * off, b.y1 + ny * off); ctx.lineTo(sx2 + nx * off, bey + ny * off);
             ctx.lineWidth = bw * 0.42;
-            ctx.strokeStyle = (b.depth <= 1) ? 'rgba(156,120,82,' + (0.55 * seg) + ')' : 'rgba(122,150,96,' + (0.4 * seg) + ')';
+            ctx.strokeStyle = 'rgba(156,120,82,' + (0.5 * seg) + ')';
             ctx.stroke();
             ctx.beginPath();
             ctx.moveTo(sx1 - nx * off, b.y1 - ny * off); ctx.lineTo(sx2 - nx * off, bey - ny * off);
             ctx.lineWidth = bw * 0.4;
-            ctx.strokeStyle = (b.depth <= 1) ? 'rgba(58,36,20,0.3)' : 'rgba(34,56,30,0.26)';
+            ctx.strokeStyle = 'rgba(58,36,20,0.28)';
             ctx.stroke();
           }
         }
