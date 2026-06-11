@@ -1508,7 +1508,7 @@ button:focus-visible {
         var leafTop = ['rgba(150,178,96,', 'rgba(125,157,91,', 'rgba(96,140,72,'];   // 明（陽の当たる上面）
         var leafMid = ['rgba(74,122,68,', 'rgba(60,108,58,', 'rgba(96,140,72,'];     // 中
         var leafLow = ['rgba(45,90,45,', 'rgba(36,74,38,', 'rgba(30,62,34,'];        // 暗（影になる下面）
-        var ctips = leaves.filter(function (l) { return l.y < canCy + canRy * 0.85; });
+        var ctips = leaves.filter(function (l) { return l.y < canCy + canRy * 1.15; });  // 下側の枝先も房に含めて樹冠を低く茂らせる
         // 再帰は左の枝から辿る＝枝先リストが左偏り。上限で打ち切る前にシャッフルし左右均等に茂らせる
         for (var si = ctips.length - 1; si > 0; si--) { var sj = Math.floor(Math.random() * (si + 1)); var sw2 = ctips[si]; ctips[si] = ctips[sj]; ctips[sj] = sw2; }
         for (var ci = 0; ci < ctips.length; ci++) {
@@ -1520,7 +1520,8 @@ button:focus-visible {
             var tt = Math.sqrt(Math.random()), aa = rnd(0, Math.PI * 2);
             var ddx = Math.cos(aa) * crx * tt, ddy = Math.sin(aa) * cry * tt;
             var px = lc.x + ddx, py = lc.y + ddy;
-            var nxv = (px - canCx) / canRx, nyv = (py - canCy) / canRy;
+            // 楕円カリング: 下半分は半径を1.25倍に伸ばす＝樹冠の裾が下まで茂る
+            var nxv = (px - canCx) / canRx, nyv = (py - canCy) / (canRy * (py > canCy ? 1.25 : 1));
             if (nxv * nxv + nyv * nyv > rnd(0.92, 1.32)) continue;
             // 葉はロゴに被ってOK（ロゴはcanvasより前面なので隠れない）。文字領域だけ避ける
             var inText = false;
