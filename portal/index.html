@@ -1398,7 +1398,7 @@ button:focus-visible {
         var segs = depth <= 1 ? 3 : 2;             // 幹・大枝ほど細かく分割＝なめらかなうねり
         var px = x, py = y, pa = angle, pw = w;
         for (var s = 0; s < segs; s++) {
-          pa += depth === 0 ? rnd(-0.04, 0.04) : rnd(-0.065, 0.065);  // うねりは控えめ＝全体の均整を保つ
+          pa += depth === 0 ? 0 : rnd(-0.065, 0.065);  // 幹(depth0)はうねらせず垂直を保つ／枝は控えめに揺らぐ
           if (depth >= 3) { pa += (-Math.PI / 2 - pa) * 0.05; }   // 外側の枝先は空へ向く
           var sl = len / segs;
           var bx = px + Math.cos(pa) * sl, by = py + Math.sin(pa) * sl;
@@ -1484,9 +1484,9 @@ button:focus-visible {
           if (elx) { var q = elx.getBoundingClientRect(); if (q.width > 0 && q.height > 0) { textClears.push({ x: q.left - rect.left, y: q.top - rect.top, w: q.width, h: q.height }); } }
         });
         groundY = H * 0.92;           // 地面（芝の地平線）。根は描かない
-        // 木：根元＝地面ライン。地面の下へは伸ばさない（貫かない）。幹はわずかに傾けて自然に
+        // 木：根元＝地面ライン。地面の下へは伸ばさない（貫かない）。幹は垂直（傾けない）
         var baseW = Math.max(15, Math.min(26, W * 0.02));
-        grow(W / 2, groundY, -Math.PI / 2 + rnd(-0.025, 0.025), H * 0.2, 0, 0, baseW);
+        grow(W / 2, groundY, -Math.PI / 2, H * 0.2, 0, 0, baseW);
         // 芝の草ストローク（地面の表現）
         var gn = Math.floor(W / 7);
         for (var gi = 0; gi < gn; gi++) {
