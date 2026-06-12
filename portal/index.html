@@ -1714,12 +1714,24 @@ button:focus-visible {
           var picon = (f.product && f.product.icon) ? ICONS[f.product.icon] : null;
           if (picon && picon.complete && picon.naturalWidth) {
             var LR = 21 * pop * pulse * (1 + 0.42 * hv);
-            var lgr = LR * (2.2 + hv);
-            var lglow = ctx.createRadialGradient(fx, fy, 0, fx, fy, lgr);
-            lglow.addColorStop(0, 'rgba(160,180,140,' + (0.5 * bp * (1 + 0.7 * hv)) + ')');
-            lglow.addColorStop(1, 'rgba(160,180,140,0)');
-            ctx.fillStyle = lglow;
-            ctx.beginPath(); ctx.arc(fx, fy, lgr, 0, Math.PI * 2); ctx.fill();
+            // 葉の茂みに埋もれないよう、ロゴの周りに生成り地の「空き」を作って茂みを後退させる
+            // （fruits は最前面に描かれるので、ここで茂みの上に淡い光のポケットを敷く）
+            var clr = LR * (1.7 + 0.3 * hv);
+            var halo = ctx.createRadialGradient(fx, fy, LR * 0.55, fx, fy, clr);
+            halo.addColorStop(0, 'rgba(250,247,242,' + (0.96 * bp) + ')');
+            halo.addColorStop(0.6, 'rgba(250,247,242,' + (0.62 * bp) + ')');
+            halo.addColorStop(1, 'rgba(250,247,242,0)');
+            ctx.fillStyle = halo;
+            ctx.beginPath(); ctx.arc(fx, fy, clr, 0, Math.PI * 2); ctx.fill();
+            // やわらかな発光（ホバー時のみ・通常は空きを濁さない）
+            if (hv > 0.01) {
+              var lgr = LR * (1.7 + hv);
+              var lglow = ctx.createRadialGradient(fx, fy, LR * 0.8, fx, fy, lgr);
+              lglow.addColorStop(0, 'rgba(160,180,140,' + (0.5 * bp * hv) + ')');
+              lglow.addColorStop(1, 'rgba(160,180,140,0)');
+              ctx.fillStyle = lglow;
+              ctx.beginPath(); ctx.arc(fx, fy, lgr, 0, Math.PI * 2); ctx.fill();
+            }
             ctx.beginPath(); ctx.arc(fx, fy, LR, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(255,255,255,' + (0.97 * bp) + ')'; ctx.fill();
             ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(45,90,45,' + (0.16 * bp) + ')'; ctx.stroke();
