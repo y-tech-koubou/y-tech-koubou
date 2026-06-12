@@ -298,7 +298,7 @@ header.site nav a:hover::after { transform: scaleX(1); }
   margin: 2px 0 30px;
 }
 .hero-emblem {
-  width: clamp(150px, 19vw, 236px);
+  width: clamp(132px, 15.5vw, 196px);
   height: auto;
   display: block;
   margin: 0 0 62px;
@@ -1056,7 +1056,7 @@ button:focus-visible {
     <section class="hero">
       <canvas class="hero-bg" aria-hidden="true"></canvas>
       <!-- 木の実のアプリ名ツールチップは表示しない（オーナー指示 2026-06-05・ロゴの実＋ホバー発光＋クリックのみ） -->
-      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png?v=2" alt="" width="236" height="236"></span>
+      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png?v=2" alt="" width="196" height="196"></span>
       <h1 class="hero-eyebrow reveal" aria-label="Yテック工房 / Y-Tech Koubou">Y &middot; Tech &middot; Koubou</h1>
       <p class="hero-tag reveal" data-en="IT &times; Architecture &times; Overseas">IT &times; 建築 &times; 海外</p>
       <div class="hero-actions reveal">
@@ -1374,7 +1374,7 @@ button:focus-visible {
       var hero = canvas.parentElement;
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      var W = 0, H = 0, branches, leaves, fruits, roots, clusters, soilParts, grassBlades, groundY = 0, trunkSeed = 0, logoCx = 0, logoCy = 0, logoR = 0, textClears = [], startTime, raf, visible = true, hoverFruit = null;
+      var W = 0, H = 0, branches, leaves, fruits, roots, clusters, soilParts, grassBlades, groundY = 0, trunkSeed = 0, logoCx = 0, logoCy = 0, logoR = 0, logoTop = 0, textClears = [], startTime, raf, visible = true, hoverFruit = null;
       var canCx = 0, canCy = 0, canRx = 0, canRy = 0;  // 樹冠の中心/半径（build で設定・draw でも参照）
       function rnd(a, b) { return a + Math.random() * (b - a); }
       function smooth(e0, e1, x) { var t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0))); return t * t * (3 - 2 * t); }
@@ -1468,11 +1468,15 @@ button:focus-visible {
         // ロゴ（エンブレム）の実位置を取得し、その周りは樹冠・枝を避けてクリアに
         var embEl = hero.querySelector('.hero-emblem');
         if (embEl) {
+          // リビール(translateY)途中で測ると座標がずれ、頂部ロゴがエンブレムと重なる。
+          // 先に .in を当てて最終位置（transform:none）で測る。
+          embEl.classList.add('in');
           var er = embEl.getBoundingClientRect();
           logoCx = er.left + er.width / 2 - rect.left;
           logoCy = er.top + er.height / 2 - rect.top;
           logoR = er.width * 0.74;
-        } else { logoCx = W / 2; logoCy = H * 0.34; logoR = W * 0.12; }
+          logoTop = er.top - rect.top;          // エンブレム上端（頂部ロゴのクリアランス基準）
+        } else { logoCx = W / 2; logoCy = H * 0.34; logoR = W * 0.12; logoTop = H * 0.18; }
         // 文字要素の矩形を集めて、木がその上に描かれないよう後で消去する
         textClears = [];
         ['.hero-eyebrow', '.hero-wordmark', '.hero-tag', '.hero-lead', '.hero-actions', '.hero-scroll', '.hero-edge-l', '.hero-edge-r'].forEach(function (sel) {
@@ -1567,6 +1571,11 @@ button:focus-visible {
         for (var ai = 0; ai < nProd; ai++) {
           var fxA = canCx + anchors[ai].ax * canRx;
           var fyA = canCy + anchors[ai].ay * canRy;
+          // 頂部・中央のロゴはエンブレムと重なりやすい。エンブレム上端より確実に上へ追い出す。
+          if (anchors[ai].ax === 0) {
+            fxA = logoCx;
+            fyA = Math.min(fyA, logoTop - 40);   // エンブレム上端の40px上（ブロッサム半径＋余白を確保）
+          }
           // ロゴの背後に必ず葉の茂みを敷く（空白に浮かせない保険）
           var bdots = [], brx = W * 0.05, bry = brx * 0.85;
           for (var bd = 0; bd < 18; bd++) {
