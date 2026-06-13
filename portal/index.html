@@ -304,6 +304,10 @@ header.site nav a:hover::after { transform: scaleX(1); }
   margin: 0 0 62px;
   filter: drop-shadow(0 16px 38px rgba(45, 90, 45, 0.15));
 }
+/* エンブレムは装飾（リンクでない）。pointer-eventsを通し、背後canvasの内側ブロッサム
+   （English工房/AI工房）のホバー・クリックを奪わないようにする */
+.hero-emblem,
+.hero-parallax { pointer-events: none; }
 .hero-wordmark {
   font-family: var(--serif-jp);
   font-weight: 600;
