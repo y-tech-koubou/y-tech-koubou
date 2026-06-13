@@ -1570,9 +1570,9 @@ button:focus-visible {
         // → どの画面幅でも必ず等間隔で離れて並び（重なりを構造的に排除）、かつ葉の茂みの上に乗る。
         var anchors = [
           { ax: -0.86, ay: -0.02 },   // 左・外（やや高い）
-          { ax: -0.40, ay:  0.56 },   // 左・内（低い）
+          { ax: -0.54, ay:  0.50 },   // 左・内（幹から外へ開く・窮屈解消）
           { ax:  0.00, ay: -0.60 },   // 頂部・中央（エンブレムの上）
-          { ax:  0.40, ay:  0.56 },   // 右・内（低い）
+          { ax:  0.54, ay:  0.50 },   // 右・内（幹から外へ開く・窮屈解消）
           { ax:  0.86, ay: -0.02 }    // 右・外（やや高い）
         ];
         var nProd = Math.min(PRODUCTS.length, anchors.length);
@@ -1585,8 +1585,11 @@ button:focus-visible {
             fyA = Math.min(fyA, logoTop - 40);   // エンブレム上端の40px上（ブロッサム半径＋余白を確保）
           }
           // ロゴの背後に必ず葉の茂みを敷く（空白に浮かせない保険）
-          var bdots = [], brx = W * 0.05, bry = brx * 0.85;
-          for (var bd = 0; bd < 18; bd++) {
+          // 頂部・中央は樹冠上端の薄い所に咲くので、背後の茂みを厚く＝白ディスクに緑の下地を与え薄さを解消
+          var isTopAnchor = anchors[ai].ax === 0;
+          var bdots = [], brx = W * (isTopAnchor ? 0.075 : 0.05), bry = brx * 0.85;
+          var bn = isTopAnchor ? 30 : 18;
+          for (var bd = 0; bd < bn; bd++) {
             var ba = rnd(0, Math.PI * 2), bt = Math.sqrt(Math.random());
             var bpal = (bd % 3 === 0) ? leafLow : leafMid;
             bdots.push({ dx: Math.cos(ba) * brx * bt, dy: Math.sin(ba) * bry * bt, rx: rnd(3.5, 8), ry: rnd(2.6, 6), rot: rnd(0, Math.PI), col: bpal[Math.floor(Math.random() * bpal.length)], a: rnd(0.3, 0.5) });
