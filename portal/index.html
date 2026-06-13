@@ -948,6 +948,9 @@ button:focus-visible {
   .works,
   .service { padding: 64px 0; }
   .hero { min-height: 90vh; padding: 108px 22px 76px; }
+  /* モバイル: エンブレム下の余白を広げてテキスト群を樹冠の下へ落とし、eyebrow が枝に紛れないようにする */
+  .hero-emblem { margin-bottom: 104px; }
+  .hero-eyebrow { margin-top: 6px; margin-bottom: 24px; }
   footer.site .inner { flex-direction: column; gap: 8px; text-align: center; }
 }
 
@@ -1409,7 +1412,7 @@ button:focus-visible {
           // 幹の上端: 中央の主導枝＋左右の大枝（同一点Y字の単調さを避け、主幹が樹冠内まで通る）
           // 左右の大枝は角度・長さを共有してシンメトリーに＝樹形のバランスを担保
           var limbA = rnd(0.45, 0.6), limbLen = len * rnd(0.6, 0.68);  // 開きすぎると横長キノコ型になる
-          grow(px, py, pa + rnd(-0.08, 0.08), len * 0.82, 1, t0 + 0.85, pw * 0.85);
+          grow(px, py, pa, len * 0.82, 1, t0 + 0.85, pw * 0.85);  // 主導枝は傾けず垂直＝重心の偏りを防ぐ
           grow(px, py, pa - limbA, limbLen, 1, t0 + 0.85, pw * 0.58);
           grow(px, py, pa + limbA, limbLen, 1, t0 + 0.85, pw * 0.58);
         } else {
@@ -1507,6 +1510,7 @@ button:focus-visible {
           var qt = function (arr, f) { return arr[Math.floor((arr.length - 1) * f)]; };
           var x5 = qt(tipXs, 0.05), x95 = qt(tipXs, 0.95), y5 = qt(tipYs, 0.05), y95 = qt(tipYs, 0.95);
           canCx = (x5 + x95) / 2; canCy = (y5 + y95) / 2;
+          canCx = canCx * 0.5 + (W / 2) * 0.5;  // 樹冠中心を画面中央へ半分寄せ＝枝のランダム分布による左右偏りを是正（fruits/節クラスタも追従）
           // 上下限クランプ＝シードによる縦横比のブレを抑え、樹形の均整を安定させる
           canRx = Math.min(W * 0.26, Math.max(W * 0.16, (x95 - x5) / 2 * 1.08));
           canRy = Math.min(H * 0.34, Math.max(H * 0.18, (y95 - y5) / 2 * 1.12));
