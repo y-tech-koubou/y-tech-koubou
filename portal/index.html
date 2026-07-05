@@ -9,30 +9,46 @@
   <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@500;600&display=optional">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@500;600&display=optional" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+JP:wght@500;600&display=optional"></noscript>
+  <!-- Heritage Design Tokens: Public Sans (h1/body) + Space Grotesk (label-caps) + Noto Sans JP (日本語グリフ) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"></noscript>
   <style>
 :root {
-  --kokemidori: #2D5A2D;
-  --wakaba: #6B8E5A;        /* 装飾・罫・ホバー枠用（UIコンポーネント） */
-  --wakaba-deep: #42693A;   /* 小さな情報テキスト用（AA 4.5+ on 生成り） */
-  --wakaba-light: #9DB889;  /* 暗背景上のラベル用 */
-  --shu: #A0382A;
-  --kinari: #FAF7F2;
-  --tonoko: #EDE7DC;
-  --sumimidori: #0F1A0F;
-  --shikkoku: #1A1A1A;
-  --nibiiro: #5A606B;       /* 補足テキスト（AA 5.9 on 生成り・実測で#6B7280から濃色化） */
-  --usuzumi: #D6CFC2;
+  /* === Heritage Design Tokens (2026-06-23) ===
+     "Architectural Minimalism meets Journalistic Gravitas"
+     旧: 苔緑×生成りの和風パレット → 新: Boston Clay × Limestone × Ink。
+     変数名は据え置き（下流ルールは無改修で新色を拾う）。 */
+  --kokemidori: #B8422E;    /* Boston Clay — 唯一のインタラクションアクセント（旧:苔緑） */
+  --wakaba: #C2674B;        /* 装飾・罫・ホバー枠（アクセント系の中間クレイ） */
+  --wakaba-deep: #9E3522;   /* 小さな情報テキスト用 深クレイ（AA 5.8+ on limestone） */
+  --wakaba-light: #E0B7A6;  /* 暗背景上のラベル用 ライトクレイ */
+  --shu: #A23A28;           /* 深クレイ（強アクセント） */
+  --kinari: #F7F5F2;        /* Limestone — 純白より温かい下地 */
+  --tonoko: #EEEAE3;        /* Limestone deep（パネル地） */
+  --sumimidori: #16181A;    /* 暗セクション地（ニュートラルな墨・旧:濃緑） */
+  --shikkoku: #1A1C1E;      /* Ink — 見出し/本文 */
+  --nibiiro: #5E646B;       /* Slate — 補足/メタ（AA 5.4 on limestone） */
+  --usuzumi: #DAD6CF;       /* 罫線（limestone系ヘアライン） */
 
   --space-section: 112px;
   --space-section-compact: 96px;
 
-  --serif-jp: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
-  --serif-en: 'Cormorant Garamond', 'Times New Roman', serif;
-  --sans-jp: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
-  --sans-en: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Heritage rounded scale（控えめ） */
+  --rounded-sm: 4px;
+  --rounded-md: 8px;
+
+  /* Heritage typography: 見出し/本文=Public Sans・ラベル=Space Grotesk・日本語=Noto Sans JP */
+  --serif-jp: 'Public Sans', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', sans-serif;
+  --serif-en: 'Space Grotesk', 'Public Sans', 'Helvetica Neue', sans-serif;
+  --sans-jp: 'Public Sans', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', system-ui, sans-serif;
+  --sans-en: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* モーション: 動きの質感を1か所で揃える */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);   /* なめらかな減速・到着が静か */
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);     /* ホバー等の往復に */
+  --dur-fast: 0.22s;
+  --dur: 0.34s;
 }
 
 * { box-sizing: border-box; }
@@ -79,7 +95,7 @@ header.site {
   background: transparent;
   border-bottom: 1px solid transparent;
   z-index: 30;
-  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+  transition: background var(--dur) var(--ease-soft), border-color var(--dur) var(--ease-soft), backdrop-filter var(--dur) var(--ease-soft);
 }
 header.site.scrolled {
   background: rgba(250, 247, 242, 0.85);
@@ -87,6 +103,9 @@ header.site.scrolled {
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom-color: var(--usuzumi);
 }
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 31; background: transparent; pointer-events: none; }
+.scroll-progress > span { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left center; background: var(--kokemidori); transition: transform 90ms linear; }
+@media (prefers-reduced-motion: reduce) { .scroll-progress > span { transition: none; } }
 header.site .inner {
   display: flex;
   align-items: center;
@@ -130,10 +149,12 @@ header.site nav a::after {
   background: var(--kokemidori);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.25s ease;
+  transition: transform var(--dur) var(--ease-out);
 }
 header.site nav a:hover { text-decoration: none; }
 header.site nav a:hover::after { transform: scaleX(1); }
+header.site nav a.active { color: var(--kokemidori); }
+header.site nav a.active::after { transform: scaleX(1); }
 
 .nav-cluster {
   display: flex;
@@ -186,7 +207,7 @@ header.site nav a:hover::after { transform: scaleX(1); }
   background: #fff;
   border: 1px solid var(--usuzumi);
   border-radius: 10px;
-  box-shadow: 0 10px 28px rgba(45, 90, 45, 0.14);
+  box-shadow: 0 10px 28px rgba(26, 28, 30, 0.12);
   overflow: hidden;
   z-index: 50;
   display: none;
@@ -246,7 +267,8 @@ header.site nav a:hover::after { transform: scaleX(1); }
   letter-spacing: 0.12em;
   padding: 13px 28px;
   border-radius: 999px;
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  will-change: transform;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft);
 }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
 .btn:active { transform: scale(0.96); } /* Apple流: 押下=縮小のマイクロインタラクション */
@@ -302,10 +324,10 @@ header.site nav a:hover::after { transform: scaleX(1); }
   height: auto;
   display: block;
   margin: 0 0 62px;
-  filter: drop-shadow(0 16px 38px rgba(45, 90, 45, 0.15));
+  filter: drop-shadow(0 16px 38px rgba(26, 28, 30, 0.14));
 }
 /* エンブレムは装飾（リンクでない）。pointer-eventsを通し、背後canvasの内側ブロッサム
-   （English工房/AI工房）のホバー・クリックを奪わないようにする */
+   のホバー・クリックを奪わないようにする */
 .hero-emblem,
 .hero-parallax { pointer-events: none; }
 .hero-wordmark {
@@ -342,7 +364,7 @@ header.site nav a:hover::after { transform: scaleX(1); }
   color: var(--kokemidori);
   border-bottom: 1px solid var(--wakaba);
   padding-bottom: 6px;
-  transition: gap 0.2s ease;
+  transition: gap var(--dur) var(--ease-out);
 }
 .hero-cta:hover { text-decoration: none; gap: 16px; }
 /* 幹・枝と重なっても読めるよう、ヒーロー文字にクリーム地のハロー（白箱を作らず、文字の行に沿ってクリームのクッションを敷く） */
@@ -445,6 +467,37 @@ section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 .tile-dark .btn.primary:hover { background: #fff; }
 .tile-dark .btn.ghost { border-color: rgba(250, 247, 242, 0.65); color: var(--kinari); }
 .tile-dark .btn.ghost:hover { background: rgba(250, 247, 242, 0.12); color: var(--kinari); }
+.app-tile .tile-media {
+  margin: 22px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.app-tile .tile-media-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--nibiiro);
+}
+.tile-dark .tile-media-label { color: rgba(250, 247, 242, 0.62); }
+.app-tile .media-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.app-tile .media-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  color: var(--sumimidori);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-soft);
+}
+.app-tile .media-chip svg { width: 20px; height: 20px; display: block; flex: 0 0 auto; }
+.app-tile .media-chip:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16); }
+.tile-dark .media-chip { background: rgba(250, 247, 242, 0.96); border-color: transparent; }
 .tile-white {
   background: #fff;
 }
@@ -548,7 +601,7 @@ section h2 {
 }
 .products .product {
   flex: 1 1 300px;
-  max-width: 360px;
+  max-width: 420px;
 }
 .works .grid.two {
   display: grid;
@@ -663,7 +716,8 @@ section h2 {
   flex-direction: column;
   gap: 16px;
   color: var(--shikkoku);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-soft);
 }
 /* Apple流: カードに影は足さない（ヘアライン境界＋微小リフトのみ） */
 .product:hover {
@@ -774,7 +828,7 @@ section h2 {
   font-size: 13px;
   letter-spacing: 0.1em;
   color: var(--kokemidori); /* Apple流: クリック可能の合図は単一アクセント（苔緑）に統一 */
-  transition: transform 0.2s ease;
+  transition: transform var(--dur) var(--ease-out);
 }
 .product:hover .open { transform: translateX(4px); }
 
@@ -819,7 +873,8 @@ section h2 {
   border-radius: 999px;
   background: var(--kinari);
   color: var(--sumimidori);
-  transition: transform 0.2s ease, background 0.2s ease;
+  will-change: transform;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-soft);
 }
 .contact .cta:hover {
   transform: translateY(-2px);
@@ -852,17 +907,36 @@ footer.site .inner {
   font-family: var(--serif-en);
   letter-spacing: 0.15em;
 }
+footer.site .foot-links {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(250, 247, 242, 0.1);
+}
+footer.site a {
+  color: rgba(250, 247, 242, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+footer.site a:hover { color: rgba(250, 247, 242, 1); }
 
 /* ====== Reveal ====== */
 .reveal {
   opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(28px);
+  will-change: opacity, transform;
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
 }
 .reveal.in {
   opacity: 1;
   transform: none;
 }
+/* 出現が終わったら合成レイヤーを解放（メモリ・再描画コストを残さない） */
+.reveal.in { will-change: auto; }
 /* スライドインの段階表示（grid内の2枚目以降を少し遅らせる） */
 .grid .product:nth-child(2) { transition-delay: 0.08s; }
 .grid .product:nth-child(3) { transition-delay: 0.16s; }
@@ -1002,7 +1076,7 @@ button:focus-visible {
         "email": "kichiyakoushou@gmail.com",
         "foundingDate": "2026",
         "description": "IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。",
-        "knowsAbout": ["建築", "資格学習", "語学学習", "投資", "Webサイト制作"]
+        "knowsAbout": ["建築", "資格学習", "語学学習", "Webサイト制作"]
       },
       {
         "@type": "WebSite",
@@ -1019,6 +1093,7 @@ button:focus-visible {
 <body>
 
   <a class="skip" href="#main" data-en="Skip to content">本文へスキップ</a>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
   <header class="site" id="top">
     <div class="container inner">
@@ -1118,10 +1193,23 @@ button:focus-visible {
       <div class="container reveal">
         <span class="kicker">Architect Exam Prep</span>
         <h2>建築資格工房</h2>
-        <p class="tile-tag" data-en="True/false drills for first- and second-class architect, takken and Class-2 electrician exams. Switch licenses, and focus-review only your mistakes.">一級・二級建築士・宅建・第二種電気工事士の〇×一問一答。<br class="pc-only">資格を切り替えて学び、誤答だけを重点復習。</p>
+        <p class="tile-tag" data-en="True/false drills for 9 architecture, housing and building-services licenses &mdash; from first-class architect to takken and interior coordinator. Switch licenses, and focus-review only your mistakes.">建築・住宅・設備系の9資格を、〇×一問一答で。<br class="pc-only">資格を切り替えて学び、誤答だけを重点復習。</p>
         <div class="tile-actions">
           <a class="btn primary" href="https://1architectexam.com" target="_blank" rel="noopener" data-en="Open the app" aria-label="建築資格工房を新規タブで開く">アプリを開く</a>
           <a class="btn ghost" href="#contact" data-en="Discuss a project">制作を相談する</a>
+        </div>
+        <div class="tile-media">
+          <span class="tile-media-label" data-en="Listen on the go">聞き流しで学ぶ</span>
+          <div class="media-chips">
+            <a class="media-chip" href="https://open.spotify.com/show/033yLbZxug2Sf60wOPPT8E" target="_blank" rel="noopener" aria-label="建築資格工房ラジオ（Spotify）を新規タブで開く">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0m5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.18-.84-.6 0-.18.18-.479.42-.479 4.56-1.021 8.52-.6 11.64 1.32.36.181.42.66.181 1.02m1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2m.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3"/></svg>
+              <span data-en="Listen on Spotify">Spotifyで聞く</span>
+            </a>
+            <a class="media-chip" href="https://www.youtube.com/channel/UCEGbTIj_DXuQT-ljORIyNIw" target="_blank" rel="noopener" aria-label="Yテック工房 YouTube チャンネルを新規タブで開く">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+              <span data-en="Watch on YouTube">YouTubeで見る</span>
+            </a>
+          </div>
         </div>
         <img class="tile-phone" src="assets/app-kenchiku-phone.png" alt="建築資格工房のホーム画面（スマートフォン表示）" loading="eager" width="1060" height="2140">
       </div>
@@ -1151,44 +1239,6 @@ button:focus-visible {
           <a class="btn ghost" href="#contact" data-en="Discuss app development">アプリ制作を相談する</a>
         </div>
         <div class="grid">
-
-          <a class="product reveal" href="https://ai-koubou.vercel.app" target="_blank" rel="noopener" aria-label="AI工房を新規タブで開く">
-            <img class="work-thumb" src="assets/app-ai.jpg?v=2" alt="AI工房のホーム画面" loading="lazy" width="860" height="538">
-            <div class="top">
-              <span class="mono logo" aria-hidden="true"><img src="assets/ai-koubou-mark.png" alt="" width="46" height="46" loading="lazy"></span>
-              <div class="head">
-                <h3 class="name">AI工房</h3>
-                <div class="domain">AI-KOUBOU.VERCEL.APP</div>
-              </div>
-              <span class="status live">Live</span>
-            </div>
-            <p data-en="Learn AI and blockchain from scratch. Three tabs &mdash; Use, Build, Blockchain &mdash; cover prompting, data sovereignty, and how to build your own AI agent (open model + fine-tuning + RAG), learned hands-on through true/false quizzes and prompt practice.">AI とブロックチェーンを一から学ぶアプリ。「使う・導入」「作る」「ブロックチェーン」の3タブで、プロンプトからデータ主権・自前AIエージェントの作り方（オープンモデル＋微調整＋RAG）まで、〇×クイズとプロンプト練習で手を動かしながら身につける。</p>
-            <div class="meta">
-              <span data-en="AI / Blockchain">AI・ブロックチェーン</span>
-              <span data-en="Learning">学習</span>
-              <span>Web</span>
-            </div>
-            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
-          </a>
-
-          <a class="product reveal" href="https://mlb-oshi.vercel.app" target="_blank" rel="noopener" aria-label="MLB推しを新規タブで開く">
-            <img class="work-thumb" src="assets/app-mlb.jpg?v=2" alt="MLB推しのホーム画面" loading="lazy" width="860" height="538">
-            <div class="top">
-              <span class="mono logo" aria-hidden="true"><img src="assets/mlb-oshi-mark.png?v=2" alt="" width="46" height="46" loading="lazy"></span>
-              <div class="head">
-                <h3 class="name">MLB推し</h3>
-                <div class="domain">MLB-OSHI.VERCEL.APP</div>
-              </div>
-              <span class="status live">Live</span>
-            </div>
-            <p data-en="A tracker for following your favorite players. Check batting stats, ability radar charts and home-run alerts all in one place.">推し選手の成績を追いかけるトラッカー。打撃スタッツや能力値レーダー、ホームラン速報をまとめて確認できる。</p>
-            <div class="meta">
-              <span data-en="Sports">スポーツ</span>
-              <span>Expo</span>
-              <span>Web</span>
-            </div>
-            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
-          </a>
 
           <a class="product reveal" href="https://africa-lingo.vercel.app" target="_blank" rel="noopener" aria-label="アフリカ語工房を新規タブで開く">
             <img class="work-thumb" src="assets/app-africa.png?v=4" alt="アフリカ語工房のホーム画面" loading="lazy" width="860" height="538">
@@ -1325,6 +1375,12 @@ button:focus-visible {
       <span>&copy; 2026 Y-TECH KOUBOU</span>
       <span data-en="IT &times; Architecture &times; Overseas">IT &times; 建築 &times; 海外</span>
       <span>Y-TECH-KOUBOU.COM</span>
+      <span class="foot-links">
+        <a href="https://play.google.com/store/apps/details?id=com.architectquiz.app" target="_blank" rel="noopener" data-en="Architect Exam (Google Play)">建築資格工房（Google Play）</a>
+        <a href="https://x.com/ytechkoubou" target="_blank" rel="noopener">X</a>
+        <a href="https://instagram.com/ytechkoubou" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://note.com/ytechkoubou" target="_blank" rel="noopener">note</a>
+      </span>
     </div>
   </footer>
 
@@ -1345,10 +1401,12 @@ button:focus-visible {
       if (reduce || !window.Lenis) return;
       var pels = document.querySelectorAll('[data-speed]');
       var header = document.querySelector('header.site');
+      // lerp（フレームレート非依存の慣性補間）で固定durationよりなめらかな追従に。
+      // 値が小さいほど“ぬるっと”長く滑る。0.085 は上品に効く中庸。
       var lenis = new Lenis({
-        duration: 1.1,
+        lerp: 0.085,
         smoothWheel: true,
-        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }
+        wheelMultiplier: 0.95
       });
       function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
       requestAnimationFrame(raf);
@@ -1391,8 +1449,6 @@ button:focus-visible {
       var PRODUCTS = [
         { name: '建築資格工房', url: 'https://1architectexam.com', icon: 'assets/kenchiku-mark.png' },
         { name: 'English工房', url: 'https://english-koubou.vercel.app', icon: 'assets/english-koubou-mark.svg' },
-        { name: 'MLB推し', url: 'https://mlb-oshi.vercel.app', icon: 'assets/mlb-oshi-mark.png?v=2' },
-        { name: 'AI工房', url: 'https://ai-koubou.vercel.app', icon: 'assets/ai-koubou-mark.png' },
         { name: 'アフリカ語工房', url: 'https://africa-lingo.vercel.app', icon: 'assets/africa-lingo-mark.png?v=3' }
       ];
       var ICONS = {};
@@ -2004,6 +2060,51 @@ button:focus-visible {
           if (e.key === 'Escape' && menu.classList.contains('open')) { openMenu(false); btn.focus(); }
         });
       }
+    })();
+
+    // スクロール進捗バー
+    (function () {
+      var bar = document.querySelector('.scroll-progress > span');
+      if (!bar) return;
+      var ticking = false;
+      function update() {
+        var d = document.documentElement;
+        var max = d.scrollHeight - d.clientHeight;
+        var p = max > 0 ? Math.min(1, Math.max(0, d.scrollTop / max)) : 0;
+        bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+        ticking = false;
+      }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+    })();
+
+    // ナビ スクロール連動アクティブ表示
+    (function () {
+      var ids = ['about','apps','works','service','contact'];
+      var map = {};
+      ids.forEach(function (id) {
+        var a = document.querySelector('header.site nav a[href="#' + id + '"]');
+        var sec = document.getElementById(id);
+        if (a && sec) map[id] = { a: a, sec: sec };
+      });
+      var keys = Object.keys(map);
+      if (!keys.length || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var id = en.target.id;
+          if (!map[id]) return;
+          map[id].visible = en.isIntersecting && en.intersectionRatio > 0;
+        });
+        // 一番上に来ている可視セクションをactiveに
+        var current = null;
+        keys.forEach(function (id) {
+          if (map[id].visible) { if (!current) current = id; }
+        });
+        keys.forEach(function (id) { map[id].a.classList.toggle('active', id === current); });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      keys.forEach(function (id) { io.observe(map[id].sec); });
     })();
   </script>
 
