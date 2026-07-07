@@ -231,7 +231,7 @@ a { color: var(--kokemidori); text-decoration: none; }
       { key: 'english', name: 'English工房', sub: 'IELTS / TOEFL / TOEIC',
         url: 'https://english-koubou.vercel.app', external: true,
         pos: [14.5, 0, 4.5], size: { w: 4.8, d: 4.2, h: 2.8, roofH: 2.1 },
-        wall: 0xEFE6D8, roof: 0x9E3522 },
+        wall: 0xEFE6D8, roof: 0x9E3522, gable: 'side' },
       { key: 'africa', name: 'アフリカ語工房', sub: 'African Languages',
         url: 'https://africa-lingo.vercel.app', external: true,
         pos: [14, 0, -9], size: { w: 4.4, d: 3.8, h: 2.7, roofH: 2.0 },
@@ -239,11 +239,11 @@ a { color: var(--kokemidori); text-decoration: none; }
       { key: 'yoshino', name: '吉野工務店', sub: 'Web 制作例',
         url: 'https://yoshino-koumuten.com', external: true,
         pos: [-18, 0, -5], size: { w: 4.6, d: 4.0, h: 2.8, roofH: 2.0 },
-        wall: 0xF4EFE7, roof: 0x2A2D30 },
+        wall: 0xF4EFE7, roof: 0x41464D, gable: 'side' },
       { key: 'hugtime', name: 'Hugtime salon', sub: 'Web 制作例',
         url: 'https://hugtime-salon.com', external: true,
         pos: [-15.5, 0, -10.5], size: { w: 4.2, d: 3.6, h: 2.6, roofH: 1.9 },
-        wall: 0xEFE6D8, roof: 0x2A2D30, lift: 1.5 },  /* 隣の吉野工務店とラベルが同じ高さ帯で重なるため1段上げる */
+        wall: 0xEFE6D8, roof: 0x41464D, lift: 1.5 },  /* 隣の吉野工務店とラベルが同じ高さ帯で重なるため1段上げる */
       { key: 'contact', name: '相談の窓口', sub: 'Contact',
         url: './#contact', external: false,
         pos: [7.5, 0, -15.5], size: { w: 3.2, d: 2.8, h: 2.3, roofH: 1.7 },
@@ -291,10 +291,28 @@ a { color: var(--kokemidori); text-decoration: none; }
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;   /* ベタ塗り感を消す要・光のレンジを写真寄りに */
+    renderer.toneMappingExposure = 1.02;
 
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xF7F5F2);          /* Limestone */
-    scene.fog = new THREE.Fog(0xF7F5F2, 46, 95);
+    scene.background = new THREE.Color(0xF0EBE1);
+    scene.fog = new THREE.Fog(0xEFE9DC, 52, 120);
+
+    /* 空: 頂点カラーのドーム（上=淡い青灰 → 地平=温かい生成り） */
+    (function () {
+      var geo = new THREE.SphereGeometry(130, 24, 16);
+      var pos = geo.attributes.position;
+      var cols = new Float32Array(pos.count * 3);
+      var top = new THREE.Color(0xA3C4DA), hor = new THREE.Color(0xF3EDDE), c = new THREE.Color();
+      for (var i = 0; i < pos.count; i++) {
+        var t = Math.max(0, Math.min(1, pos.getY(i) / 130));
+        c.copy(hor).lerp(top, Math.pow(t, 0.62));
+        cols[i * 3] = c.r; cols[i * 3 + 1] = c.g; cols[i * 3 + 2] = c.b;
+      }
+      geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+      var sky = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide, fog: false }));
+      scene.add(sky);
+    })();
 
     var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
     /* 縦画面は同じ画角だと木しか入らないため、アスペクトに応じて引きを強め、注視点も少し上げる */
@@ -322,116 +340,324 @@ a { color: var(--kokemidori); text-decoration: none; }
     controls.autoRotate = !reduce;
     controls.autoRotateSpeed = 0.45;
 
-    // ====== 光（昼のやわらかい庭） ======
-    scene.add(new THREE.HemisphereLight(0xFFFFFF, 0xD8D2C6, 0.85));
-    var sun = new THREE.DirectionalLight(0xFFF3E2, 0.95);
-    sun.position.set(20, 30, 14);
+    // ====== 光（午後のやわらかい庭・影をはっきり落とす） ======
+    scene.add(new THREE.HemisphereLight(0xDDE9F0, 0xB0A890, 0.4));
+    var sun = new THREE.DirectionalLight(0xFFEFD8, 1.12);
+    sun.position.set(24, 32, 10);
     sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048);
     sun.shadow.camera.left = -34; sun.shadow.camera.right = 34;
     sun.shadow.camera.top = 34; sun.shadow.camera.bottom = -34;
-    sun.shadow.camera.far = 90;
-    sun.shadow.bias = -0.0008;
+    sun.shadow.camera.far = 100;
+    sun.shadow.bias = -0.0006;
+    sun.shadow.radius = 3;
     scene.add(sun);
+    /* 逆側からごく弱いフィル光（影面が潰れて黒くならないように） */
+    var fill = new THREE.DirectionalLight(0xCBD8E2, 0.22);
+    fill.position.set(-18, 14, -20);
+    scene.add(fill);
 
-    // ====== 素材ヘルパ ======
+    // ====== 素材ヘルパ（プロシージャルテクスチャ: 漆喰/芝/石/木のむら） ======
+    function noiseTexture(baseHex, opt) {
+      opt = opt || {};
+      var size = 256;
+      var cv = document.createElement('canvas'); cv.width = cv.height = size;
+      var cx = cv.getContext('2d');
+      var base = new THREE.Color(baseHex);
+      cx.fillStyle = '#' + base.getHexString();
+      cx.fillRect(0, 0, size, size);
+      var grains = opt.grains || 2600;
+      for (var i = 0; i < grains; i++) {
+        var v = (Math.random() - 0.5) * (opt.contrast || 0.10);
+        var c2 = base.clone().offsetHSL(0, opt.hueJitter || 0, v);
+        cx.fillStyle = '#' + c2.getHexString();
+        cx.globalAlpha = 0.30 + Math.random() * 0.35;
+        var s = opt.grainSize || 2;
+        cx.fillRect(Math.random() * size, Math.random() * size, s + Math.random() * s, s + Math.random() * s);
+      }
+      /* 横方向の淡い筋（漆喰のコテむら/芝の流れ） */
+      if (opt.streaks) {
+        for (var j = 0; j < opt.streaks; j++) {
+          var vy = Math.random() * size;
+          var c3 = base.clone().offsetHSL(0, 0, (Math.random() - 0.5) * 0.06);
+          cx.fillStyle = '#' + c3.getHexString();
+          cx.globalAlpha = 0.16;
+          cx.fillRect(0, vy, size, 1 + Math.random() * 2);
+        }
+      }
+      cx.globalAlpha = 1;
+      var tex = new THREE.CanvasTexture(cv);
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+      tex.encoding = THREE.sRGBEncoding;
+      if (opt.repeat) tex.repeat.set(opt.repeat[0], opt.repeat[1]);
+      return tex;
+    }
     function mat(color, rough) {
       return new THREE.MeshStandardMaterial({ color: color, roughness: rough == null ? 0.92 : rough, metalness: 0 });
     }
-    var woodMat = mat(0x4A3A2C, 0.9);
-    var trunkMat = mat(0x6E4B33, 0.95);
-    var doorMat = mat(0x3C3F42, 0.85);
-    var windowMat = new THREE.MeshStandardMaterial({ color: 0xFBF9F4, roughness: 0.4, emissive: 0xC9BFA8, emissiveIntensity: 0.35 });
+    /* テクスチャは色ごとにキャッシュ・マテリアルは棟ごとに新規（ホバー発光が他棟に波及しないように） */
+    var texCache = {};
+    function cachedTex(kind, colorHex, opt) {
+      var k = kind + colorHex;
+      if (!texCache[k]) texCache[k] = noiseTexture(colorHex, opt);
+      return texCache[k];
+    }
+    function plasterMat(colorHex) {
+      return new THREE.MeshStandardMaterial({
+        map: cachedTex('p', colorHex, { contrast: 0.07, grains: 3200, streaks: 26, repeat: [1.6, 1.0] }),
+        roughness: 0.95, metalness: 0
+      });
+    }
+    function roofMat(colorHex) {
+      return new THREE.MeshStandardMaterial({
+        map: cachedTex('r', colorHex, { contrast: 0.12, grains: 2200, streaks: 60, repeat: [2.0, 1.2] }),
+        roughness: 0.88, metalness: 0, flatShading: true
+      });
+    }
+    var woodMat = new THREE.MeshStandardMaterial({
+      map: noiseTexture(0x54402E, { contrast: 0.14, grains: 1600, streaks: 90, repeat: [1, 1] }),
+      roughness: 0.9, metalness: 0
+    });
+    var trunkMat = new THREE.MeshStandardMaterial({
+      map: noiseTexture(0x6A4832, { contrast: 0.16, grains: 2000, streaks: 110, repeat: [2, 2] }),
+      roughness: 0.95, metalness: 0
+    });
+    var doorMat = new THREE.MeshStandardMaterial({
+      map: noiseTexture(0x3E4145, { contrast: 0.08, grains: 1200, streaks: 60, repeat: [1, 1] }),
+      roughness: 0.82, metalness: 0
+    });
+    var windowMat = new THREE.MeshStandardMaterial({ color: 0xFDF6E3, roughness: 0.35, emissive: 0xE8CE9E, emissiveIntensity: 0.5 });
+    var frameMat = mat(0xEFEAE0, 0.85);
+    var stoneMat = new THREE.MeshStandardMaterial({
+      map: noiseTexture(0xD9D2C2, { contrast: 0.10, grains: 2600, repeat: [1, 1] }),
+      roughness: 0.98, metalness: 0, flatShading: true
+    });
+    var plinthMat = new THREE.MeshStandardMaterial({
+      map: noiseTexture(0xCEC5B2, { contrast: 0.12, grains: 2400, repeat: [2, 0.5] }),
+      roughness: 0.98, metalness: 0
+    });
 
-    // ====== 地面・広場・小道 ======
-    var ground = new THREE.Mesh(new THREE.CircleGeometry(36, 64), mat(0xEDE8DF, 0.98));
+    // ====== 地面（芝）・広場・飛び石の小道 ======
+    var GRASS = 0x9DB183;   /* 落ち着いたセージの芝（庭の実在感の要） */
+    var ground = new THREE.Mesh(new THREE.CircleGeometry(70, 72), new THREE.MeshStandardMaterial({
+      map: noiseTexture(GRASS, { contrast: 0.10, grains: 3600, streaks: 40, repeat: [26, 26] }),
+      roughness: 1.0, metalness: 0
+    }));
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     scene.add(ground);
 
-    var plaza = new THREE.Mesh(new THREE.CircleGeometry(6.2, 48), mat(0xE4DED1, 0.98));
+    /* 木の根元の広場: 土色の円 + 縁石 */
+    var plaza = new THREE.Mesh(new THREE.CircleGeometry(5.6, 48), new THREE.MeshStandardMaterial({
+      map: noiseTexture(0xCBB99B, { contrast: 0.12, grains: 3000, repeat: [5, 5] }),
+      roughness: 1.0, metalness: 0
+    }));
     plaza.rotation.x = -Math.PI / 2;
-    plaza.position.y = 0.012;
+    plaza.position.y = 0.015;
     plaza.receiveShadow = true;
     scene.add(plaza);
+    for (var ei = 0; ei < 26; ei++) {
+      var ea = (ei / 26) * Math.PI * 2;
+      var edge = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.14, 0.3), stoneMat);
+      edge.position.set(Math.cos(ea) * 5.75, 0.07, Math.sin(ea) * 5.75);
+      edge.rotation.y = -ea + Math.PI / 2 + (Math.random() - 0.5) * 0.2;
+      edge.castShadow = edge.receiveShadow = true;
+      scene.add(edge);
+    }
 
+    /* 小道: 直線プレーンをやめて飛び石に */
     function addPath(to) {
       var v = new THREE.Vector3(to[0], 0, to[2]);
-      var len = v.length() - 3.4;
-      var geo = new THREE.PlaneGeometry(1.5, len);
-      var m = new THREE.Mesh(geo, mat(0xE0D8C9, 0.98));
-      m.rotation.x = -Math.PI / 2;
-      var mid = v.clone().multiplyScalar(0.5 + (3.4 * 0.5) / v.length());
-      m.position.set(mid.x, 0.008, mid.z);
-      m.rotation.z = Math.atan2(v.x, v.z);
-      m.receiveShadow = true;
-      scene.add(m);
+      var len = v.length();
+      var dir = v.clone().normalize();
+      var side = new THREE.Vector3(-dir.z, 0, dir.x);
+      for (var d0 = 6.4; d0 < len - 2.6; d0 += 1.15) {
+        var p = dir.clone().multiplyScalar(d0 + (Math.random() - 0.5) * 0.18)
+          .add(side.clone().multiplyScalar((Math.random() - 0.5) * 0.5));
+        var st = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.5, 0.09, 7), stoneMat);
+        st.scale.x = 0.8 + Math.random() * 0.45;
+        st.scale.z = 0.62 + Math.random() * 0.3;
+        st.position.set(p.x, 0.045, p.z);
+        st.rotation.y = Math.random() * Math.PI;
+        st.castShadow = st.receiveShadow = true;
+        scene.add(st);
+      }
     }
     SPOTS.forEach(function (s) { addPath(s.pos); });
 
     // ====== 中央の木（ヒーローの緑の木と同族＝シグネチャ） ======
+    /* 頂点を不規則に散らした樹冠＋フラットシェーディングで「風に膨らんだ葉の塊」に */
+    function leafGeo(r, jit) {
+      var g = new THREE.IcosahedronGeometry(r, 1);
+      var p = g.attributes.position;
+      for (var i = 0; i < p.count; i++) {
+        p.setXYZ(i,
+          p.getX(i) * (1 + (Math.random() - 0.5) * jit),
+          p.getY(i) * (0.82 + (Math.random() - 0.5) * jit),   /* 縦に少し潰す＝樹冠らしく */
+          p.getZ(i) * (1 + (Math.random() - 0.5) * jit));
+      }
+      g.computeVertexNormals();
+      return g;
+    }
+    function leafMat(c) {
+      return new THREE.MeshStandardMaterial({ color: c, roughness: 0.95, metalness: 0, flatShading: true });
+    }
     var tree = new THREE.Group();
-    var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.85, 5.4, 8), trunkMat);
-    trunk.position.y = 2.7; trunk.castShadow = true;
+    var trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 1.05, 5.6, 9), trunkMat);
+    trunk.position.y = 2.8; trunk.rotation.y = 0.4;
+    trunk.castShadow = true;
     tree.add(trunk);
+    /* 根張り: 幹の足元に小さな瘤 */
+    for (var ri = 0; ri < 5; ri++) {
+      var ra = (ri / 5) * Math.PI * 2 + 0.3;
+      var root = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.34, 0.9, 6), trunkMat);
+      root.position.set(Math.cos(ra) * 0.75, 0.32, Math.sin(ra) * 0.75);
+      root.rotation.z = Math.cos(ra) * 0.55;
+      root.rotation.x = -Math.sin(ra) * 0.55;
+      root.castShadow = true;
+      tree.add(root);
+    }
+    /* 大枝2本 */
+    var br1 = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.30, 2.6, 7), trunkMat);
+    br1.position.set(1.0, 5.3, 0.4); br1.rotation.z = -0.7; br1.castShadow = true;
+    tree.add(br1);
+    var br2 = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.26, 2.2, 7), trunkMat);
+    br2.position.set(-0.9, 5.6, -0.5); br2.rotation.z = 0.75; br2.rotation.x = 0.3; br2.castShadow = true;
+    tree.add(br2);
     var CANOPY = [
-      { c: 0x2F6B3F, r: 2.9, p: [0, 7.2, 0] },
-      { c: 0x3E7C4C, r: 2.2, p: [1.9, 6.3, 0.6] },
-      { c: 0x57945F, r: 2.0, p: [-1.8, 6.2, -0.7] },
-      { c: 0x4E8A56, r: 1.7, p: [0.4, 6.0, 1.8] },
-      { c: 0x6FA86F, r: 1.4, p: [-0.7, 8.6, 0.9] }
+      { c: 0x2E5F3B, r: 3.0, p: [0, 7.6, 0] },
+      { c: 0x3C6F47, r: 2.3, p: [2.2, 6.6, 0.7] },
+      { c: 0x4B7F52, r: 2.1, p: [-2.1, 6.5, -0.8] },
+      { c: 0x426F41, r: 1.8, p: [0.5, 6.3, 2.0] },
+      { c: 0x578B57, r: 1.6, p: [-0.9, 9.0, 1.0] },
+      { c: 0x35663D, r: 1.7, p: [-0.2, 6.4, -2.1] }
     ];
     var canopy = [];
     CANOPY.forEach(function (l) {
-      var s = new THREE.Mesh(new THREE.IcosahedronGeometry(l.r, 1), mat(l.c, 0.95));
+      var s = new THREE.Mesh(leafGeo(l.r, 0.28), leafMat(l.c));
       s.position.set(l.p[0], l.p[1], l.p[2]);
+      s.rotation.set(Math.random(), Math.random() * 3, Math.random());
       s.castShadow = true;
       canopy.push(s); tree.add(s);
     });
     scene.add(tree);
 
-    // ====== 建物ファクトリ ======
+    // ====== 建物ファクトリ（切妻屋根・軒の出・基礎・窓枠で「建築」に寄せる） ======
     var pickables = [];
+    /* 切妻プリズム: 底辺span×高さroofH の三角形を length ぶん押し出す（ridge=押し出し軸） */
+    function gablePrism(span, roofH, length, material) {
+      var sh = new THREE.Shape();
+      sh.moveTo(-span / 2, 0); sh.lineTo(span / 2, 0); sh.lineTo(0, roofH); sh.closePath();
+      var geo = new THREE.ExtrudeGeometry(sh, { depth: length, bevelEnabled: false });
+      geo.translate(0, 0, -length / 2);
+      var m = new THREE.Mesh(geo, material);
+      m.castShadow = m.receiveShadow = true;
+      return m;
+    }
     function buildSpot(spot, index) {
       var g = new THREE.Group();
       var sz = spot.size;
-      var wall = mat(spot.wall, 0.92);
-      var roof = mat(spot.roof, 0.85);
+      var wall = plasterMat(spot.wall);
+      var roof = roofMat(spot.roof);
+      var OV = 0.42;   /* 軒の出 */
+
+      /* 基礎（ひとまわり大きい低い石場） */
+      var plinth = new THREE.Mesh(new THREE.BoxGeometry(sz.w + 0.3, 0.3, sz.d + 0.3), plinthMat);
+      plinth.position.y = 0.15;
+      plinth.castShadow = plinth.receiveShadow = true;
+      g.add(plinth);
 
       var body = new THREE.Mesh(new THREE.BoxGeometry(sz.w, sz.h, sz.d), wall);
-      body.position.y = sz.h / 2;
+      body.position.y = 0.3 + sz.h / 2;
       body.castShadow = body.receiveShadow = true;
       g.add(body);
 
-      var cap = new THREE.Mesh(new THREE.ConeGeometry(Math.max(sz.w, sz.d) * 0.78, sz.roofH, 4), roof);
-      cap.position.y = sz.h + sz.roofH / 2 - 0.02;
-      cap.rotation.y = Math.PI / 4;
-      cap.castShadow = true;
-      g.add(cap);
+      /* 屋根: 正面切妻(ridgeが正面向き=妻面が入口側)と平入り(ridgeが横)を混在させて街並みに */
+      var roofGrp = new THREE.Group();
+      var cap;
+      if (spot.gable === 'side') {
+        cap = gablePrism(sz.d + OV * 2, sz.roofH, sz.w + OV * 2, roof);
+        cap.rotation.y = Math.PI / 2;
+      } else {
+        cap = gablePrism(sz.w + OV * 2, sz.roofH, sz.d + OV * 2, roof);
+      }
+      roofGrp.add(cap);
+      /* 妻壁（三角の漆喰面）: プリズム両端に薄い三角を貼る */
+      var ridgeAxisLen = (spot.gable === 'side') ? (sz.w) : (sz.d);
+      var triSpan = (spot.gable === 'side') ? (sz.d) : (sz.w);
+      var triSh = new THREE.Shape();
+      triSh.moveTo(-triSpan / 2, 0); triSh.lineTo(triSpan / 2, 0); triSh.lineTo(0, sz.roofH - 0.06);
+      triSh.closePath();
+      [-1, 1].forEach(function (end) {
+        var tw = new THREE.Mesh(new THREE.ExtrudeGeometry(triSh, { depth: 0.06, bevelEnabled: false }), wall);
+        tw.position.z = end * (ridgeAxisLen / 2 - 0.03) - 0.03;
+        if (spot.gable === 'side') { tw.rotation.y = Math.PI / 2; tw.position.z = 0; tw.position.x = end * (sz.w / 2 - 0.03) - 0.03; }
+        tw.castShadow = true;
+        roofGrp.add(tw);
+      });
+      /* 棟木カバー */
+      var ridge = new THREE.Mesh(
+        new THREE.BoxGeometry((spot.gable === 'side') ? 0.24 : 0.24, 0.14,
+          (spot.gable === 'side') ? sz.w + OV * 2 + 0.05 : sz.d + OV * 2 + 0.05), roof);
+      if (spot.gable === 'side') { ridge.rotation.y = Math.PI / 2; }
+      ridge.position.y = sz.roofH + 0.02;
+      ridge.castShadow = true;
+      roofGrp.add(ridge);
+      roofGrp.position.y = 0.3 + sz.h - 0.02;
+      g.add(roofGrp);
 
-      var door = new THREE.Mesh(new THREE.BoxGeometry(sz.w * 0.2, sz.h * 0.52, 0.12), doorMat);
-      door.position.set(0, sz.h * 0.26, sz.d / 2 + 0.05);
+      /* 入口: 枠+扉+踏み石+取っ手 */
+      var doorW = Math.min(1.05, sz.w * 0.24), doorH = Math.min(1.9, sz.h * 0.62);
+      var dframe = new THREE.Mesh(new THREE.BoxGeometry(doorW + 0.18, doorH + 0.12, 0.1), frameMat);
+      dframe.position.set(0, 0.3 + doorH / 2, sz.d / 2 + 0.03);
+      g.add(dframe);
+      var door = new THREE.Mesh(new THREE.BoxGeometry(doorW, doorH, 0.08), doorMat);
+      door.position.set(0, 0.3 + doorH / 2, sz.d / 2 + 0.08);
       g.add(door);
+      var knob = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), mat(0xC9B78A, 0.4));
+      knob.position.set(doorW * 0.3, 0.3 + doorH * 0.48, sz.d / 2 + 0.13);
+      g.add(knob);
+      var step = new THREE.Mesh(new THREE.BoxGeometry(doorW + 0.5, 0.12, 0.7), stoneMat);
+      step.position.set(0, 0.06, sz.d / 2 + 0.42);
+      step.castShadow = step.receiveShadow = true;
+      g.add(step);
 
-      [-1, 1].forEach(function (side) {
-        var win = new THREE.Mesh(new THREE.BoxGeometry(sz.w * 0.16, sz.h * 0.2, 0.1), windowMat);
-        win.position.set(side * sz.w * 0.26, sz.h * 0.58, sz.d / 2 + 0.05);
-        g.add(win);
+      /* 窓: 枠(奥) + ガラス(手前inset) + 窓台。背面(通りから見える側)にも同じ窓を付けて無地壁を消す */
+      [1, -1].forEach(function (face) {
+        [-1, 1].forEach(function (side) {
+          var wz = face * (sz.d / 2);
+          var wf = new THREE.Mesh(new THREE.BoxGeometry(sz.w * 0.2, sz.h * 0.26, 0.08), frameMat);
+          wf.position.set(side * sz.w * 0.28, 0.3 + sz.h * 0.60, wz + face * 0.03);
+          g.add(wf);
+          var win = new THREE.Mesh(new THREE.BoxGeometry(sz.w * 0.15, sz.h * 0.2, 0.06), windowMat);
+          win.position.set(side * sz.w * 0.28, 0.3 + sz.h * 0.60, wz + face * 0.06);
+          g.add(win);
+          var sill = new THREE.Mesh(new THREE.BoxGeometry(sz.w * 0.22, 0.07, 0.16), frameMat);
+          sill.position.set(side * sz.w * 0.28, 0.3 + sz.h * 0.60 - sz.h * 0.13 - 0.05, wz + face * 0.1);
+          sill.castShadow = true;
+          g.add(sill);
+        });
       });
 
       if (spot.main) {
-        var chim = new THREE.Mesh(new THREE.BoxGeometry(0.55, 1.6, 0.55), mat(0xB9AFA2, 0.95));
-        chim.position.set(sz.w * 0.28, sz.h + sz.roofH * 0.7, -sz.d * 0.18);
+        var chim = new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.9, 0.6), plinthMat);
+        chim.position.set(sz.w * 0.26, 0.3 + sz.h + sz.roofH * 0.55, -sz.d * 0.16);
         chim.castShadow = true;
         g.add(chim);
+        var chimCap = new THREE.Mesh(new THREE.BoxGeometry(0.74, 0.12, 0.74), stoneMat);
+        chimCap.position.set(sz.w * 0.26, 0.3 + sz.h + sz.roofH * 0.55 + 1.0, -sz.d * 0.16);
+        g.add(chimCap);
       }
 
       /* 看板（板のみ。文字は HTML ラベルが担う） */
-      var post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1.1, 6), woodMat);
-      post.position.set(sz.w * 0.42, 0.55, sz.d / 2 + 0.9);
+      var post = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.07, 1.1, 6), woodMat);
+      post.position.set(sz.w * 0.44, 0.55, sz.d / 2 + 0.95);
+      post.castShadow = true;
       g.add(post);
-      var board = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.5, 0.08), woodMat);
-      board.position.set(sz.w * 0.42, 1.15, sz.d / 2 + 0.9);
+      var board = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.5, 0.07), woodMat);
+      board.position.set(sz.w * 0.44, 1.12, sz.d / 2 + 0.95);
+      board.rotation.y = -0.12;
+      board.castShadow = true;
       g.add(board);
 
       g.position.set(spot.pos[0], 0, spot.pos[2]);
@@ -440,49 +666,99 @@ a { color: var(--kokemidori); text-decoration: none; }
 
       spot.group = g;
       spot.mats = [wall, roof];
-      spot.anchor = new THREE.Vector3(spot.pos[0], sz.h + sz.roofH + 0.9 + (spot.lift || 0), spot.pos[2]);
+      spot.anchor = new THREE.Vector3(spot.pos[0], sz.h + sz.roofH + 1.2 + (spot.lift || 0), spot.pos[2]);
       g.traverse(function (o) { if (o.isMesh) { o.userData.spot = index; pickables.push(o); } });
     }
     SPOTS.forEach(buildSpot);
 
     // ====== 苗床（次の道具を育てている場所・リンクなし） ======
     var nursery = new THREE.Group();
-    var bed = new THREE.Mesh(new THREE.BoxGeometry(3.4, 0.3, 1.7), mat(0x8A6E52, 0.98));
-    bed.position.y = 0.15; bed.receiveShadow = true;
-    nursery.add(bed);
+    var bedSoil = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.26, 1.5), new THREE.MeshStandardMaterial({
+      map: cachedTex('soil', 0x6E5844, { contrast: 0.14, grains: 2600, repeat: [3, 1.5] }), roughness: 1.0, metalness: 0
+    }));
+    bedSoil.position.y = 0.2; bedSoil.receiveShadow = true;
+    nursery.add(bedSoil);
+    /* 木枠 */
+    [[0, 0.9, 3.6, 0.16], [0, -0.9, 3.6, 0.16]].forEach(function (r) {
+      var rail = new THREE.Mesh(new THREE.BoxGeometry(r[2], 0.3, r[3]), woodMat);
+      rail.position.set(r[0], 0.19, r[1]); rail.castShadow = true;
+      nursery.add(rail);
+    });
+    [[-1.72, 0], [1.72, 0]].forEach(function (r) {
+      var rail = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.3, 1.96), woodMat);
+      rail.position.set(r[0], 0.19, r[1]); rail.castShadow = true;
+      nursery.add(rail);
+    });
+    /* 苗: 短い茎＋小さな葉塊 */
     [-1, 0, 1].forEach(function (i) {
-      var sprout = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.55 + 0.14 * (i + 1), 6), mat(0x6FA86F, 0.95));
-      sprout.position.set(i * 1.0, 0.55, 0);
-      sprout.castShadow = true;
-      nursery.add(sprout);
+      var stem = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.04, 0.4, 5), trunkMat);
+      stem.position.set(i * 1.0, 0.5, (i % 2) * 0.2);
+      nursery.add(stem);
+      var leaf = new THREE.Mesh(leafGeo(0.24 + 0.07 * (i + 1), 0.5), leafMat(0x578B57));
+      leaf.position.set(i * 1.0, 0.74 + 0.05 * (i + 1), (i % 2) * 0.2);
+      leaf.castShadow = true;
+      nursery.add(leaf);
     });
     nursery.position.set(-8, 0, 12);
     scene.add(nursery);
     var NURSERY_ANCHOR = new THREE.Vector3(-8, 1.7, 12);
 
-    // ====== 添景（低木・岩） ======
+    // ====== 添景（雑木・岩・草むら・花） ======
+    function smallTree(scale, hueTop) {
+      var g = new THREE.Group();
+      var t = new THREE.Mesh(new THREE.CylinderGeometry(0.08 * scale, 0.18 * scale, 1.3 * scale, 6), trunkMat);
+      t.position.y = 0.65 * scale; t.castShadow = true;
+      g.add(t);
+      var top = new THREE.Mesh(leafGeo(0.85 * scale, 0.5), leafMat(hueTop));
+      top.position.y = 1.7 * scale;
+      top.castShadow = true;
+      g.add(top);
+      var top2 = new THREE.Mesh(leafGeo(0.55 * scale, 0.5), leafMat(0x4B7F52));
+      top2.position.set(0.45 * scale, 2.1 * scale, 0.2 * scale);
+      top2.castShadow = true;
+      g.add(top2);
+      return g;
+    }
     function scatter() {
       var i, a, r;
-      for (i = 0; i < 9; i++) {
-        a = (i / 9) * Math.PI * 2 + 0.8;  /* 既定カメラの正面(azimuth≒32°)に木を置かない位相 */
-        r = 24 + (i % 3) * 3.4;
-        var bush = new THREE.Group();
-        var t = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.16, 0.9, 6), trunkMat);
-        t.position.y = 0.45;
-        var top = new THREE.Mesh(new THREE.ConeGeometry(0.85 + (i % 3) * 0.25, 2.0 + (i % 4) * 0.5, 7), mat(i % 2 ? 0x3E7C4C : 0x57945F, 0.95));
-        top.position.y = 1.9; top.castShadow = true;
-        bush.add(t, top);
-        bush.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
-        scene.add(bush);
+      var greens = [0x2E5F3B, 0x3C6F47, 0x426F41];
+      for (i = 0; i < 10; i++) {
+        a = (i / 10) * Math.PI * 2 + 0.8;  /* 既定カメラの正面(azimuth≒32°)に木を置かない位相 */
+        r = 24 + (i % 3) * 3.6;
+        var tr = smallTree(0.9 + (i % 3) * 0.45, greens[i % 3]);
+        tr.rotation.y = i * 1.3;
+        tr.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
+        scene.add(tr);
       }
-      for (i = 0; i < 6; i++) {
-        a = (i / 6) * Math.PI * 2 + 1.2;
-        r = 20 + (i % 2) * 6;
-        var rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.5 + (i % 3) * 0.3, 0), mat(0xC8C0B2, 0.98));
-        rock.position.set(Math.cos(a) * r, 0.3, Math.sin(a) * r);
+      for (i = 0; i < 7; i++) {
+        a = (i / 7) * Math.PI * 2 + 1.25;
+        r = 19 + (i % 2) * 7;
+        var rg = new THREE.DodecahedronGeometry(0.45 + (i % 3) * 0.3, 0);
+        var rock = new THREE.Mesh(rg, stoneMat);
+        rock.position.set(Math.cos(a) * r, 0.26, Math.sin(a) * r);
         rock.rotation.set(i, i * 0.7, 0);
-        rock.castShadow = true;
+        rock.scale.y = 0.7;
+        rock.castShadow = rock.receiveShadow = true;
         scene.add(rock);
+      }
+      /* 草むら: 小さな葉群を面で散らす（芝テクスチャに立体の粗を足す） */
+      var tuftMat1 = leafMat(0x6F8A58), tuftMat2 = leafMat(0x7C9765);
+      for (i = 0; i < 90; i++) {
+        a = Math.random() * Math.PI * 2;
+        r = 6.8 + Math.random() * 24;
+        var tuft = new THREE.Mesh(new THREE.ConeGeometry(0.1 + Math.random() * 0.1, 0.28 + Math.random() * 0.3, 5), (i % 2) ? tuftMat1 : tuftMat2);
+        tuft.position.set(Math.cos(a) * r, 0.12, Math.sin(a) * r);
+        tuft.rotation.set((Math.random() - 0.5) * 0.3, Math.random() * 3, (Math.random() - 0.5) * 0.3);
+        scene.add(tuft);
+      }
+      /* 花: 白と土器色の点花を株で */
+      var flw1 = mat(0xF3EFE4, 0.7), flw2 = mat(0xC2674B, 0.7);
+      for (i = 0; i < 46; i++) {
+        a = Math.random() * Math.PI * 2;
+        r = 6.6 + Math.random() * 20;
+        var f = new THREE.Mesh(new THREE.SphereGeometry(0.06 + Math.random() * 0.05, 6, 5), (i % 3) ? flw1 : flw2);
+        f.position.set(Math.cos(a) * r, 0.1, Math.sin(a) * r);
+        scene.add(f);
       }
     }
     scatter();
