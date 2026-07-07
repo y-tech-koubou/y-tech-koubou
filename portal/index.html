@@ -53,7 +53,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; /* 固定ヘッダー分（旧Lenisのoffset:-80と同値） */ }
 
 body {
   margin: 0;
@@ -945,13 +945,8 @@ footer.site a:hover { color: rgba(250, 247, 242, 1); }
 .pillars .field:nth-child(2) { transition-delay: 0.1s; }
 .pillars .field:nth-child(3) { transition-delay: 0.2s; }
 
-/* ヒーロー視差（Lenis スクロール連動・JSが transform を設定） */
+/* ヒーロー視差（スクロール連動・JSが transform を設定） */
 .hero-parallax { display: block; will-change: transform; }
-
-/* Lenis スムーススクロール */
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
@@ -1111,6 +1106,7 @@ button:focus-visible {
             <li><a href="#about">ABOUT</a></li>
             <li><a href="#apps">APPS</a></li>
             <li><a href="#works">WORKS</a></li>
+            <li><a href="koubou.html">GARDEN</a></li>
             <li><a href="#service">SERVICE</a></li>
             <li><a href="#contact">CONTACT</a></li>
           </ul>
@@ -1376,6 +1372,7 @@ button:focus-visible {
       <span data-en="IT &times; Architecture &times; Overseas">IT &times; 建築 &times; 海外</span>
       <span>Y-TECH-KOUBOU.COM</span>
       <span class="foot-links">
+        <a href="koubou.html" data-en="Koubou Garden (3D)">工房の庭（3D）</a>
         <a href="https://play.google.com/store/apps/details?id=com.architectquiz.app" target="_blank" rel="noopener" data-en="Architect Exam (Google Play)">建築資格工房（Google Play）</a>
         <a href="https://x.com/ytechkoubou" target="_blank" rel="noopener">X</a>
         <a href="https://instagram.com/ytechkoubou" target="_blank" rel="noopener">Instagram</a>
@@ -1384,7 +1381,6 @@ button:focus-visible {
     </div>
   </footer>
 
-  <script src="assets/lenis.min.js"></script>
   <script>
     // ヘッダー: スクロールで出現
     (function () {
@@ -1395,40 +1391,27 @@ button:focus-visible {
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    // スムーススクロール(Lenis) + ヒーロー視差 + アンカー
+    // ヒーロー視差（素のスクロール連動。慣性スクロールLenisは撤去 2026-07-07・不採用確定の既定路線）
+    // アンカーのスムース移動は CSS の scroll-behavior + scroll-padding-top が担う
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce || !window.Lenis) return;
+      if (reduce) return;
       var pels = document.querySelectorAll('[data-speed]');
-      var header = document.querySelector('header.site');
-      // lerp（フレームレート非依存の慣性補間）で固定durationよりなめらかな追従に。
-      // 値が小さいほど“ぬるっと”長く滑る。0.085 は上品に効く中庸。
-      var lenis = new Lenis({
-        lerp: 0.085,
-        smoothWheel: true,
-        wheelMultiplier: 0.95
-      });
-      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-      requestAnimationFrame(raf);
-      lenis.on('scroll', function (e) {
-        var y = e.scroll || 0;
-        if (header) header.classList.toggle('scrolled', y > 32);
+      if (!pels.length) return;
+      var ticking = false;
+      function apply() {
+        ticking = false;
+        var y = window.scrollY || 0;
         for (var i = 0; i < pels.length; i++) {
           var el = pels[i];
           var sp = parseFloat(el.getAttribute('data-speed')) || 0;
           el.style.transform = y > 0 ? 'translate3d(0,' + (y * sp).toFixed(1) + 'px,0)' : '';
         }
-      });
-      var links = document.querySelectorAll('a[href^="#"]');
-      for (var j = 0; j < links.length; j++) {
-        links[j].addEventListener('click', function (e) {
-          var href = this.getAttribute('href');
-          if (href && href.length > 1) {
-            var target = document.querySelector(href);
-            if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -80 }); }
-          }
-        });
       }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+      }, { passive: true });
+      apply();
     })();
 
     // 背景: 木が成長 → 枝先にアプリが実/花として咲く → 常時ゆらぎ（canvas・淡色）
