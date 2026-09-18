@@ -6,7 +6,7 @@
   <title>Yテック工房 — IT × 建築 × 海外</title>
   <meta name="description" content="IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。Yテック工房 / Y-Tech Koubou。">
   <link rel="canonical" href="https://www.y-tech-koubou.com/">
-  <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Heritage Design Tokens: Public Sans (h1/body) + Space Grotesk (label-caps) + Noto Sans JP (日本語グリフ) -->
@@ -36,6 +36,28 @@
   --shikkoku: #1A1C1E;      /* Ink — 見出し/本文 */
   --nibiiro: #5E646B;       /* Slate — 補足/メタ（AA 5.4 on limestone） */
   --usuzumi: #DAD6CF;       /* 罫線（limestone系ヘアライン） */
+
+  /* === Yテック工房 装飾パレット（2026-09-16確定・キテンゲ実測値）===
+     用途は柄帯/ロゴ/柱バーに限定（3色まで）。見出し・本文・ボタンには使わない。
+     Accent Blue(--kokemidori)はリンク/CTA/選択のまま。 */
+  --indigo: #0B3DA4;        /* 藍 */
+  --indigo-deep: #282950;   /* 藍深（ロゴの茎・家・根／柱線） */
+  --vermilion: #C50507;     /* 朱 */
+  --mustard: #E89408;       /* 辛子 */
+  --mustard-muted: #D2A423; /* 辛子鈍 */
+  --grape: #741D34;         /* 葡萄 */
+  --brown-deep: #472F14;    /* 焦茶 */
+  --pattern-base: var(--indigo);
+  --pattern-hot: var(--vermilion);
+  --pattern-warm: var(--mustard);
+  --pattern-ground: var(--kinari);
+  /* logo-mark.svg の28px汎用幾何柄（斜線+水玉）をCSSで再現。柄帯専用 */
+  --pattern-kitenge:
+    radial-gradient(circle at 7px 7px, var(--pattern-hot) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 21px 21px, var(--pattern-ground) 0 2px, transparent 2.5px),
+    linear-gradient(135deg, transparent 0 38%, var(--pattern-warm) 38% 47%, transparent 47% 100%),
+    var(--pattern-base);
+  --pattern-size: 28px 28px;
 
   --space-section: 112px;
   --space-section-compact: 96px;
@@ -309,13 +331,41 @@ header.site nav a.active::after { transform: scaleX(1); }
   pointer-events: none;
   background: radial-gradient(ellipse 48% 42% at 50% 44%, rgba(107, 142, 90, 0.10), transparent 70%);
 }
-.hero > *:not(.hero-bg):not(.hero-edge):not(.hero-scroll) { position: relative; z-index: 1; }
+.hero > *:not(.hero-bg):not(.hero-edge):not(.hero-scroll):not(.hero-band) { position: relative; z-index: 1; }
 .hero-edge, .hero-scroll { z-index: 2; }
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+}
+/* リブランド(2026-09-18): キテンゲ柄帯（右の縦帯・下の横帯）＋左の藍深の柱線。装飾のみ */
+.hero-band {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--pattern-kitenge);
+  background-size: var(--pattern-size);
+}
+.hero-band-r {
+  top: 112px;
+  right: 32px;
+  width: 18px;
+  height: min(58vh, 520px);
+  opacity: 0.92;
+}
+.hero-band-b {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 16px;
+}
+.hero-band-l {
+  top: 112px;
+  left: 33px;
+  width: 2px;
+  height: min(58vh, 520px);
+  background: var(--indigo-deep);
 }
 .hero-eyebrow {
   font-family: var(--serif-en);
@@ -330,6 +380,9 @@ header.site nav a.active::after { transform: scaleX(1); }
   height: auto;
   display: block;
   margin: 0 0 62px;
+  /* 柄入りロゴが木の幹・枝と重なって読みにくくならないよう、生成りの円盤を敷く（リブランド 2026-09-18） */
+  background: rgba(247, 245, 242, 0.94);
+  border-radius: 50%;
   filter: drop-shadow(0 16px 38px rgba(26, 28, 30, 0.14));
 }
 /* エンブレムは装飾（リンクでない）。pointer-eventsを通し、背後canvasの内側ブロッサム
@@ -1037,6 +1090,8 @@ button:focus-visible {
 @media (max-height: 880px) {
   .hero-edge { display: none; }
   .hero-scroll { display: none; }
+  .hero-band-r, .hero-band-l { display: none; }
+  .hero-band-b { height: 12px; }
 }
 
 @media (max-width: 520px) {
@@ -1050,7 +1105,7 @@ button:focus-visible {
   </style>
   <meta property="og:title" content="Yテック工房 — IT × 建築 × 海外">
   <meta property="og:description" content="IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。">
-  <meta property="og:image" content="https://www.y-tech-koubou.com/assets/og.png?v=3">
+  <meta property="og:image" content="https://www.y-tech-koubou.com/assets/og.png?v=4">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
@@ -1060,7 +1115,7 @@ button:focus-visible {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yテック工房 — IT × 建築 × 海外">
   <meta name="twitter:description" content="IT × 建築 × 海外。建築を学ぶ視点とITで、学習アプリからWeb・アプリ制作まで手がける個人工房。">
-  <meta name="twitter:image" content="https://www.y-tech-koubou.com/assets/og.png?v=3">
+  <meta name="twitter:image" content="https://www.y-tech-koubou.com/assets/og.png?v=4">
   <meta name="theme-color" content="#FAF7F2">
   <script type="application/ld+json">
   {
@@ -1100,7 +1155,7 @@ button:focus-visible {
   <header class="site">
     <div class="container inner">
       <a href="#top" class="brand" aria-label="Yテック工房 ホーム">
-        <img src="assets/logo-mark.png?v=2" alt="" width="36" height="36">
+        <img src="assets/logo-mark.svg?v=3" alt="" width="36" height="36">
         <span data-en="Y-Tech Koubou">Yテック工房</span>
       </a>
       <div class="nav-cluster">
@@ -1140,8 +1195,11 @@ button:focus-visible {
 
     <section class="hero">
       <canvas class="hero-bg" aria-hidden="true"></canvas>
+      <span class="hero-band hero-band-l" aria-hidden="true"></span>
+      <span class="hero-band hero-band-r" aria-hidden="true"></span>
+      <span class="hero-band hero-band-b" aria-hidden="true"></span>
       <!-- 木の実のアプリ名ツールチップは表示しない（オーナー指示 2026-06-05・ロゴの実＋ホバー発光＋クリックのみ） -->
-      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.png?v=2" alt="" width="196" height="196"></span>
+      <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.svg?v=3" alt="" width="196" height="196"></span>
       <h1 class="hero-eyebrow reveal" aria-label="Yテック工房 / Y-Tech Koubou">Y &middot; Tech &middot; Koubou</h1>
       <p class="hero-tag reveal" data-en="IT &times; Architecture &times; Overseas">IT &times; 建築 &times; 海外</p>
       <div class="hero-actions reveal">

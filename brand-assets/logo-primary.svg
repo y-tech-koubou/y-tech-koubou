@@ -1,49 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="400" height="400" role="img" aria-label="Yテック工房ロゴ">
   <title>Yテック工房 / Y-Tech Koubou</title>
-  <rect width="200" height="200" fill="#FAF7F2"/>
-
-  <!-- Outer ring (工房という一つの場) -->
-  <circle cx="100" cy="100" r="88" fill="none" stroke="#2D5A2D" stroke-width="4"/>
-
-  <!-- 3 leaves: 建築 / IT / 国際協力 -->
-  <g fill="#2D5A2D">
-    <path d="M100 38 Q 112 58 100 82 Q 88 58 100 38 Z"/>
-    <path d="M64 52 Q 86 62 84 86 Q 62 76 64 52 Z"/>
-    <path d="M136 52 Q 114 62 116 86 Q 138 76 136 52 Z"/>
-  </g>
-  <g stroke="#FAF7F2" stroke-width="1.4" fill="none" stroke-linecap="round">
-    <path d="M100 46 L 100 78"/>
-    <path d="M70 58 L 82 82"/>
-    <path d="M130 58 L 118 82"/>
-  </g>
-
-  <!-- X字に交わる茎: 異分野の交差 -->
-  <g stroke="#2D5A2D" stroke-width="4" fill="none" stroke-linecap="round">
-    <path d="M84 82 L 120 122"/>
-    <path d="M116 82 L 80 122"/>
-  </g>
-
-  <!-- 家の屋根と壁: 建築・基盤・つくる場 -->
-  <g stroke="#2D5A2D" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M66 132 L 100 105 L 134 132"/>
-    <path d="M76 130 L 76 158"/>
-    <path d="M124 130 L 124 158"/>
-    <path d="M76 158 L 124 158"/>
-  </g>
-
-  <!-- 格子窓 -->
-  <g stroke="#2D5A2D" stroke-width="2.4" fill="none">
-    <rect x="89" y="134" width="22" height="20"/>
-    <line x1="100" y1="134" x2="100" y2="154"/>
-    <line x1="89" y1="144" x2="111" y2="144"/>
-  </g>
-
-  <!-- 根: 土地に根を張る -->
-  <g stroke="#2D5A2D" stroke-width="2.6" fill="none" stroke-linecap="round">
-    <path d="M100 158 L 100 178"/>
-    <path d="M88 158 Q 80 170 70 178"/>
-    <path d="M76 158 Q 62 168 52 174"/>
-    <path d="M112 158 Q 120 170 130 178"/>
-    <path d="M124 158 Q 138 168 148 174"/>
+  <!-- 2026-09-18 アフリカ×日本リブランド。logo-mark.svg と同一のマークを生成り地(#F7F5F2)に置いた正方形メインロゴ。 -->
+  <defs>
+    <pattern id="ytkp-kitenge" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#0B3DA4"/>
+      <path d="M0 28 L28 0 M-7 21 L7 7 M21 35 L35 21" stroke="#E89408" stroke-width="4"/>
+      <circle cx="7" cy="7" r="2.8" fill="#C50507"/>
+      <circle cx="21" cy="21" r="2.8" fill="#F7F5F2"/>
+      <path d="M14 2 L20 14 L14 26 L8 14Z" fill="none" stroke="#F7F5F2" stroke-width="2"/>
+    </pattern>
+    <clipPath id="ytkp-ring">
+      <path fill-rule="evenodd" d="M100 6a94 94 0 1 0 0 188a94 94 0 0 0 0-188Zm0 16a78 78 0 1 1 0 156a78 78 0 0 1 0-156Z"/>
+    </clipPath>
+    <clipPath id="ytkp-leaves">
+      <path d="M100 22C119 45 119 74 100 96C81 74 81 45 100 22Z"/>
+      <path d="M46 50C74 48 92 64 84 98C58 94 44 78 46 50Z"/>
+      <path d="M154 50C126 48 108 64 116 98C142 94 156 78 154 50Z"/>
+    </clipPath>
+  </defs>
+  <rect width="200" height="200" fill="#F7F5F2"/>
+  <g clip-path="url(#ytkp-ring)"><rect width="200" height="200" fill="url(#ytkp-kitenge)"/></g>
+  <g clip-path="url(#ytkp-leaves)"><rect width="200" height="200" fill="url(#ytkp-kitenge)"/></g>
+  <g fill="none" stroke="#282950" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100 96 L100 112" stroke-width="7"/>
+    <path d="M84 97 L100 112 L132 142" stroke-width="9"/>
+    <path d="M116 97 L100 112 L68 142" stroke-width="9"/>
+    <path d="M78 136 V168 H122 V136" stroke-width="6"/>
+    <rect x="90" y="144" width="20" height="18" stroke-width="4"/>
+    <path d="M100 144V162M90 153H110" stroke-width="3"/>
+    <path d="M100 168 V182" stroke-width="4"/>
+    <path d="M92 168C84 176 70 181 52 182" stroke-width="4"/>
+    <path d="M108 168C116 176 130 181 148 182" stroke-width="4"/>
+    <path d="M84 170C76 175 66 177 58 177" stroke-width="3"/>
+    <path d="M116 170C124 175 134 177 142 177" stroke-width="3"/>
   </g>
 </svg>

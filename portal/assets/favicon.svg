@@ -1,9 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Yテック工房 favicon">
   <title>Yテック工房</title>
-  <circle cx="32" cy="32" r="30" fill="#2D5A2D"/>
-  <g fill="#FAF7F2">
-    <path d="M32 14 Q 42 28 32 44 Q 22 28 32 14 Z"/>
-    <path d="M12 22 Q 26 30 28 48 Q 12 40 12 22 Z"/>
-    <path d="M52 22 Q 38 30 36 48 Q 52 40 52 22 Z"/>
+  <!-- 2026-09-18 16/32px用の簡略版: 柄・格子窓・細根は省略（潰れるため）。地=藍深・要素=生成り -->
+  <circle cx="32" cy="32" r="31" fill="#282950"/>
+  <g transform="translate(6.4 4) scale(0.256)">
+    <g fill="#F7F5F2">
+      <path d="M100 22C119 45 119 74 100 96C81 74 81 45 100 22Z"/>
+      <path d="M46 50C74 48 92 64 84 98C58 94 44 78 46 50Z"/>
+      <path d="M154 50C126 48 108 64 116 98C142 94 156 78 154 50Z"/>
+    </g>
+    <g fill="none" stroke="#F7F5F2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M100 96 L100 112" stroke-width="12"/>
+      <path d="M84 97 L100 112 L132 142" stroke-width="13"/>
+      <path d="M116 97 L100 112 L68 142" stroke-width="13"/>
+      <path d="M78 136 V170 H122 V136" stroke-width="10"/>
+    </g>
   </g>
 </svg>
