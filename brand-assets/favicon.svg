@@ -1,18 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Yテック工房 favicon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="64" height="64" role="img" aria-label="Yテック工房 favicon">
   <title>Yテック工房</title>
-  <!-- 2026-09-18 16/32px用の簡略版: 柄・格子窓・細根は省略（潰れるため）。地=藍深・要素=生成り -->
-  <circle cx="32" cy="32" r="31" fill="#282950"/>
-  <g transform="translate(6.4 4) scale(0.256)">
-    <g fill="#F7F5F2">
-      <path d="M100 22C119 45 119 74 100 96C81 74 81 45 100 22Z"/>
-      <path d="M46 50C74 48 92 64 84 98C58 94 44 78 46 50Z"/>
-      <path d="M154 50C126 48 108 64 116 98C142 94 156 78 154 50Z"/>
-    </g>
-    <g fill="none" stroke="#F7F5F2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M100 96 L100 112" stroke-width="12"/>
-      <path d="M84 97 L100 112 L132 142" stroke-width="13"/>
-      <path d="M116 97 L100 112 L68 142" stroke-width="13"/>
-      <path d="M78 136 V170 H122 V136" stroke-width="10"/>
-    </g>
+  <!-- 2026-09-19 小サイズ用の簡略版: 柄は省略（潰れるため）。地=藍深の円盤・芽=生成り。 -->
+  <circle cx="100" cy="100" r="97" fill="#282950"/>
+  <g transform="translate(100 100) scale(0.8) translate(-100 -92)" fill="#F7F5F2">
+    <path d="M26 41 C34 42 42 47 49 54 C57 62 64 71 70 80 C75 88 79 96 82 104 C84 110 84.8 115 84.8 120 L84.8 161 C89 163 95 162.5 99 159.5 L105.2 152 L105.2 120 C105.4 112 106.5 105 108 99 C109 95 108.5 92 107 90 C102 86 97 81 92 75 C84 65 72 53 60 47 C48 41.5 36 39.8 26 41 Z"/>
+    <path fill-rule="evenodd" d="M101 90 C103 80 107 70 113 60 C120 48 132 37 146 30 C157 25 167 23 174 23 C174 32 172 42 168 52 C163 64 155 74 145 81 C139 85.5 133 88.5 128 90.5 C118 93 108 92.5 101 90 Z M140 47 C133 55 126 65 121 74 C117 80 114.5 84 113 87.5 L108.5 88.5 C111 82 115 74 120 66 C125.5 57 132 50 138 45 Z"/>
   </g>
 </svg>

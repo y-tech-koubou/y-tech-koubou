@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="400" height="400" role="img" aria-label="Yテック工房 マーク">
   <title>Yテック工房 — Mark</title>
-  <!-- 2026-09-18 アフリカ×日本リブランド。円環と3枚の葉=キテンゲ由来の汎用幾何柄（実測パレット）、
-       茎(X)・家・根=藍深の単色。柄は葉と円環にだけ入れる（小サイズで潰れないため）。背景は透過。 -->
+  <!-- 2026-09-19 ロゴ刷新: 中身はスプラウト型Y（オーナー指定の参照画像を実測トレース）＝藍深の単色、
+       周囲の円環はキテンゲ由来の汎用幾何柄。要素は「円環」と「芽（Y）」の2つだけ。 -->
   <defs>
     <pattern id="ytk-kitenge" width="28" height="28" patternUnits="userSpaceOnUse">
       <rect width="28" height="28" fill="#0B3DA4"/>
@@ -10,30 +10,11 @@
       <circle cx="21" cy="21" r="2.8" fill="#F7F5F2"/>
       <path d="M14 2 L20 14 L14 26 L8 14Z" fill="none" stroke="#F7F5F2" stroke-width="2"/>
     </pattern>
-    <clipPath id="ytk-ring">
-      <path fill-rule="evenodd" d="M100 6a94 94 0 1 0 0 188a94 94 0 0 0 0-188Zm0 16a78 78 0 1 1 0 156a78 78 0 0 1 0-156Z"/>
-    </clipPath>
-    <clipPath id="ytk-leaves">
-      <path d="M100 22C119 45 119 74 100 96C81 74 81 45 100 22Z"/>
-      <path d="M46 50C74 48 92 64 84 98C58 94 44 78 46 50Z"/>
-      <path d="M154 50C126 48 108 64 116 98C142 94 156 78 154 50Z"/>
-    </clipPath>
+    <clipPath id="ytk-ring"><path fill-rule="evenodd" d="M100 6a94 94 0 1 0 0 188a94 94 0 0 0 0-188Zm0 16a78 78 0 1 1 0 156a78 78 0 0 1 0-156Z"/></clipPath>
   </defs>
-  <!-- 円環 + 3葉 = 柄 -->
   <g clip-path="url(#ytk-ring)"><rect width="200" height="200" fill="url(#ytk-kitenge)"/></g>
-  <g clip-path="url(#ytk-leaves)"><rect width="200" height="200" fill="url(#ytk-kitenge)"/></g>
-  <!-- 茎(X)・家・根 = 藍深 -->
-  <g fill="none" stroke="#282950" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M100 96 L100 112" stroke-width="7"/>
-    <path d="M84 97 L100 112 L132 142" stroke-width="9"/>
-    <path d="M116 97 L100 112 L68 142" stroke-width="9"/>
-    <path d="M78 136 V168 H122 V136" stroke-width="6"/>
-    <rect x="90" y="144" width="20" height="18" stroke-width="4"/>
-    <path d="M100 144V162M90 153H110" stroke-width="3"/>
-    <path d="M100 168 V182" stroke-width="4"/>
-    <path d="M92 168C84 176 70 181 52 182" stroke-width="4"/>
-    <path d="M108 168C116 176 130 181 148 182" stroke-width="4"/>
-    <path d="M84 170C76 175 66 177 58 177" stroke-width="3"/>
-    <path d="M116 170C124 175 134 177 142 177" stroke-width="3"/>
+  <g transform="translate(100 100) scale(0.74) translate(-100 -92)" fill="#282950">
+    <path d="M26 41 C34 42 42 47 49 54 C57 62 64 71 70 80 C75 88 79 96 82 104 C84 110 84.8 115 84.8 120 L84.8 161 C89 163 95 162.5 99 159.5 L105.2 152 L105.2 120 C105.4 112 106.5 105 108 99 C109 95 108.5 92 107 90 C102 86 97 81 92 75 C84 65 72 53 60 47 C48 41.5 36 39.8 26 41 Z"/>
+    <path fill-rule="evenodd" d="M101 90 C103 80 107 70 113 60 C120 48 132 37 146 30 C157 25 167 23 174 23 C174 32 172 42 168 52 C163 64 155 74 145 81 C139 85.5 133 88.5 128 90.5 C118 93 108 92.5 101 90 Z M140 47 C133 55 126 65 121 74 C117 80 114.5 84 113 87.5 L108.5 88.5 C111 82 115 74 120 66 C125.5 57 132 50 138 45 Z"/>
   </g>
 </svg>
