@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>工房の庭 — Yテック工房</title>
-  <meta name="description" content="Yテック工房がつくってきた道具を、ひとつの庭に建物として並べた3D空間。見回して、気になる建物からそれぞれのサイトへ。">
+  <meta name="description" content="Yテック工房がつくってきたツールを、ひとつの庭に建物として並べた3D空間。見回して、気になる建物からそれぞれのサイトへ。">
   <link rel="canonical" href="https://www.y-tech-koubou.com/koubou">
   <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
   <meta property="og:type" content="website">
   <meta property="og:title" content="工房の庭 — Yテック工房">
-  <meta property="og:description" content="つくってきた道具を、ひとつの庭に建物として並べた3D空間。">
+  <meta property="og:description" content="つくってきたツールを、ひとつの庭に建物として並べた3D空間。">
   <meta property="og:url" content="https://www.y-tech-koubou.com/koubou">
   <meta property="og:image" content="https://www.y-tech-koubou.com/assets/og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -190,7 +190,7 @@ a { color: var(--kokemidori); text-decoration: none; }
   <div class="panel">
     <span class="kicker">Koubou Garden</span>
     <h1>工房の庭</h1>
-    <p>続けた分だけ、庭に形が残る。<br>これまでに出荷した道具が、ここに建っています。</p>
+    <p>続けた分だけ、庭に形が残る。<br>これまでに出荷したツールが、ここに建っています。</p>
     <p class="hint">ドラッグ / スワイプで見回す。建物を選ぶと、そのサイトが開きます。</p>
   </div>
 
@@ -785,7 +785,7 @@ a { color: var(--kokemidori); text-decoration: none; }
     }
     SPOTS.forEach(buildSpot);
 
-    // ====== 苗床（次の道具を育てている場所・リンクなし） ======
+    // ====== 苗床（次のツールを育てている場所・リンクなし） ======
     var nursery = new THREE.Group();
     var bedSoil = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.26, 1.5), new THREE.MeshStandardMaterial({
       map: cachedTex('soil', 0x6E5844, { contrast: 0.14, grains: 2600, repeat: [3, 1.5] }), roughness: 1.0, metalness: 0
@@ -886,7 +886,7 @@ a { color: var(--kokemidori); text-decoration: none; }
     });
     var nurseryLabel = document.createElement('span');
     nurseryLabel.className = 'spot-label static';
-    nurseryLabel.innerHTML = '<span class="nm">苗床 — 次の道具を育てています</span>';
+    nurseryLabel.innerHTML = '<span class="nm">苗床 — 次のツールを育てています</span>';
     document.body.appendChild(nurseryLabel);
     labels.push({ el: nurseryLabel, anchor: NURSERY_ANCHOR });
 
