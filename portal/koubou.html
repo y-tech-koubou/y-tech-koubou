@@ -6,7 +6,7 @@
   <title>工房の庭 — Yテック工房</title>
   <meta name="description" content="Yテック工房がつくってきたツールを、ひとつの庭に建物として並べた3D空間。見回して、気になる建物からそれぞれのサイトへ。">
   <link rel="canonical" href="https://www.y-tech-koubou.com/koubou">
-  <link rel="icon" type="image/png" href="assets/favicon.png?v=2">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=8">
   <meta property="og:type" content="website">
   <meta property="og:title" content="工房の庭 — Yテック工房">
   <meta property="og:description" content="つくってきたツールを、ひとつの庭に建物として並べた3D空間。">
@@ -17,10 +17,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap">
   <style>
 :root {
-  /* Heritage Design Tokens（正本: index.html の :root と同値） */
-  --kokemidori: #B8422E;
-  --wakaba: #C2674B;
-  --wakaba-deep: #9E3522;
+  /* Heritage Design Tokens（正本: index.html の :root と同値。2026-09-20 同期） */
+  --kokemidori: #2563EB;   /* Accent Blue — リンク/選択などインタラクション専用 */
+  --wakaba: #3B82F6;       /* 罫・ホバー枠 */
+  --wakaba-deep: #1D4ED8;  /* 小さな情報テキスト（インタラクション文脈のみ） */
+  /* 装飾パレット（柄・屋根などの素材色。見出しやボタンには使わない） */
+  --indigo-deep: #282950;
+  --vermilion: #C50507;
+  --grape: #741D34;
+  --brown-deep: #472F14;
+  --mustard-muted: #D2A423;
   --kinari: #F7F5F2;
   --tonoko: #EEEAE3;
   --shikkoku: #1A1C1E;
@@ -81,7 +87,7 @@ a { color: var(--kokemidori); text-decoration: none; }
 }
 .panel .kicker {
   font-family: var(--serif-en); font-size: 11px; font-weight: 600;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--wakaba-deep);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--nibiiro);
 }
 .panel h1 { margin: 6px 0 8px; font-size: 24px; line-height: 1.3; letter-spacing: 0.02em; }
 .panel p { margin: 0; font-size: 13.5px; line-height: 1.8; color: var(--nibiiro); }
@@ -182,7 +188,7 @@ a { color: var(--kokemidori); text-decoration: none; }
   <div class="bar">
     <a class="back" href="./">
       <span class="arrow" aria-hidden="true">&larr;</span>
-      <img src="assets/logo-mark.png?v=2" alt="" width="22" height="22">
+      <img src="assets/logo-mark.svg?v=8" alt="" width="22" height="22">
       <span>Yテック工房</span>
     </a>
   </div>
@@ -222,32 +228,34 @@ a { color: var(--kokemidori); text-decoration: none; }
     'use strict';
 
     // ====== 庭の住人（建物） ======
-    // wall/roof は Heritage トークン系。木の緑だけはブランドのシグネチャ例外（index.html のヒーローの木と同族）。
+    // wall は Limestone 系、roof は「Yテック工房 装飾パレット」（2026-09-16確定）から取る。
+    // 旧 Boston Clay 系（0xB8422E / 0x9E3522 / 0xC2674B）は 2026-09-20 に置き換え済み。
+    // 木の緑だけはブランドのシグネチャ例外（index.html のヒーローの木と同族）。
     var SPOTS = [
       { key: 'kenchiku', name: '建築資格工房', sub: 'Architect Exam Prep',
         url: 'https://1architectexam.com', external: true,
         pos: [7.5, 0, 12.5], size: { w: 5.8, d: 4.8, h: 3.2, roofH: 2.4 },
-        wall: 0xF4EFE7, roof: 0xB8422E, main: true },
+        wall: 0xF4EFE7, roof: 0x741D34, main: true },
       { key: 'english', name: 'English工房', sub: 'IELTS / TOEFL / TOEIC',
         url: 'https://english-koubou.vercel.app', external: true,
         pos: [14.5, 0, 4.5], size: { w: 4.8, d: 4.2, h: 2.8, roofH: 2.1 },
-        wall: 0xEFE6D8, roof: 0x9E3522, gable: 'side' },
-      { key: 'africa', name: 'アフリカ語工房', sub: 'African Languages',
-        url: 'https://africa-lingo.vercel.app', external: true,
+        wall: 0xEFE6D8, roof: 0x472F14, gable: 'side' },
+      { key: 'hugtimegrow', name: 'Hugtime Grow', sub: 'Parenting Community',
+        url: 'https://hug-koubou.vercel.app', external: true,
         pos: [14, 0, -9], size: { w: 4.4, d: 3.8, h: 2.7, roofH: 2.0 },
-        wall: 0xEAD9C4, roof: 0xC2674B },
+        wall: 0xEAD9C4, roof: 0xD2A423 },
       { key: 'yoshino', name: '吉野工務店', sub: 'Web 制作例',
         url: 'https://yoshino-koumuten.com', external: true,
         pos: [-18, 0, -5], size: { w: 4.6, d: 4.0, h: 2.8, roofH: 2.0 },
-        wall: 0xF4EFE7, roof: 0x41464D, gable: 'side' },
+        wall: 0xF4EFE7, roof: 0x282950, gable: 'side' },
       { key: 'hugtime', name: 'Hugtime salon', sub: 'Web 制作例',
         url: 'https://hugtime-salon.com', external: true,
         pos: [-15.5, 0, -10.5], size: { w: 4.2, d: 3.6, h: 2.6, roofH: 1.9 },
-        wall: 0xEFE6D8, roof: 0x41464D, lift: 1.5 },  /* 隣の吉野工務店とラベルが同じ高さ帯で重なるため1段上げる */
+        wall: 0xEFE6D8, roof: 0x282950, lift: 1.5 },  /* 隣の吉野工務店とラベルが同じ高さ帯で重なるため1段上げる */
       { key: 'contact', name: '相談の窓口', sub: 'Contact',
         url: './#contact', external: false,
         pos: [7.5, 0, -15.5], size: { w: 3.2, d: 2.8, h: 2.3, roofH: 1.7 },
-        wall: 0xE7CDBE, roof: 0x9E3522 }
+        wall: 0xE7CDBE, roof: 0x741D34 }
     ];
 
     var canvas = document.getElementById('stage');
@@ -862,7 +870,7 @@ a { color: var(--kokemidori); text-decoration: none; }
       var seedGeo = new THREE.BufferGeometry();
       seedGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
       seeds = new THREE.Points(seedGeo, new THREE.PointsMaterial({
-        color: 0xC2674B, size: 0.16, transparent: true, opacity: 0.55, sizeAttenuation: true
+        color: 0xE89408, size: 0.16, transparent: true, opacity: 0.55, sizeAttenuation: true
       }));
       scene.add(seeds);
     }
