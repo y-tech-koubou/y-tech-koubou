@@ -1,20 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200" role="img" aria-label="Yテック工房 横組ロックアップ">
   <title>Yテック工房 / Y-Tech Koubou</title>
-  <!-- 2026-09-19 マークは logo-mark.svg と同一。文字色=Ink / 藍深。 -->
+  <!-- 2026-09-20 マークは logo-mark.svg と同一。文字色=Ink / 藍深。 -->
   <defs>
-    <pattern id="ytkh-kitenge" width="28" height="28" patternUnits="userSpaceOnUse">
-      <rect width="28" height="28" fill="#0B3DA4"/>
-      <path d="M0 28 L28 0 M-7 21 L7 7 M21 35 L35 21" stroke="#E89408" stroke-width="4"/>
-      <circle cx="7" cy="7" r="2.8" fill="#C50507"/>
-      <circle cx="21" cy="21" r="2.8" fill="#F7F5F2"/>
-      <path d="M14 2 L20 14 L14 26 L8 14Z" fill="none" stroke="#F7F5F2" stroke-width="2"/>
-    </pattern>
     <clipPath id="ytkh-ring"><path fill-rule="evenodd" d="M100 6a94 94 0 1 0 0 188a94 94 0 0 0 0-188Zm0 16a78 78 0 1 1 0 156a78 78 0 0 1 0-156Z"/></clipPath>
   </defs>
   <rect width="800" height="200" fill="#F7F5F2"/>
   <g transform="translate(10,10) scale(0.9)">
-    <g clip-path="url(#ytkh-ring)"><rect width="200" height="200" fill="url(#ytkh-kitenge)"/></g>
-    <g transform="translate(100 114.1) scale(0.74) translate(-100 -92)" fill="#282950">
+    <g clip-path="url(#ytkh-ring)">
+      <circle cx="100" cy="100" r="86.0" fill="none" stroke="#0B3DA4" stroke-width="16"/>
+      <g transform="rotate(0.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(7.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(15.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(22.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(30.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(37.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(45.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(52.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(60.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(67.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(75.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(82.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(90.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(97.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(105.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(112.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(120.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(127.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(135.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(142.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(150.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(157.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(165.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(172.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(180.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(187.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(195.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(202.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(210.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(217.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(225.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(232.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(240.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(247.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(255.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(262.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(270.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(277.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(285.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(292.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(300.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(307.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(315.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(322.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+      <g transform="rotate(330.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(337.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#C50507"/></g>
+      <g transform="rotate(345.00 100 100)"><path d="M100 7.5 L103.6 14.0 L100 20.5 L96.4 14.0 Z" fill="#E89408"/></g>
+      <g transform="rotate(352.50 100 100)"><circle cx="100" cy="14.0" r="2.6" fill="#F7F5F2"/></g>
+    </g>
+    <g transform="translate(98.0 114.1) scale(0.74) translate(-100 -92)" fill="#282950">
       <path d="M26 41 C34 42 42 47 49 54 C57 62 64 71 70 80 C75 88 79 96 82 104 C84 110 84.8 115 84.8 120 L84.8 161 C89 163 95 162.5 99 159.5 L105.2 152 L105.2 120 C105.4 112 106.5 105 108 99 C109 95 108.5 92 107 90 C102 86 97 81 92 75 C84 65 72 53 60 47 C48 41.5 36 39.8 26 41 Z"/>
       <path fill-rule="evenodd" d="M101 90 C103 80 107 70 113 60 C120 48 132 37 146 30 C157 25 167 23 174 23 C174 32 172 42 168 52 C163 64 155 74 145 81 C139 85.5 133 88.5 128 90.5 C118 93 108 92.5 101 90 Z M140 47 C133 55 126 65 121 74 C117 80 114.5 84 113 87.5 L108.5 88.5 C111 82 115 74 120 66 C125.5 57 132 50 138 45 Z"/>
     </g>
