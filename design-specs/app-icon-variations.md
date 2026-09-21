@@ -9,7 +9,7 @@
 
 ### 統一する要素
 - ロゴマーク（円＋3葉＋X字茎）の骨格
-- 背景色: 生成り `#FAF7F2`
+- 背景色: 生成り `#F7F5F2`
 - 余白: アイコン枠の12%確保（BRAND.md「ロゴ使用ルール」準拠）
 
 ### アプリごとに変える要素
@@ -24,25 +24,25 @@
 
 | アプリ | アクセント葉色 | 全体印象 |
 |---|---|---|
-| architect-quiz | 朱 `#A0382A` | 建築・本格 |
+| architect-quiz | 朱 `#C50507` | 建築・本格 |
 | koji-app | 麹色 `#C99A4A` | 暖かみ・伝統 |
-| invest-ai | 若葉 `#6B8E5A` | ニュートラル・成長 |
-| africa-map | 砥粉 `#EDE7DC` × 茎を朱で | 大地・冒険 |
+| invest-ai | 若葉 `#5E646B` | ニュートラル・成長 |
+| africa-map | 砥粉 `#EEEAE3` × 茎を朱で | 大地・冒険 |
 
 ### SVG パターン（共通骨格）
 
 ```svg
 <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <!-- 背景 -->
-  <rect width="1024" height="1024" fill="#FAF7F2"/>
+  <rect width="1024" height="1024" fill="#F7F5F2"/>
 
   <!-- 円（家紋風） -->
   <circle cx="512" cy="512" r="400" fill="none"
-          stroke="#2D5A2D" stroke-width="24"/>
+          stroke="#282950" stroke-width="24"/>
 
   <!-- X字の茎（建築の骨格） -->
   <path d="M 320,704 L 704,320 M 320,320 L 704,704"
-        stroke="#2D5A2D" stroke-width="24"
+        stroke="#282950" stroke-width="24"
         stroke-linecap="round"/>
 
   <!-- 葉1（上）— アプリごとに色を変える -->
@@ -51,11 +51,11 @@
 
   <!-- 葉2（左下）— 標準色 -->
   <ellipse cx="320" cy="680" rx="80" ry="120"
-           fill="#2D5A2D" transform="rotate(-30 320 680)"/>
+           fill="#282950" transform="rotate(-30 320 680)"/>
 
   <!-- 葉3（右下）— 標準色 -->
   <ellipse cx="704" cy="680" rx="80" ry="120"
-           fill="#2D5A2D" transform="rotate(30 704 680)"/>
+           fill="#282950" transform="rotate(30 704 680)"/>
 </svg>
 ```
 
@@ -105,7 +105,7 @@ Bは Apple/Google のミニマル指向と相性が悪く、ブランド帰属�
 ### Adaptive Icon（Android）
 
 前景レイヤー: 432×432px の安全領域にロゴマークを配置（外周108pxは切り取られる可能性あり）。
-背景レイヤー: 生成り `#FAF7F2` の単色塗り。
+背景レイヤー: 生成り `#F7F5F2` の単色塗り。
 
 ---
 
@@ -114,7 +114,7 @@ Bは Apple/Google のミニマル指向と相性が悪く、ブランド帰属�
 - [ ] 4アプリ × アクセント色バリエーション、SVGマスター作成
 - [ ] iOS / Android 各サイズへの書き出し
 - [ ] Adaptive Icon の前景・背景レイヤー分離
-- [ ] ダークモードバージョン（背景を `#0F1A0F` に置換）
+- [ ] ダークモードバージョン（背景を `#282950` に置換）
 - [ ] App Store / Google Play 用 1024px / 512px の正方形版
 - [ ] favicon（32 × 32）
 

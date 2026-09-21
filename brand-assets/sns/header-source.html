@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Yテック工房 Xヘッダー 1500x500 — 墨緑ダーク×図面トーン
-     palette: BRAND.md §カラー（sumimidori/kinari/wakaba/shu） */
+  /* Yテック工房 Xヘッダー 1500x500
+     2026-09-21: 旧「墨緑×若葉グロー」から、確定済みの装飾パレットへ刷新。
+     地=藍深 #282950 / 文字=生成り #F7F5F2 / 差し色=辛子 #E89408・朱 #C50507
+     書体はポータルと同じ Public Sans + Noto Sans JP + Space Grotesk に統一。
+     再生成: chrome --headless=new --window-size=1500,500 --screenshot=header-x-1500x500.png header-source.html */
   html,body{margin:0;padding:0;width:1500px;height:500px;overflow:hidden;}
   body{
-    background:#0F1A0F;
+    background:#282950;
     position:relative;
     font-kerning:normal;
   }
@@ -15,48 +18,57 @@
   .grid{
     position:absolute;inset:0;
     background-image:
-      linear-gradient(to right, rgba(250,247,242,0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(250,247,242,0.035) 1px, transparent 1px);
+      linear-gradient(to right, rgba(247,245,242,0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(247,245,242,0.035) 1px, transparent 1px);
     background-size:125px 125px;
     background-position:-0.5px -0.5px;
   }
-  /* 右上からの淡い若葉グロー */
+  /* 右上からの淡い藍のグロー */
   .glow{
     position:absolute;inset:0;
-    background:radial-gradient(900px 460px at 78% 30%, rgba(107,142,90,0.16), transparent 70%);
+    background:radial-gradient(900px 460px at 78% 30%, rgba(11,61,164,0.34), transparent 70%);
   }
-  /* 右側のロゴ線画ウォーターマーク（右端で切る） */
+  /* 右側のロゴ（反転版）を大きく置いて右端で切る */
   .watermark{
     position:absolute;top:50%;right:-150px;transform:translateY(-50%);
-    width:660px;height:660px;opacity:0.42;
+    width:660px;height:660px;opacity:0.5;
+  }
+  /* 左下の柄帯（ロゴの円環と同じモチーフの帯） */
+  .band{
+    position:absolute;left:0;right:0;bottom:0;height:14px;
+    background:
+      radial-gradient(circle at 7px 7px, #C50507 0 2px, transparent 2.5px),
+      radial-gradient(circle at 21px 21px, #F7F5F2 0 2px, transparent 2.5px),
+      linear-gradient(135deg, transparent 0 38%, #E89408 38% 47%, transparent 47% 100%),
+      #0B3DA4;
+    background-size:28px 28px;
   }
   /* テキストブロック（アバター円がヘッダー下部~40%に被るため上寄せ固定） */
   .text{
     position:absolute;left:110px;top:62px;
   }
   .eyebrow{
-    font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:19px;
-    color:#6B8E5A;letter-spacing:0.42em;text-transform:uppercase;
+    font-family:"Space Grotesk","Public Sans",sans-serif;font-weight:600;font-size:19px;
+    color:#E89408;letter-spacing:0.42em;text-transform:uppercase;
   }
-  .eyebrow .tick{color:#A0382A;}
+  .eyebrow .tick{color:#C50507;}
   .name-ja{
-    font-family:"Noto Serif JP",serif;font-weight:600;font-size:98px;color:#FAF7F2;
+    font-family:"Noto Sans JP","Public Sans",sans-serif;font-weight:700;font-size:96px;color:#F7F5F2;
     letter-spacing:0.045em;line-height:1.04;margin-top:16px;
   }
   .rule{
-    width:560px;height:1px;background:linear-gradient(to right, rgba(250,247,242,0.36), rgba(250,247,242,0.04));
+    width:560px;height:1px;background:linear-gradient(to right, rgba(247,245,242,0.36), rgba(247,245,242,0.04));
     margin-top:22px;
   }
   .tagline{
     font-family:"Noto Sans JP",sans-serif;font-weight:400;font-size:29px;
-    color:rgba(250,247,242,0.78);letter-spacing:0.30em;margin-top:20px;
+    color:rgba(247,245,242,0.80);letter-spacing:0.30em;margin-top:20px;
   }
-  .tagline .x{color:#A0382A;padding:0 10px;font-weight:500;}
-  /* 図面の寸法線風アクセント（右下・さりげなく） */
+  .tagline .x{color:#E89408;padding:0 10px;font-weight:500;}
+  /* 英語タグライン。右下だとロゴの上に重なって読めないため、日本語タグラインの下に置く */
   .dim{
-    position:absolute;right:96px;bottom:54px;
-    font-family:"IBM Plex Mono",monospace;font-size:14px;letter-spacing:0.22em;
-    color:rgba(250,247,242,0.30);
+    font-family:"Space Grotesk","Public Sans",sans-serif;font-size:15px;letter-spacing:0.22em;
+    color:rgba(247,245,242,0.46);margin-top:18px;
   }
 </style></head>
 <body>
@@ -68,6 +80,7 @@
     <div class="name-ja">Yテック工房</div>
     <div class="rule"></div>
     <div class="tagline">IT<span class="x">&#215;</span>建築<span class="x">&#215;</span>海外</div>
+    <div class="dim">IT &#215; ARCHITECTURE &#215; OVERSEAS</div>
   </div>
-  <div class="dim">IT &#215; ARCHITECTURE &#215; OVERSEAS</div>
+  <div class="band"></div>
 </body></html>

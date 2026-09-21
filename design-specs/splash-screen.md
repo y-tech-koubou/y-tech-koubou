@@ -41,10 +41,10 @@ Yテック工房ブランド配下4アプリ共通のスプラッシュ画面デ
 
 | 要素 | 仕様 |
 |---|---|
-| 背景色 | 生成り `#FAF7F2` |
+| 背景色 | 生成り `#F7F5F2` |
 | ロゴマーク | 120 × 120px、垂直中心から上30%に配置 |
-| ブランド名（和文） | Noto Serif JP Medium 24px、色 `#2D5A2D`、letter-spacing 0.08em |
-| ブランド英名 | Cormorant Garamond Medium 12px、色 `#6B8E5A`、letter-spacing 0.4em、大文字 |
+| ブランド名（和文） | Noto Serif JP Medium 24px、色 `#282950`、letter-spacing 0.08em |
+| ブランド英名 | Cormorant Garamond Medium 12px、色 `#5E646B`、letter-spacing 0.4em、大文字 |
 | プロダクト名 | Noto Sans JP Regular 14px、色 `#6B7280`、下から15%地点 |
 | 余白上下 | 共に最低60px確保 |
 
@@ -52,11 +52,11 @@ Yテック工房ブランド配下4アプリ共通のスプラッシュ画面デ
 
 | 要素 | ライト | ダーク |
 |---|---|---|
-| 背景 | `#FAF7F2` | `#0F1A0F` |
+| 背景 | `#F7F5F2` | `#282950` |
 | ロゴマーク | 通常版 | 反転版（`logo-primary-dark.svg`） |
-| ブランド名（和文） | `#2D5A2D` | `#FAF7F2` |
-| ブランド英名 | `#6B8E5A` | `#6B8E5A`（共通） |
-| プロダクト名 | `#6B7280` | `#D6CFC2` |
+| ブランド名（和文） | `#282950` | `#F7F5F2` |
+| ブランド英名 | `#5E646B` | `#5E646B`（共通） |
+| プロダクト名 | `#6B7280` | `#DAD6CF` |
 
 ---
 
@@ -66,12 +66,12 @@ Yテック工房ブランド配下4アプリ共通のスプラッシュ画面デ
 
 | アプリ | 葉のアクセント色 | 由来 |
 |---|---|---|
-| architect-quiz | 朱 `#A0382A` | 建築の朱印・落款 |
+| architect-quiz | 朱 `#C50507` | 建築の朱印・落款 |
 | koji-app | 麹色 `#C99A4A` | 麹の発酵色（[[project_hugtime_hp_design]] と整合） |
-| invest-ai | 若葉 `#6B8E5A` | ブランド標準色（IT＝中立） |
-| africa-map | 砥粉 `#EDE7DC` | 大地の色（ベージュ系） |
+| invest-ai | 若葉 `#5E646B` | ブランド標準色（IT＝中立） |
+| africa-map | 砥粉 `#EEEAE3` | 大地の色（ベージュ系） |
 
-葉の色変更は1枚のみで、他2枚は標準の苔緑 `#2D5A2D` を維持する。
+葉の色変更は1枚のみで、他2枚は標準の苔緑 `#282950` を維持する。
 これにより「同じブランド・異なるプロダクト」が一瞥で伝わる。
 
 ---
@@ -101,7 +101,7 @@ Yテック工房ブランド配下4アプリ共通のスプラッシュ画面デ
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FAF7F2"
+      "backgroundColor": "#F7F5F2"
     }
   }
 }

@@ -26,7 +26,7 @@
 │  ○ プライバシー          │
 │  ○ アプリ情報            │
 │                         │
-│  ─────────────────       │ ← 区切り線（薄墨 #D6CFC2）
+│  ─────────────────       │ ← 区切り線（薄墨 #DAD6CF）
 │                         │
 │        [マーク]          │ ← ロゴマーク 40×40
 │      Yテック工房         │ ← Noto Serif JP 14px
@@ -44,11 +44,11 @@
 
 | 要素 | 仕様 |
 |---|---|
-| 上の区切り線 | 1px solid `#D6CFC2`、上下に余白24px |
+| 上の区切り線 | 1px solid `#DAD6CF`、上下に余白24px |
 | ロゴマーク | 40 × 40px、横中央 |
-| ブランド名（和文） | Noto Serif JP Medium 14px、色 `#2D5A2D`（ダーク時 `#FAF7F2`） |
-| ブランド英名 | Cormorant Garamond Medium 10px、色 `#6B8E5A`、letter-spacing 0.3em |
-| 「他のプロダクトを見る」 | Noto Sans JP Regular 12px、色 `#6B8E5A`、上下12pxパディング |
+| ブランド名（和文） | Noto Serif JP Medium 14px、色 `#282950`（ダーク時 `#F7F5F2`） |
+| ブランド英名 | Cormorant Garamond Medium 10px、色 `#5E646B`、letter-spacing 0.3em |
+| 「他のプロダクトを見る」 | Noto Sans JP Regular 12px、色 `#5E646B`、上下12pxパディング |
 | バージョン表記 | Noto Sans JP Regular 10px、色 `#6B7280` |
 | 全体縦サイズ | 約140px |
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   divider: {
     width: '60%',
     height: 1,
-    backgroundColor: '#D6CFC2',
+    backgroundColor: '#DAD6CF',
     marginBottom: 24,
   },
   mark: {
@@ -101,20 +101,20 @@ const styles = StyleSheet.create({
   brandJp: {
     fontFamily: 'NotoSerifJP-Medium',
     fontSize: 14,
-    color: '#2D5A2D',
+    color: '#282950',
     letterSpacing: 1.2,
   },
   brandEn: {
     fontFamily: 'CormorantGaramond-Medium',
     fontSize: 10,
-    color: '#6B8E5A',
+    color: '#5E646B',
     letterSpacing: 3,
     marginTop: 2,
   },
   link: {
     fontFamily: 'NotoSansJP-Regular',
     fontSize: 12,
-    color: '#6B8E5A',
+    color: '#5E646B',
     marginTop: 16,
     paddingVertical: 4,
   },
