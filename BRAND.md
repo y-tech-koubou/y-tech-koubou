@@ -145,7 +145,7 @@
 | プロダクト | 領域 | 説明 | 公開先 |
 |---|---|---|---|
 | 建築資格工房 (architect-quiz-expo) | 建築 × IT | 建築・住宅・設備系9資格の〇×一問一答＋本番形式四択（一級/二級建築士・宅建・電工二種・1級/2級建築施工管理・建築設備士・インテリアコーディネーター・インテリアプランナー。16,000問超・弱点重みづけ復習） | 1architectexam.com / Android |
-| English工房 (english-app) | IT × 海外 | IELTS/TOEFL/TOEIC 英語試験対策 | english-koubou.vercel.app |
+| English工房 (english-app) | IT × 海外 | IELTS/TOEFL/TOEIC 英語試験対策 | english-koubou.vercel.app / Google Play |
 | アフリカ語工房 (africa-lingo) | IT × 海外 | アフリカ110言語・全54カ国の現地フレーズ学習（日英仏3言語UI） | africa-lingo.vercel.app |
 | Hugtime Grow (hug-koubou) | IT × 暮らし | 「みんなで子育て」。育ちの多様性コミュニティ＋児童発達支援・放課後等デイサービス・相談支援 全国56,258件の施設検索 | hug-koubou.vercel.app / Google Play |
 | AI工房 (ai-koubou) | IT | AIの使い方・作り方を学ぶ学習アプリ | ai-koubou.vercel.app |
