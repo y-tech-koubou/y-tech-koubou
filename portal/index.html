@@ -339,7 +339,7 @@ header.site nav a.active::after { transform: scaleX(1); }
   z-index: 0;
   pointer-events: none;
 }
-/* リブランド(2026-09-18): キテンゲ柄帯（右の縦帯・下の横帯）＋左の藍深の柱線。装飾のみ */
+/* リブランド(2026-09-18): キテンゲ柄帯（下の横帯）。装飾のみ。左右の縦線は 2026-10-07 にオーナー指示で撤去 */
 .hero-band {
   position: absolute;
   z-index: 1;
@@ -347,25 +347,11 @@ header.site nav a.active::after { transform: scaleX(1); }
   background: var(--pattern-kitenge);
   background-size: var(--pattern-size);
 }
-.hero-band-r {
-  top: 112px;
-  right: 32px;
-  width: 18px;
-  height: min(58vh, 520px);
-  opacity: 0.92;
-}
 .hero-band-b {
   left: 0;
   right: 0;
   bottom: 0;
   height: 16px;
-}
-.hero-band-l {
-  top: 112px;
-  left: 33px;
-  width: 2px;
-  height: min(58vh, 520px);
-  background: var(--indigo-deep);
 }
 .hero-eyebrow {
   font-family: var(--serif-en);
@@ -384,6 +370,8 @@ header.site nav a.active::after { transform: scaleX(1); }
   background: rgba(247, 245, 242, 0.94);
   border-radius: 50%;
   filter: drop-shadow(0 16px 38px rgba(26, 28, 30, 0.14));
+  /* 2026-10-07 オーナー指示で木の真ん中のロゴを非表示。場所は残す（文字と木の配置・頂部の芽の位置がこの要素の寸法で決まるため） */
+  visibility: hidden;
 }
 /* エンブレムは装飾（リンクでない）。pointer-eventsを通し、背後canvasの内側ブロッサム
    のホバー・クリックを奪わないようにする */
@@ -1024,7 +1012,6 @@ button:focus-visible {
 @media (max-height: 880px) {
   .hero-edge { display: none; }
   .hero-scroll { display: none; }
-  .hero-band-r, .hero-band-l { display: none; }
   .hero-band-b { height: 12px; }
 }
 
@@ -1129,8 +1116,6 @@ button:focus-visible {
 
     <section class="hero">
       <canvas class="hero-bg" aria-hidden="true"></canvas>
-      <span class="hero-band hero-band-l" aria-hidden="true"></span>
-      <span class="hero-band hero-band-r" aria-hidden="true"></span>
       <span class="hero-band hero-band-b" aria-hidden="true"></span>
       <!-- 木の実のアプリ名ツールチップは表示しない（オーナー指示 2026-06-05・ロゴの実＋ホバー発光＋クリックのみ） -->
       <span class="hero-parallax" data-speed="-0.12"><img class="hero-emblem reveal" src="assets/logo-mark.svg?v=8" alt="" width="196" height="196"></span>
