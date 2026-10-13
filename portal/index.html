@@ -509,7 +509,7 @@ section { padding: var(--space-section) 0; scroll-margin-top: 80px; }
 .apps-media .media-chip svg { width: 20px; height: 20px; display: block; flex: 0 0 auto; }
 .apps-media .media-chip:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16); }
 section .section-head {
-  text-align: center;
+  text-align: left;
   margin-bottom: 72px;
 }
 section .section-head .kicker {
@@ -533,9 +533,9 @@ section h2 {
 
 /* ====== About ====== */
 .about .lead-text {
-  max-width: 720px;
-  margin: 0 auto 84px;
-  text-align: center;
+  margin: 0 0 84px;
+  text-wrap: pretty;
+  text-align: left;
   color: var(--shikkoku);
   font-size: clamp(16px, 1.8vw, 18px);
   line-height: 2;
@@ -599,28 +599,28 @@ section h2 {
 .products .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 24px;
 }
 .works-lead {
-  max-width: 620px;
-  margin: -40px auto 60px;
-  text-align: center;
+  margin: -40px 0 60px;
+  text-wrap: pretty;
+  text-align: left;
   color: var(--nibiiro);
   font-size: 16px;
   line-height: 1.9;
 }
 .works-cta {
-  text-align: center;
+  text-align: left;
   margin-top: 60px;
 }
 
 /* ====== Service ====== */
 .service { padding: var(--space-section-compact) 0; }
 .service .service-lead {
-  max-width: 680px;
-  margin: -40px auto 64px;
-  text-align: center;
+  margin: -40px 0 64px;
+  text-wrap: pretty;
+  text-align: left;
   color: var(--shikkoku);
   font-size: clamp(16px, 1.8vw, 18px);
   line-height: 2;
@@ -675,7 +675,7 @@ section h2 {
   line-height: 1.8;
 }
 .service .service-cta {
-  text-align: center;
+  text-align: left;
   margin-top: 56px;
 }
 .work-thumb {
@@ -820,6 +820,7 @@ section h2 {
   color: var(--kinari);
 }
 .contact h2 { color: var(--kinari); }
+.contact .section-head { text-align: center; }
 .contact .section-head .kicker { color: var(--heading-clay-light); }
 .contact .card {
   max-width: 560px;
@@ -2101,5 +2102,62 @@ button:focus-visible {
     })();
   </script>
 
+<script>
+/* 和文の最終行が1〜2文字だけ残るのを防ぐ（KeepLineTails.tsx と同じ方式）。
+   本文・見出しの行末3文字に改行禁止の目印(U+2060)を挟み、最終行に最低3文字が来るようにする。
+   言語切り替えで文字が入れ替わるので、DOMの変化を見て掛け直す。文言そのものは変えない。 */
+(function () {
+  var SELECTOR = "p, li, dd, h1, h2, h3, h4, blockquote, a, button, .keep-tail";
+  var JOINER = "\u2060";
+  var JA = /[\u3040-\u30ff\u4e00-\u9fff]/;
+
+  /* 行の終わりになる文字列: 要素の最後の文字列と、<br> の直前の文字列 */
+  function lineEndNodes(el) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    var ends = [], prev = null, last = null, n;
+    while ((n = walker.nextNode())) {
+      if (!(n.nodeValue || "").trim()) continue;
+      prev = last;
+      last = n;
+      if (n.nextSibling && n.nextSibling.nodeName === "BR") ends.push(last);
+    }
+    if (last && ends.indexOf(last) < 0) ends.push(last);
+    /* 最後が矢印だけなら、その前の文字列も行の終わりとして扱う */
+    var lastText = last ? (last.nodeValue || "").replace(/[\s\u2060]/g, "") : "";
+    if (prev && lastText.length <= 2 && !JA.test(lastText) && ends.indexOf(prev) < 0) ends.push(prev);
+    return ends;
+  }
+
+  /* 改行(\n)で区切られた各行の末尾3文字をつなぐ */
+  function glueLine(line) {
+    var text = line.replace(/\s+$/, "");
+    /* 処理済みかは行の最後だけで見る */
+    if (!text || text.slice(-6).indexOf(JOINER) >= 0) return line;
+    var chars = Array.from(text);
+    /* 英字だけの行（英語版・メールアドレス）は触らない */
+    if (chars.length <= 3 || !JA.test(chars.slice(-3).join(""))) return line;
+    return chars.slice(0, -3).join("") + chars.slice(-3).join(JOINER) + line.slice(text.length);
+  }
+
+  function keepTails() {
+    document.querySelectorAll(SELECTOR).forEach(function (el) {
+      lineEndNodes(el).forEach(function (node) {
+        var v = node.nodeValue || "";
+        var next = v.split("\n").map(glueLine).join("\n");
+        if (next !== v) node.nodeValue = next;
+      });
+    });
+  }
+
+  var frame = 0;
+  function schedule() {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(keepTails);
+  }
+  keepTails();
+  /* 掛け直しで起きる変化は処理済みの判定で止まるので、輪にはならない */
+  new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true, characterData: true });
+})();
+</script>
 </body>
 </html>
