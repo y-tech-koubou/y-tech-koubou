@@ -1178,7 +1178,7 @@ button:focus-visible {
           <span class="kicker">Apps</span>
           <h2 data-en="Apps we build">アプリ</h2>
         </div>
-        <p class="works-lead reveal" data-en="All of these apps are developed in-house &mdash; available on Android and the web, with iOS versions on the way.<br class='pc-only'>We also take on app development, from idea to release.">アプリはすべて自社開発で、Android と Web で公開中（iOS 版は準備中）。<br class="pc-only">アプリ制作（企画から公開まで）も承ります。</p>
+        <p class="works-lead reveal" data-en="All of these apps are developed in-house and available on Android and the web. Architect Exam Prep is also on the App Store, with more iOS versions on the way.<br class='pc-only'>We also take on app development, from idea to release.">アプリはすべて自社開発で、Android と Web で公開中。建築資格工房は App Store でも公開中で、ほかのアプリの iOS 版も順次公開します。<br class="pc-only">アプリ制作（企画から公開まで）も承ります。</p>
         <div class="grid two">
 
           <a class="product reveal" href="https://1architectexam.com" target="_blank" rel="noopener" aria-label="建築資格工房を新規タブで開く">
@@ -1195,7 +1195,7 @@ button:focus-visible {
             <div class="meta">
               <span data-en="Exam prep">資格学習</span>
               <span data-en="Architecture">建築</span>
-              <span>Android / Web</span>
+              <span>Android / iOS / Web</span>
             </div>
             <span class="open" data-en="Open &rarr;">開く &rarr;</span>
           </a>
@@ -1233,6 +1233,25 @@ button:focus-visible {
             <div class="meta">
               <span data-en="Parenting">子育て</span>
               <span data-en="Community">コミュニティ</span>
+              <span>Android / Web</span>
+            </div>
+            <span class="open" data-en="Open &rarr;">開く &rarr;</span>
+          </a>
+
+          <a class="product reveal" href="https://saien-koubou.vercel.app" target="_blank" rel="noopener" aria-label="菜園工房を新規タブで開く">
+            <img class="work-thumb" src="assets/app-saien.jpg?v=1" alt="菜園工房のホーム画面" loading="lazy" width="860" height="538">
+            <div class="top">
+              <span class="mono logo" aria-hidden="true"><img src="assets/saien-koubou-mark.png?v=1" alt="" width="46" height="46" loading="lazy"></span>
+              <div class="head">
+                <h3 class="name">菜園工房</h3>
+                <div class="domain">SAIEN-KOUBOU.VERCEL.APP</div>
+              </div>
+              <span class="status live">Live</span>
+            </div>
+            <p data-en="A home-garden app: draw your plot as a plan, and from the day you plant it shows what to do next. Companion-planting and crop-rotation warnings are free, too.">畑を図で描いて、植えた日から次にやることが分かる家庭菜園アプリ。相性と連作の注意も無料で。</p>
+            <div class="meta">
+              <span data-en="Home garden">家庭菜園</span>
+              <span data-en="Planner">畑づくり</span>
               <span>Android / Web</span>
             </div>
             <span class="open" data-en="Open &rarr;">開く &rarr;</span>
@@ -1386,6 +1405,8 @@ button:focus-visible {
         <a href="https://play.google.com/store/apps/details?id=com.architectquiz.app" target="_blank" rel="noopener" data-en="Architect Exam (Google Play)">建築資格工房（Google Play）</a>
         <a href="https://play.google.com/store/apps/details?id=com.ytechkoubou.englishapp" target="_blank" rel="noopener" data-en="English Koubou (Google Play)">English工房（Google Play）</a>
         <a href="https://play.google.com/store/apps/details?id=com.ytechkoubou.hugkoubou" target="_blank" rel="noopener" data-en="Hugtime Grow (Google Play)">Hugtime Grow（Google Play）</a>
+          <a href="https://play.google.com/store/apps/details?id=com.ytechkoubou.kitchengarden" target="_blank" rel="noopener" data-en="Saien Koubou (Google Play)">菜園工房（Google Play）</a>
+          <a href="https://apps.apple.com/app/id6813001357" target="_blank" rel="noopener" data-en="Architect Exam (App Store)">建築資格工房（App Store）</a>
         <a href="https://x.com/ytechkoubou" target="_blank" rel="noopener">X</a>
         <a href="https://instagram.com/ytechkoubou" target="_blank" rel="noopener">Instagram</a>
         <a href="https://note.com/ytechkoubou" target="_blank" rel="noopener">note</a>
@@ -1444,7 +1465,8 @@ button:focus-visible {
       var PRODUCTS = [
         { name: '建築資格工房', url: 'https://1architectexam.com', icon: 'assets/kenchiku-mark.png' },
         { name: 'English工房', url: 'https://english-koubou.vercel.app', icon: 'assets/english-koubou-mark.svg' },
-        { name: 'Hugtime Grow', url: 'https://hug-koubou.vercel.app', icon: 'assets/hugtime-grow-mark.png?v=1' }
+        { name: 'Hugtime Grow', url: 'https://hug-koubou.vercel.app', icon: 'assets/hugtime-grow-mark.png?v=1' },
+        { name: '菜園工房', url: 'https://saien-koubou.vercel.app', icon: 'assets/saien-koubou-mark.png?v=1' }
       ];
       var ICONS = {};
       PRODUCTS.forEach(function (p) { if (p.icon) { var im = new Image(); im.onload = function () { if (typeof wake === 'function') { wake(); } }; im.src = p.icon; ICONS[p.icon] = im; } });
