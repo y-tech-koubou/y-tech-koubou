@@ -812,6 +812,64 @@ section h2 {
 }
 .product:hover .open { transform: translateX(4px); }
 
+/* ====== SNS（散らばっていたSNSの入口を1か所に。2026-11-04） ====== */
+.sns { padding: var(--space-section-compact) 0; background: #fff; }
+.sns .sns-group + .sns-group { margin-top: 48px; }
+.sns .sns-group-label {
+  margin: 0 0 16px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--nibiiro);
+}
+.sns .sns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.sns .sns-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 24px;
+  border: 1px solid var(--usuzumi);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--shikkoku);
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-soft);
+}
+.sns .sns-card:hover { transform: translateY(-2px); border-color: var(--wakaba); text-decoration: none; }
+.sns .sns-name {
+  font-family: var(--serif-jp);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--heading-clay);
+}
+.sns .sns-top { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+/* 各SNSの公式ロゴ（形・色は各社のもの。X/Instagram/YouTube/Spotify/TikTok=Simple Icons、note=note公式アイコン） */
+.sns .sns-icon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.sns .sns-icon svg { width: 24px; height: 24px; fill: #fff; display: block; }
+.sns .sns-icon img { width: 44px; height: 44px; display: block; }
+.sns .sns-x, .sns .sns-tiktok { background: #000; }
+.sns .sns-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.sns .sns-youtube { background: #FF0000; }
+.sns .sns-spotify { background: #1DB954; }
+.sns .sns-note { background: #fff; border: 1px solid var(--usuzumi); }
+.sns .sns-handle { font-size: 13px; color: var(--nibiiro); }
+.sns .sns-desc { margin: 4px 0 0; font-size: 14px; line-height: 1.7; }
+@media (max-width: 760px) {
+  .sns .sns-grid { grid-template-columns: 1fr; }
+}
+
 /* ====== Contact ====== */
 .contact {
   background:
@@ -827,20 +885,6 @@ section h2 {
   margin: 0 auto;
   /* 題(section-head)は中央・カードの中の文章は左（2026-10-14 本人「普通の文章は左寄せが普通」） */
   text-align: left;
-}
-.contact .card::after {
-  content: "Y";
-  display: inline-grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  margin-top: 36px;
-  color: var(--shu);
-  border: 1px solid currentColor;
-  border-radius: 8px;
-  font-family: var(--serif-en);
-  font-size: 22px;
-  opacity: 0.75;
 }
 .contact .card p {
   color: rgba(250, 247, 242, 0.78);
@@ -1093,6 +1137,7 @@ button:focus-visible {
             <li><a href="#works">WORKS</a></li>
             <li><a href="koubou.html">GARDEN</a></li>
             <li><a href="#service">SERVICE</a></li>
+            <li><a href="#sns">SNS</a></li>
             <li><a href="#contact">CONTACT</a></li>
           </ul>
         </nav>
@@ -1260,20 +1305,6 @@ button:focus-visible {
         </div>
 
         <div class="apps-media reveal">
-          <span class="apps-media-label" data-en="Listen on the go: Architect Exam Prep">建築資格工房は聞き流しでも学べます</span>
-          <div class="media-chips">
-            <a class="media-chip" href="https://open.spotify.com/show/033yLbZxug2Sf60wOPPT8E" target="_blank" rel="noopener" aria-label="建築資格工房ラジオ（Spotify）を新規タブで開く">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0m5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.18-.84-.6 0-.18.18-.479.42-.479 4.56-1.021 8.52-.6 11.64 1.32.36.181.42.66.181 1.02m1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2m.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3"/></svg>
-              <span data-en="Listen on Spotify">Spotifyで聞く</span>
-            </a>
-            <a class="media-chip" href="https://www.youtube.com/channel/UCEGbTIj_DXuQT-ljORIyNIw" target="_blank" rel="noopener" aria-label="Yテック工房 YouTube チャンネルを新規タブで開く">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
-              <span data-en="Watch on YouTube">YouTubeで見る</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="apps-media reveal">
           <span class="apps-media-label" data-en="Read the questions on the web: Architect Exam Prep">建築資格工房の問題は Web でも読めます</span>
           <div class="media-chips">
             <a class="media-chip" href="https://1architectexam.com/q/ikkyu/keikaku" target="_blank" rel="noopener" aria-label="一級建築士 計画の○×一問一答を新規タブで開く">
@@ -1379,6 +1410,57 @@ button:focus-visible {
       </div>
     </section>
 
+    <section id="sns" class="sns">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Follow</span>
+          <h2 data-en="Follow us">SNS</h2>
+        </div>
+
+        <div class="sns-group reveal">
+          <p class="sns-group-label" data-en="News from Y-Tech Koubou">Yテック工房のお知らせ</p>
+          <div class="sns-grid">
+            <a class="sns-card" href="https://x.com/ytechkoubou" target="_blank" rel="noopener" aria-label="Yテック工房のXを新規タブで開く">
+              <span class="sns-top"><span class="sns-icon sns-x" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></span><span class="sns-name">X</span></span>
+              <span class="sns-handle">@ytechkoubou</span>
+              <p class="sns-desc" data-en="New apps and sites, as soon as they launch">新しいアプリやサイトのお知らせ</p>
+            </a>
+            <a class="sns-card" href="https://www.instagram.com/ytechkoubou/" target="_blank" rel="noopener" aria-label="Yテック工房のInstagramを新規タブで開く">
+              <span class="sns-top"><span class="sns-icon sns-instagram" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span><span class="sns-name">Instagram</span></span>
+              <span class="sns-handle">@ytechkoubou</span>
+              <p class="sns-desc" data-en="Our apps and sites, in pictures">作ったアプリやサイトを画像で紹介</p>
+            </a>
+            <a class="sns-card" href="https://note.com/ytechkoubou" target="_blank" rel="noopener" aria-label="Yテック工房のnoteを新規タブで開く">
+              <span class="sns-top"><span class="sns-icon sns-note" aria-hidden="true"><img src="assets/sns-note.png" alt="" width="44" height="44" loading="lazy"></span><span class="sns-name">note</span></span>
+              <span class="sns-handle">ytechkoubou</span>
+              <p class="sns-desc" data-en="Articles on each app and site we have built">アプリやサイトを1本ずつ紹介する記事</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="sns-group reveal">
+          <p class="sns-group-label" data-en="Learn by listening: Architect Exam Prep">建築資格工房を聞いて学ぶ</p>
+          <div class="sns-grid">
+            <a class="sns-card" href="https://www.youtube.com/channel/UCEGbTIj_DXuQT-ljORIyNIw" target="_blank" rel="noopener" aria-label="Yテック工房のYouTubeチャンネルを新規タブで開く">
+              <span class="sns-top"><span class="sns-icon sns-youtube" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span class="sns-name">YouTube</span></span>
+              <span class="sns-handle" data-en="Y-Tech Koubou">Yテック工房</span>
+              <p class="sns-desc" data-en="Exam questions to listen to on the go">問題を聞き流しで学べる動画</p>
+            </a>
+            <a class="sns-card" href="https://open.spotify.com/show/033yLbZxug2Sf60wOPPT8E" target="_blank" rel="noopener" aria-label="建築資格工房ラジオ（Spotify）を新規タブで開く">
+              <span class="sns-top"><span class="sns-icon sns-spotify" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></span><span class="sns-name">Spotify</span></span>
+              <span class="sns-handle" data-en="Architect Exam Radio">建築資格工房ラジオ</span>
+              <p class="sns-desc" data-en="The same questions, as a podcast">同じ問題をポッドキャストで</p>
+            </a>
+            <a class="sns-card" href="https://www.tiktok.com/@ytechkoubou" target="_blank" rel="noopener" aria-label="TikTokを新規タブで開く">
+              <span class="sns-top"><span class="sns-icon sns-tiktok" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span><span class="sns-name">TikTok</span></span>
+              <span class="sns-handle">@ytechkoubou</span>
+              <p class="sns-desc" data-en="Short true/false quizzes for the 1st-class architect exam">一級建築士の○×クイズ</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-head reveal">
@@ -1406,11 +1488,7 @@ button:focus-visible {
         <a href="https://play.google.com/store/apps/details?id=com.ytechkoubou.englishapp" target="_blank" rel="noopener" data-en="English Koubou (Google Play)">English工房（Google Play）</a>
         <a href="https://play.google.com/store/apps/details?id=com.ytechkoubou.hugkoubou" target="_blank" rel="noopener" data-en="Hugtime Grow (Google Play)">Hugtime Grow（Google Play）</a>
           <a href="https://play.google.com/store/apps/details?id=com.ytechkoubou.kitchengarden" target="_blank" rel="noopener" data-en="Saien Koubou (Google Play)">菜園工房（Google Play）</a>
-          <a href="https://apps.apple.com/app/id6813001357" target="_blank" rel="noopener" data-en="Architect Exam (App Store)">建築資格工房（App Store）</a>
-        <a href="https://x.com/ytechkoubou" target="_blank" rel="noopener">X</a>
-        <a href="https://instagram.com/ytechkoubou" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://note.com/ytechkoubou" target="_blank" rel="noopener">note</a>
-      </span>
+          <a href="https://apps.apple.com/app/id6813001357" target="_blank" rel="noopener" data-en="Architect Exam (App Store)">建築資格工房（App Store）</a>      </span>
     </div>
   </footer>
 
